@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.21 2005/03/26 15:21:02 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.22 2005/03/26 15:27:14 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -672,7 +672,6 @@ parseoptions(int argc, char **argv, char *iname, char *oname,
       {
 	 /* input file */
 	 strcpy(iname, argv[i]); /* FIXME */
-	 set_extension(iname, ".sma", FALSE);
       }
       else
       {

@@ -22,7 +22,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc5.c,v 1.5 2004/10/19 16:50:27 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc5.c,v 1.6 2005/03/26 16:44:12 tsauerbeck Exp $
  */
 #include <unistd.h>
 #include <stdio.h>
@@ -94,7 +94,7 @@ error(int number, ...)
 
    if (sc_error(number, string, inpfname, start, fline, argptr))
    {
-      sc_closeasm(outf, TRUE);
+      sc_closeasm(outf);
       outf = NULL;
       longjmp(errbuf, 3);
    }
@@ -109,7 +109,7 @@ error(int number, ...)
 
 	if (outf != NULL)
 	  {
-	     sc_closeasm(outf, TRUE);
+	     sc_closeasm(outf);
 	     outf = NULL;
 	  }			/* if */
 	longjmp(errbuf, 2);	/* fatal error, quit */

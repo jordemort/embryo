@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.23 2005/03/26 16:37:25 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.24 2005/03/26 16:44:12 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -220,12 +220,10 @@ sc_openasm(int fd)
 }
 
 void
-sc_closeasm(void *handle, int deletefile)
+sc_closeasm(void *handle)
 {
    if (handle != NULL)
       fclose((FILE *) handle);
-   if (deletefile)
-      unlink(outfname);
 }
 
 void
@@ -325,6 +323,8 @@ sc_compile(int argc, char *argv[])
    fd_out = mkstemp(outfname);
    if (fd_out < 0)
      error(101, outfname);
+
+   unlink (outfname); /* kill this file as soon as it's (f)close'd */
 
    setconfig(argv[0]);		/* the path to the include files */
    lcl_ctrlchar = sc_ctrlchar;
@@ -428,7 +428,7 @@ sc_compile(int argc, char *argv[])
 	assemble(binf, outf);	/* assembler file is now input */
      }				/* if */
    if (outf != NULL)
-      sc_closeasm(outf, TRUE);
+      sc_closeasm(outf);
    if (binf != NULL)
       sc_closebin(binf, errnum != 0);
 

@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.19 2004/12/08 06:05:23 raster Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.20 2005/02/26 14:46:07 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -3859,9 +3859,15 @@ doswitch(void)
     * occur; there really shouldn't be duplicate cases, but the compiler
     * may not crash or drop into an assertion for a user error). */
    for (cse = caselist.next; cse != NULL && cse->next != NULL; cse = cse->next)
+     ; /* empty. no idea whether this is correct, but we MUST NOT do
+        * the setlabel(lbl_table) call in the loop body. doing so breaks
+        * switch statements that only have one case statement following.
+        */
 #endif
-      /* generate the table here, before lbl_exit (general jump target) */
-      setlabel(lbl_table);
+
+   /* generate the table here, before lbl_exit (general jump target) */
+   setlabel(lbl_table);
+
    if (swdefault == FALSE)
      {
 	/* store lbl_exit as the "none-matched" label in the switch table */

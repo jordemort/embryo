@@ -19,7 +19,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.8 2004/04/20 03:50:11 raster Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.9 2004/04/27 08:05:11 raster Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -173,7 +173,7 @@ sc_error(int number, char *message, char *filename, int firstline,
 void               *
 sc_opensrc(char *filename)
 {
-   return fopen(filename, "rt");
+   return fopen(filename, "rb");
 }
 
 void
@@ -215,7 +215,7 @@ sc_eofsrc(void *handle)
 void               *
 sc_openasm(char *filename)
 {
-   return fopen(filename, "w+t");
+   return fopen(filename, "w+");
 }
 
 void

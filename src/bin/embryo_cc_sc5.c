@@ -19,7 +19,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc5.c,v 1.2 2004/04/20 03:50:11 raster Exp $
+ *  Version: $Id: embryo_cc_sc5.c,v 1.3 2004/04/27 08:05:12 raster Exp $
  */
 #include <unistd.h>
 #include <stdio.h>
@@ -100,7 +100,7 @@ error(int number, ...)
      {
 	FILE *fp;
 	
-	fp = fopen(errfname, "at");
+	fp = fopen(errfname, "a+");
 	if (fp != NULL)
 	  {
 	     if (errstart >= 0 && errstart != fline)

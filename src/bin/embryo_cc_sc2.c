@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.1 2004/03/24 09:48:28 raster Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.2 2004/03/25 02:07:28 raster Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -26,6 +26,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <math.h>
+#include "embryo_cc_osdefs.h"
 #include "embryo_cc_sc.h"
 #if defined LINUX
   #include <embryo_cc_sclinux.h>

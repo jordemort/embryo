@@ -18,11 +18,12 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_amx.h,v 1.1 2004/03/24 09:48:28 raster Exp $
+ *  Version: $Id: embryo_cc_amx.h,v 1.2 2004/03/25 02:07:28 raster Exp $
  */
 
 #if defined LINUX
-  #include <embryo_cc_sclinux.h>
+  #include "embryo_cc_osdefs.h"
+  #include "embryo_cc_sclinux.h"
 #endif
 
 #ifndef __AMX_H
@@ -32,19 +33,12 @@
   /* The ISO C99 defines the int16_t and int_32t types. If the compiler got
    * here, these types are probably undefined.
    */
-  #if defined __LCC__ || defined LINUX
-    #include <stdint.h>
-  #else
-    typedef short int           int16_t;
-    typedef unsigned short int  uint16_t;
-    #if defined SN_TARGET_PS2
-      typedef int               int32_t;
-      typedef unsigned int      uint32_t;
-    #else
-      typedef long int          int32_t;
-      typedef unsigned long int uint32_t;
-    #endif
-  #endif
+# ifndef __uint32_t_defined
+typedef short int           int16_t;
+typedef unsigned short int  uint16_t;
+typedef int                 int32_t;
+typedef unsigned int        uint32_t;
+# endif
 #endif
 
 #if defined __WIN32__ || defined _WIN32 || defined WIN32 || defined __MSDOS__

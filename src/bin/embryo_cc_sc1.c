@@ -20,7 +20,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc1.c,v 1.2 2004/03/24 10:25:05 raster Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.3 2004/03/25 02:07:28 raster Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -37,10 +37,8 @@
 
 #if defined LINUX
   #include <unistd.h>
+  #include "embryo_cc_osdefs.h"
   #include <embryo_cc_sclinux.h>
-//
-  #include "config.h"
-//
 #endif
 
 #if defined FORTIFY

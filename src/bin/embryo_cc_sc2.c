@@ -21,7 +21,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.16 2005/03/26 15:21:02 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.17 2005/04/01 15:15:38 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -477,11 +477,11 @@ htoi(cell * val, char *curptr)
    if (*ptr == '0' && *(ptr + 1) == 'x')
      {				/* C style hexadecimal notation */
 	ptr += 2;
-	while (ishex(*ptr) || *ptr == '_')
+	while (isxdigit(*ptr) || *ptr == '_')
 	  {
 	     if (*ptr != '_')
 	       {
-		  assert(ishex(*ptr));
+		  assert(isxdigit(*ptr));
 		  *val = *val << 4;
 		  if (isdigit(*ptr))
 		     *val += (*ptr - '0');
@@ -2335,17 +2335,6 @@ SC_FUNC int
 alphanum(char c)
 {
    return (alpha(c) || isdigit(c));
-}
-
-/*  ishex
- *
- *  Test if character "c" is a hexadecimal digit ("0".."9" or "a".."f").
- */
-SC_FUNC int
-ishex(char c)
-{
-   return (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A'
-							       && c <= 'F');
 }
 
 /* The local variable table must be searched backwards, so that the deepest

@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h,v 1.10 2005/04/01 15:11:30 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc.h,v 1.11 2005/04/01 15:15:38 tsauerbeck Exp $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -465,7 +465,6 @@ int         tokeninfo(cell * val, char **str);
 int         needtoken(int token);
 void        stowlit(cell value);
 int         alphanum(char c);
-int         ishex(char c);
 void        delete_symbol(symbol * root, symbol * sym);
 void        delete_symbols(symbol * root, int level, int del_labels,
 				   int delete_functions);

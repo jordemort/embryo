@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc6.c,v 1.4 2004/04/20 03:50:11 raster Exp $
+ *  Version: $Id: embryo_cc_sc6.c,v 1.5 2004/07/11 09:50:42 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -1023,8 +1023,8 @@ assemble(FILE * fout, FILE * fin)
 	     instr = skipwhitespace(line);
 	     /* ignore empty lines and labels (labels have a special syntax, so these
 	      * must be parsed separately) */
-	     if (*instr == '\0' || tolower(*instr) == 'l'
-		 && *(instr + 1) == '.')
+	     if (*instr == '\0' || (tolower(*instr) == 'l'
+		 && *(instr + 1) == '.'))
 		continue;
 	     /* get to the end of the instruction (make use of the '\n' that fgets()
 	      * added at the end of the line; this way we will *always* drop on a

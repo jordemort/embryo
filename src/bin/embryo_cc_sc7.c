@@ -35,7 +35,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc7.c,v 1.3 2004/05/15 05:39:44 raster Exp $
+ *  Version: $Id: embryo_cc_sc7.c,v 1.4 2004/07/11 09:50:42 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -490,18 +490,18 @@ matchsequence(char *start, char *end, char *pattern,
 	  case ' ':
 	     if (*start != '\t' && *start != ' ')
 		return FALSE;
-	     while (start < end && *start == '\t' || *start == ' ')
+	     while ((start < end && *start == '\t') || *start == ' ')
 		start++;
 	     break;
 	  case '!':
-	     while (start < end && *start == '\t' || *start == ' ')
+	     while ((start < end && *start == '\t') || *start == ' ')
 		start++;	/* skip trailing white space */
 	     if (*start != '\n')
 		return FALSE;
 	     assert(*(start + 1) == '\0');
 	     start += 2;	/* skip '\n' and '\0' */
 	     if (*(pattern + 1) != '\0')
-		while (start < end && *start == '\t' || *start == ' ')
+		while ((start < end && *start == '\t') || *start == ' ')
 		   start++;	/* skip leading white space of next instruction */
 	     break;
 	  default:

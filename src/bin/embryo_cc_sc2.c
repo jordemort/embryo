@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.7 2004/06/10 08:52:35 raster Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.8 2004/07/11 09:50:42 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -1176,9 +1176,9 @@ command(void)
 		     sym = findloc(str);
 		     if (sym == NULL)
 			sym = findglb(str);
-		     if (sym == NULL || sym->ident != iFUNCTN
+		     if (sym == NULL || (sym->ident != iFUNCTN
 			 && sym->ident != iREFFUNC
-			 && (sym->usage & uDEFINE) == 0)
+			 && (sym->usage & uDEFINE) == 0))
 		       {
 			  error(17, str);	/* undefined symbol */
 		       }
@@ -1974,7 +1974,7 @@ lex(cell * lexvalue, char **lexsym)
 	     lptr += 1;		/* skip colon */
 	  }			/* if */
      }
-   else if (*lptr == '\"' || *lptr == sc_ctrlchar && *(lptr + 1) == '\"')
+   else if (*lptr == '\"' || (*lptr == sc_ctrlchar && *(lptr + 1) == '\"'))
      {				/* unpacked string literal */
 	_lextok = tSTRING;
 	rawstring = (*lptr == sc_ctrlchar);
@@ -1990,10 +1990,10 @@ lex(cell * lexvalue, char **lexsym)
 	else
 	   error(37);		/* invalid (non-terminated) string */
      }
-   else if (*lptr == '!' && *(lptr + 1) == '\"'
-	    || *lptr == '!' && *(lptr + 1) == sc_ctrlchar && *(lptr + 2) == '\"'
-	    || *lptr == sc_ctrlchar && *(lptr + 1) == '!'
-	    && *(lptr + 2) == '\"')
+   else if ((*lptr == '!' && *(lptr + 1) == '\"')
+	    || (*lptr == '!' && *(lptr + 1) == sc_ctrlchar && *(lptr + 2) == '\"')
+	    || (*lptr == sc_ctrlchar && *(lptr + 1) == '!'
+	    && *(lptr + 2) == '\"'))
      {				/* packed string literal */
 	_lextok = tSTRING;
 	rawstring = (*lptr == sc_ctrlchar || *(lptr + 1) == sc_ctrlchar);
@@ -2082,7 +2082,7 @@ matchtoken(int token)
    int                 tok;
 
    tok = lex(&val, &str);
-   if (tok == token || token == tTERM && (tok == ';' || tok == tENDEXPR))
+   if (tok == token || (token == tTERM && (tok == ';' || tok == tENDEXPR)))
      {
 	return 1;
      }

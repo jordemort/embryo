@@ -21,7 +21,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sclist.c,v 1.2 2004/04/20 03:50:11 raster Exp $
+ *  Version: $Id: embryo_cc_sclist.c,v 1.3 2004/07/11 09:50:42 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdlib.h>
@@ -239,7 +239,7 @@ adjustindex(char c)
 {
    stringpair         *cur;
 
-   assert(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c == '_');
+   assert((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_');
    assert('A' < '_' && '_' < 'z');
 
    for (cur = substpair.next; cur != NULL && cur->first[0] != c;
@@ -270,7 +270,7 @@ find_subst(char *name, int length)
 
    assert(name != NULL);
    assert(length > 0);
-   assert(*name >= 'A' && *name <= 'Z' || *name >= 'a' && *name <= 'z'
+   assert((*name >= 'A' && *name <= 'Z') || (*name >= 'a' && *name <= 'z')
 	  || *name == '_');
    item = substindex[(int)*name - 'A'];
    if (item != NULL)
@@ -285,7 +285,7 @@ delete_subst(char *name, int length)
 
    assert(name != NULL);
    assert(length > 0);
-   assert(*name >= 'A' && *name <= 'Z' || *name >= 'a' && *name <= 'z'
+   assert((*name >= 'A' && *name <= 'Z') || (*name >= 'a' && *name <= 'z')
 	  || *name == '_');
    item = substindex[(int)*name - 'A'];
    if (item != NULL)

@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc3.c,v 1.4 2004/05/15 05:39:44 raster Exp $
+ *  Version: $Id: embryo_cc_sc3.c,v 1.5 2004/07/11 09:50:42 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -1002,7 +1002,7 @@ hier14(value * lval1)
 	if (lval3.sym->dim.array.level != level)
 	   return error(48);	/* array dimensions must match */
 	else if (lval3.sym->dim.array.length < val
-		 || exactmatch && lval3.sym->dim.array.length > val)
+		 || (exactmatch && lval3.sym->dim.array.length > val))
 	   return error(47);	/* array sizes must match */
 	if (level > 0)
 	  {
@@ -1544,8 +1544,8 @@ hier1(value * lval1)
 		  if (close == ']')
 		    {
 		       /* normal array index */
-		       if (lval2.constval < 0 || sym->dim.array.length != 0
-			   && sym->dim.array.length <= lval2.constval)
+		       if (lval2.constval < 0 || (sym->dim.array.length != 0
+			   && sym->dim.array.length <= lval2.constval))
 			  error(32, sym->name);	/* array index out of bounds */
 		       if (lval2.constval != 0)
 			 {
@@ -1561,10 +1561,10 @@ hier1(value * lval1)
 		  else
 		    {
 		       /* character index */
-		       if (lval2.constval < 0 || sym->dim.array.length != 0
+		       if (lval2.constval < 0 || (sym->dim.array.length != 0
 			   && sym->dim.array.length * ((8 * sizeof(cell)) /
 						       charbits) <=
-			   (ucell) lval2.constval)
+			   (ucell) lval2.constval))
 			  error(32, sym->name);	/* array index out of bounds */
 		       if (lval2.constval != 0)
 			 {
@@ -2094,11 +2094,11 @@ callfunction(symbol * sym)
 				       * function argument; a literal string may be smaller than
 				       * the function argument.
 				       */
-				      if (lval.constval > 0
-					  && arg[argidx].dim[0] != lval.constval
-					  || lval.constval < 0
+				      if ((lval.constval > 0
+					  && arg[argidx].dim[0] != lval.constval)
+					  || (lval.constval < 0
 					  && arg[argidx].dim[0] <
-					  -lval.constval)
+					  -lval.constval))
 					 error(47);	/* array sizes must match */
 				   }	/* if */
 			      }	/* if */

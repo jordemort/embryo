@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.6 2004/06/02 02:29:44 raster Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.7 2004/06/10 08:52:35 raster Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -653,7 +653,7 @@ ftoi(cell * val, char *curptr)
 			, (int)(*(int *)&test1)
 			);
 	     }
-	  else if ((int *)&test2 != 0x42480000L)
+	  else if (*(int *)&test2 != 0x42480000L)
 	     {
 		fprintf(stderr, 
 			"embryo_cc: WARNING! you compiler does not SEEM to interpret IEEE floating\n"

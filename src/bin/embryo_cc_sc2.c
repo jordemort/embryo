@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.11 2004/07/27 00:58:25 raster Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.12 2004/09/09 00:48:12 raster Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -2467,7 +2467,7 @@ delete_symbols(symbol * root, int level, int delete_labels,
  * comparison (which is costly). There is little interest in avoiding
  * clusters in similar names, which is why this function is plain simple.
  */
-SC_FUNC uint32_t
+SC_FUNC unsigned int
 namehash(char *name)
 {
    unsigned char      *ptr = (unsigned char *)name;

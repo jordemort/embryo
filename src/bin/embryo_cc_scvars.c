@@ -20,7 +20,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_scvars.c,v 1.2 2004/04/20 03:50:11 raster Exp $
+ *  Version: $Id: embryo_cc_scvars.c,v 1.3 2004/09/28 03:06:21 raster Exp $
  */
 #include <stdio.h>
 #include <stdlib.h>		/* for _MAX_PATH */
@@ -73,7 +73,7 @@ int      fcurrent = 0;	/* current file being processed (debugging) */
 int      intest = 0;	/* true if inside a test */
 int      sideeffect = 0;	/* true if an expression causes a side-effect */
 int      stmtindent = 0;	/* current indent of the statement */
-int      indent_nowarn = FALSE;	/* skip warning "217 loose indentation" */
+int      indent_nowarn = TRUE;	/* skip warning "217 loose indentation" */
 int      sc_tabsize = 8;	/* number of spaces that a TAB represents */
 int      sc_allowtags = TRUE;	/* allow/detect tagnames in lex() */
 int      sc_status;	/* read/write status */

@@ -1,4 +1,7 @@
-/*  Small compiler - Error message system
+/*
+ *  vim:ts=8:sw=3:sts=3:noexpandtab
+ *
+ *  Small compiler - Error message system
  *  In fact a very simple system, using only 'panic mode'.
  *
  *  Copyright (c) ITB CompuPhase, 1997-2003
@@ -19,7 +22,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc5.c,v 1.3 2004/04/27 08:05:12 raster Exp $
+ *  Version: $Id: embryo_cc_sc5.c,v 1.4 2004/10/12 16:57:38 tsauerbeck Exp $
  */
 #include <unistd.h>
 #include <stdio.h>
@@ -52,6 +55,7 @@ error(int number, ...)
    char               *msg, *pre;
    va_list             argptr;
    char                string[1024];
+   int start;
 
    /* errflag is reset on each semicolon.
     * In a two-pass compiler, an error should not be reported twice. Therefore
@@ -85,42 +89,24 @@ error(int number, ...)
    strexpand(string, (unsigned char *)msg, sizeof string, SCPACK_TABLE);
 
    va_start(argptr, number);
-   if (strlen(errfname) == 0)
-     {
-	int start = (errstart == fline) ? -1 : errstart;
 
-	if (sc_error(number, string, inpfname, start, fline, argptr))
-	  {
-	     sc_closeasm(outf, TRUE);
-	     outf = NULL;
-	     longjmp(errbuf, 3);
-	  }
-     }
-   else
-     {
-	FILE *fp;
-	
-	fp = fopen(errfname, "a+");
-	if (fp != NULL)
-	  {
-	     if (errstart >= 0 && errstart != fline)
-		fprintf(fp, "%s(%d -- %d) : %s %03d: ", inpfname, errstart, fline, pre, number);
-	     else
-		fprintf(fp, "%s(%d) : %s %03d: ", inpfname, fline, pre, number);
-	     vfprintf(fp, string, argptr);
-	     fclose(fp);
-	  }
-     }
+   start = (errstart == fline) ? -1 : errstart;
+
+   if (sc_error(number, string, inpfname, start, fline, argptr))
+   {
+      sc_closeasm(outf, TRUE);
+      outf = NULL;
+      longjmp(errbuf, 3);
+   }
+
    va_end(argptr);
 
    if (((number >= 100) && (number < 200)) || (errnum > 250))
      {
-	if (strlen(errfname) == 0)
-	  {
-	     va_start(argptr, number);
-	     sc_error(0, "\nCompilation aborted.", NULL, 0, 0, argptr);
-	     va_end(argptr);
-	  }			/* if */
+	va_start(argptr, number);
+	sc_error(0, "\nCompilation aborted.", NULL, 0, 0, argptr);
+	va_end(argptr);
+
 	if (outf != NULL)
 	  {
 	     sc_closeasm(outf, TRUE);

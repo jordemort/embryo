@@ -20,7 +20,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_scvars.c,v 1.3 2004/09/28 03:06:21 raster Exp $
+ *  Version: $Id: embryo_cc_scvars.c,v 1.4 2004/10/12 16:57:38 tsauerbeck Exp $
  */
 #include <stdio.h>
 #include <stdlib.h>		/* for _MAX_PATH */
@@ -42,7 +42,6 @@ constvalue *curlibrary = NULL;	/* current library */
 symbol  *curfunc;	/* pointer to current function */
 char    *inpfname;	/* pointer to name of the file currently read from */
 char     outfname[_MAX_PATH];	/* output file name */
-char     errfname[_MAX_PATH];	/* error file name */
 char     sc_ctrlchar = CTRL_CHAR;	/* the control character (or escape character) */
 int      litidx = 0;	/* index to literal table */
 int      litmax = sDEF_LITMAX;	/* current size of the literal table */

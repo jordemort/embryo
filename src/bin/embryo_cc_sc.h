@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h,v 1.5 2004/09/09 00:48:12 raster Exp $
+ *  Version: $Id: embryo_cc_sc.h,v 1.6 2004/10/12 16:57:37 tsauerbeck Exp $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -630,7 +630,6 @@ extern constvalue *curlibrary;	/* current library */
 extern symbol    *curfunc;	/* pointer to current function */
 extern char      *inpfname;	/* name of the file currently read from */
 extern char       outfname[];	/* output file name */
-extern char       errfname[];	/* error file name */
 extern char       sc_ctrlchar;	/* the control character (or escape character) */
 extern int        litidx;	/* index to literal table */
 extern int        litmax;	/* current size of the literal table */

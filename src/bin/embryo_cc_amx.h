@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_amx.h,v 1.5 2004/04/20 03:50:04 raster Exp $
+ *  Version: $Id: embryo_cc_amx.h,v 1.6 2004/08/02 15:13:26 vacuum Exp $
  */
 
 #include "embryo_cc_osdefs.h"
@@ -31,11 +31,15 @@
   /* The ISO C99 defines the int16_t and int_32t types. If the compiler got
    * here, these types are probably undefined.
    */
-# ifndef HAVE_STDINT_H
+# ifdef HAVE_INTTYPES_H
+#include <inttypes.h>
+# else
+#  ifndef HAVE_STDINT_H
 typedef short int   int16_t;
 typedef unsigned short int uint16_t;
 typedef int         int32_t;
 typedef unsigned int uint32_t;
+#  endif
 # endif
 #endif
 

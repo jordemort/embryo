@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_amx.h,v 1.7 2004/08/15 21:29:35 vacuum Exp $
+ *  Version: $Id: embryo_cc_amx.h,v 1.8 2004/08/25 18:51:42 technikolor Exp $
  */
 
 #include "embryo_cc_osdefs.h"
@@ -35,7 +35,7 @@
 #include <inttypes.h>
 # else
 #  ifndef HAVE_STDINT_H
-#include <sys/types>
+#include <sys/types.h>
 #  endif
 # endif
 #endif

@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.24 2005/03/26 16:44:12 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.25 2005/04/01 15:11:31 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -590,40 +590,6 @@ initglobals(void)
 
    wqptr = wq;			/* initialize while queue pointer */
 
-}
-
-/* set_extension
- * Set the default extension, or force an extension. To erase the
- * extension of a filename, set "extension" to an empty string.
- */
-SC_FUNC void
-set_extension(char *filename, char *extension, int force)
-{
-   char               *ptr;
-
-   ptr = strrchr(filename, '.');
-#if 0
-   if (ptr != NULL)
-     {
-	/* ignore extension on a directory or at the start of the filename */
-	if (strchr(ptr, DIRSEP_CHAR) != NULL || ptr == filename
-	    || *(ptr - 1) == DIRSEP_CHAR)
-	   ptr = NULL;
-     }				/* if */
-   if (force && ptr != NULL)
-      *ptr = '\0';		/* set zero terminator at the position of the period */
-   if (force || ptr == NULL)
-      strcat(filename, extension);
-#else
-   if (!ptr)
-     {
-	strcat(filename, extension);
-     }
-   else
-     {
-	strncpy(ptr, extension, strlen(extension));
-     }
-#endif
 }
 
 static void

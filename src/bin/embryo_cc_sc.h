@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h,v 1.9 2005/03/26 16:44:12 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc.h,v 1.10 2005/04/01 15:11:30 tsauerbeck Exp $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -438,7 +438,6 @@ typedef struct __s_stringpair
 #endif
 
 /* function prototypes in SC1.C */
-void        set_extension(char *filename, char *extension, int force);
 symbol     *fetchfunc(char *name, int tag);
 char       *operator_symname(char *symname, char *opername, int tag1,
 				     int tag2, int numtags, int resulttag);

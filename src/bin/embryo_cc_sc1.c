@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.18 2004/10/19 16:50:10 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.19 2004/12/08 06:05:23 raster Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -3245,9 +3245,11 @@ statement(int *lastindent, int allow_decl)
    /* lex() has set stmtindent */
    if (lastindent != NULL && tok != tLABEL)
      {
+#if 0	
 	if (*lastindent >= 0 && *lastindent != stmtindent &&
 	    !indent_nowarn && sc_tabsize > 0)
 	   error(217);		/* loose indentation */
+#endif	
 	*lastindent = stmtindent;
 	indent_nowarn = TRUE;	/* if warning was blocked, re-enable it */
      }				/* if */
@@ -3571,8 +3573,10 @@ doif(void)
      {
 	/* to avoid the "dangling else" error, we want a warning if the "else"
 	 * has a lower indent than the matching "if" */
+#if 0	
 	if (stmtindent < ifindent && sc_tabsize > 0)
 	   error(217);		/* loose indentation */
+#endif	
 	flab2 = getlabel();
 	if ((lastst != tRETURN) && (lastst != tGOTO))
 	   jumplabel(flab2);

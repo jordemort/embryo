@@ -19,7 +19,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.14 2004/07/25 14:52:24 vacuum Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.15 2004/07/27 00:58:25 raster Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -2151,7 +2151,7 @@ tag2str(char *dest, int tag)
 {
    tag &= TAGMASK;
    assert(tag >= 0);
-   snprintf(dest, sizeof(dest), "0%x", tag);
+   sprintf(dest, "0%x", tag);
    return isdigit(dest[1]) ? &dest[1] : dest;
 }
 
@@ -2165,12 +2165,12 @@ operator_symname(char *symname, char *opername, int tag1, int tag2,
    assert(numtags >= 1 && numtags <= 2);
    opertok = (opername[1] == '\0') ? opername[0] : 0;
    if (opertok == '=')
-      snprintf(symname, sizeof(symname), "%s%s%s", tag2str(tagstr1, resulttag), opername,
+      sprintf(symname, "%s%s%s", tag2str(tagstr1, resulttag), opername,
 	      tag2str(tagstr2, tag1));
    else if (numtags == 1 || opertok == '~')
-      snprintf(symname, sizeof(symname), "%s%s", opername, tag2str(tagstr1, tag1));
+      sprintf(symname, "%s%s", opername, tag2str(tagstr1, tag1));
    else
-      snprintf(symname, sizeof(symname), "%s%s%s", tag2str(tagstr1, tag1), opername,
+      sprintf(symname, "%s%s%s", tag2str(tagstr1, tag1), opername,
 	      tag2str(tagstr2, tag2));
    return symname;
 }
@@ -2226,7 +2226,7 @@ funcdisplayname(char *dest, char *funcname)
    assert(tagsym[1] != NULL);
    if (unary)
      {
-	snprintf(dest, sizeof(dest), "operator%s(%s:)", opname, tagsym[1]->name);
+	sprintf(dest, "operator%s(%s:)", opname, tagsym[1]->name);
      }
    else
      {
@@ -2234,11 +2234,11 @@ funcdisplayname(char *dest, char *funcname)
 	/* special case: the assignment operator has the return value
 	 * as the 2nd tag */
 	if (opname[0] == '=' && opname[1] == '\0')
-	   snprintf(dest, sizeof(dest), "%s:operator%s(%s:)", tagsym[0]->name,
-           opname, tagsym[1]->name);
+	   sprintf(dest, "%s:operator%s(%s:)", tagsym[0]->name, opname,
+		   tagsym[1]->name);
 	else
-	   snprintf(dest, sizeof(dest), "operator%s(%s:,%s:)", opname,
-           tagsym[0]->name, tagsym[1]->name);
+	   sprintf(dest, "operator%s(%s:,%s:)", opname, tagsym[0]->name,
+		   tagsym[1]->name);
      }				/* if */
    return dest;
 }

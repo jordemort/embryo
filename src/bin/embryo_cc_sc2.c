@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.10 2004/07/25 14:52:24 vacuum Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.11 2004/07/27 00:58:25 raster Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -1196,7 +1196,7 @@ command(void)
 			extern char        *sc_tokens[];	/* forward declaration */
 
 			if (tok < 256)
-			   snprintf(s2, sizeof(s2), "%c", (char)tok);
+			   sprintf(s2, "%c", (char)tok);
 			else
 			   strcpy(s2, sc_tokens[tok - tFIRST]);
 			error(1, sc_tokens[tSYMBOL - tFIRST], s2);
@@ -2139,13 +2139,13 @@ needtoken(int token)
 	/* token already pushed back */
 	assert(_pushed);
 	if (token < 256)
-	   snprintf(s1, sizeof(s1), "%c", (char)token);	/* single character token */
+	   sprintf(s1, "%c", (char)token);	/* single character token */
 	else
 	   strcpy(s1, sc_tokens[token - tFIRST]);	/* multi-character symbol */
 	if (!freading)
 	   strcpy(s2, "-end of file-");
 	else if (_lextok < 256)
-	   snprintf(s2, sizeof(s1), "%c", (char)_lextok);
+	   sprintf(s2, "%c", (char)_lextok);
 	else
 	   strcpy(s2, sc_tokens[_lextok - tFIRST]);
 	error(1, s1, s2);	/* expected ..., but found ... */

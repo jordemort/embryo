@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.4 2004/04/20 03:50:11 raster Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.5 2004/05/15 05:39:44 raster Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -104,10 +104,14 @@ plungequalifiedfile(char *name)
    pushstk((stkitem) inpf);
    pushstk((stkitem) inpfname);	/* pointer to current file name */
    pushstk((stkitem) curlibrary);
+   /* FIXME: 64bit unsafe */
    pushstk((stkitem) iflevel);
    assert(skiplevel == 0);
+   /* FIXME: 64bit unsafe */
    pushstk((stkitem) icomment);
+   /* FIXME: 64bit unsafe */
    pushstk((stkitem) fcurrent);
+   /* FIXME: 64bit unsafe */
    pushstk((stkitem) fline);
    inpfname = duplicatestring(name);	/* set name of include file */
    if (inpfname == NULL)
@@ -636,8 +640,8 @@ ftoi(cell * val, char *curptr)
 	{
 	   float               test1 = 0.0, test2 = 50.0;
 
-	   assert(*(long *)&test1 == 0x00000000L
-		  && *(long *)&test2 == 0x42480000L);
+	   assert(*(int *)&test1 == 0x00000000L
+		  && *(int *)&test2 == 0x42480000L);
 	}
 #endif
      }

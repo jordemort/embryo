@@ -35,7 +35,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc7.c,v 1.2 2004/04/20 03:50:11 raster Exp $
+ *  Version: $Id: embryo_cc_sc7.c,v 1.3 2004/05/15 05:39:44 raster Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -555,7 +555,10 @@ replacesequence(char *pattern, char symbols[_maxoptvars][_aliasmax + 1],
 
    /* allocate a buffer to replace the sequence in */
    if ((buffer = malloc(*repl_length)) == NULL)
-      return (char *)error(103);
+     {
+	error(103);
+	return NULL;
+     }
 
    /* replace the pattern into this temporary buffer */
    lptr = buffer;

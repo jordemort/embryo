@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc3.c,v 1.3 2004/04/20 03:50:11 raster Exp $
+ *  Version: $Id: embryo_cc_sc3.c,v 1.4 2004/05/15 05:39:44 raster Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -1691,7 +1691,9 @@ primary(value * lval)
 
    if (matchtoken('('))
      {				/* sub-expression - (expression,...) */
+	/* FIXME: 64bit unsafe */
 	pushstk((stkitem) intest);
+	/* FIXME: 64bit unsafe */
 	pushstk((stkitem) sc_allowtags);
 
 	intest = 0;		/* no longer in "test" expression */

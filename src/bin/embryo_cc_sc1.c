@@ -20,7 +20,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc1.c,v 1.3 2004/03/25 02:07:28 raster Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.4 2004/03/25 09:29:15 raster Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -458,7 +458,8 @@ cleanup:
     assemble(binf,outf);        /* assembler file is now input */
   } /* if */
   if (outf!=NULL)
-    sc_closeasm(outf,!(sc_asmfile || sc_listing));
+//    sc_closeasm(outf,!(sc_asmfile || sc_listing));
+    sc_closeasm(outf, 0);
   if (binf!=NULL)
     sc_closebin(binf,errnum!=0);
 

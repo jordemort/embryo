@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.2 2004/03/25 02:07:28 raster Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.3 2004/03/25 03:05:26 raster Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -1145,7 +1145,7 @@ static char *skipstring(char *string)
   } /* while */
 
   endquote=*string;
-  assert(endquote=='"' || endquote=='\'');
+  assert(endquote=='\"' || endquote=='\'');
   string++;             /* skip open quote */
   while (*string!=endquote && *string!='\0')
     litchar(&string,rawstring);

@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h,v 1.7 2005/03/26 15:21:02 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc.h,v 1.8 2005/03/26 16:37:25 tsauerbeck Exp $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -411,7 +411,7 @@ typedef struct __s_stringpair
    int                 sc_eofsrc(void *handle);
 
 /* output to intermediate (.ASM) file */
-   void               *sc_openasm(char *filename);	/* read/write */
+   void               *sc_openasm(int fd);	/* read/write */
    void                sc_closeasm(void *handle, int deletefile);
    void                sc_resetasm(void *handle);
    int                 sc_writeasm(void *handle, char *str);

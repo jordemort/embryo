@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.22 2005/03/26 15:27:14 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.23 2005/03/26 16:37:25 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -214,9 +214,9 @@ sc_eofsrc(void *handle)
 }
 
 void               *
-sc_openasm(char *filename)
+sc_openasm(int fd)
 {
-   return fopen(filename, "w+");
+   return fdopen(fd, "w+");
 }
 
 void
@@ -285,7 +285,7 @@ sc_lengthbin(void *handle)
 int
 sc_compile(int argc, char *argv[])
 {
-   int                 entry, i, jmpcode;
+   int                 entry, i, jmpcode, fd_out;
    int                 retcode;
    char                incfname[_MAX_PATH];
    char                reportname[_MAX_PATH];
@@ -293,6 +293,7 @@ sc_compile(int argc, char *argv[])
    void               *inpfmark;
    char                lcl_ctrlchar;
    int                 lcl_packstr, lcl_needsemicolon, lcl_tabsize;
+   char *tmpdir;
 
    /* set global variables to their initial value */
    binf = NULL;
@@ -314,11 +315,17 @@ sc_compile(int argc, char *argv[])
    if (!phopt_init())
       error(103);		/* insufficient memory */
 
-   setopt(argc, argv, inpfname, outfname, incfname, reportname);
-   /* set output names that depend on the input name */
-   set_extension(outfname, ".asm", TRUE);
-   strcpy(binfname, outfname);
-   set_extension(binfname, ".amx", TRUE);
+   setopt(argc, argv, inpfname, binfname, incfname, reportname);
+
+   /* open the output file */
+   tmpdir = getenv("TMPDIR");
+   if (!tmpdir) tmpdir = "/tmp";
+
+   snprintf(outfname, _MAX_PATH, "%s/embryo_cc.asm-tmp-XXXXXX", tmpdir);
+   fd_out = mkstemp(outfname);
+   if (fd_out < 0)
+     error(101, outfname);
+
    setconfig(argv[0]);		/* the path to the include files */
    lcl_ctrlchar = sc_ctrlchar;
    lcl_packstr = sc_packstr;
@@ -328,7 +335,7 @@ sc_compile(int argc, char *argv[])
    if (inpf == NULL)
       error(100, inpfname);
    freading = TRUE;
-   outf = (FILE *) sc_openasm(outfname);	/* first write to assembler
+   outf = (FILE *) sc_openasm(fd_out);	/* first write to assembler
 						 * file (may be temporary) */
    if (outf == NULL)
       error(101, outfname);

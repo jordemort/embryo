@@ -20,7 +20,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc1.c,v 1.6 2004/03/28 04:53:35 raster Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.7 2004/03/28 05:14:58 raster Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -328,7 +328,6 @@ int sc_compile(int argc, char *argv[])
     error(103);         /* insufficient memory */
 
   setopt(argc,argv,inpfname,outfname,errfname,incfname,reportname);
-   printf("outfname = %s\n", outfname);
   /* set output names that depend on the input name */
   if (sc_listing)
     set_extension(outfname,".lst",TRUE);

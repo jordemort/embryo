@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_amx.h,v 1.3 2004/03/25 02:14:56 raster Exp $
+ *  Version: $Id: embryo_cc_amx.h,v 1.4 2004/03/25 06:35:38 rbdpngn Exp $
  */
 
 #if defined LINUX
@@ -33,16 +33,10 @@
   /* The ISO C99 defines the int16_t and int_32t types. If the compiler got
    * here, these types are probably undefined.
    */
-# ifndef __int16_t_defined
+# ifndef HAVE_STDINT_H
 typedef short int           int16_t;
-# endif
-# ifndef __uint16_t_defined
 typedef unsigned short int  uint16_t;
-# endif
-# ifndef __int32_t_defined
 typedef int                 int32_t;
-# endif
-# ifndef __uint32_t_defined
 typedef unsigned int        uint32_t;
 # endif
 #endif

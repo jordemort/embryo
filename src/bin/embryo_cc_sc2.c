@@ -1,5 +1,5 @@
 /*
- *  vim:ts=8:sw=3:sts=3:noexpandtab
+ *  vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
  *
  *  Small compiler - File input, preprocessing and lexical analysis functions
  *
@@ -21,7 +21,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.14 2004/10/15 15:11:26 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.15 2004/10/19 16:50:27 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>

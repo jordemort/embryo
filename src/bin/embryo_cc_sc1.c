@@ -1,5 +1,5 @@
 /*
- *  vim:ts=8:sw=3:sts=3:noexpandtab
+ *  vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
  *
  *  Small compiler
  *  Function and variable definition and declaration, statement parser.
@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.17 2004/10/12 16:57:37 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.18 2004/10/19 16:50:10 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <ctype.h>

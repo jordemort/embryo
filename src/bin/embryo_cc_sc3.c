@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc3.c,v 1.1 2004/03/24 09:48:28 raster Exp $
+ *  Version: $Id: embryo_cc_sc3.c,v 1.2 2004/04/10 05:55:23 raster Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -1724,8 +1724,13 @@ static void callfunction(symbol *sym)
           /* otherwise, the address is already in PRI */
           if (lval.sym!=NULL)
             markusage(lval.sym,uWRITTEN);
+/*
+ * Dont need this warning - its varargs. there is no way of knowing the
+ * required tag/type...
+ * 
           if (!checktag(arg[argidx].tags,arg[argidx].numtags,lval.tag))
             error(213);
+ */
           break;
         case iVARIABLE:
           if (lval.ident==iLABEL || lval.ident==iFUNCTN || lval.ident==iREFFUNC

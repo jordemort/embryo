@@ -21,7 +21,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.15 2004/10/19 16:50:27 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.16 2005/03/26 15:21:02 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -126,7 +126,6 @@ plungequalifiedfile(char *name)
    fcurrent = fnumber;
    icomment = FALSE;
    setfile(inpfname, fcurrent);
-   setfiledirect(inpfname);
    listline = -1;		/* force a #line directive when changing the file */
    setactivefile(fcurrent);
    return TRUE;
@@ -276,7 +275,6 @@ readline(char *line)
 	     inpfname = (char *)popstk();
 	     inpf = (FILE *) popstk();
 	     setactivefile(fcurrent);
-	     setfiledirect(inpfname);
 	     listline = -1;	/* force a #line directive when changing the file */
 	     elsedone = 0;
 	  }			/* if */
@@ -1717,21 +1715,6 @@ preprocess(void)
 	     lptr = pline;	/* reset "line pointer" to start of the parsing buffer */
 	  }			/* if */
 #endif
-	if (sc_status == statFIRST && sc_listing && freading
-	    && (iscommand == CMD_NONE || iscommand == CMD_EMPTYLINE
-		|| iscommand == CMD_DIRECTIVE))
-	  {
-	     listline++;
-	     if (fline != listline)
-	       {
-		  listline = fline;
-		  setlinedirect(fline);
-	       }		/* if */
-	     if (iscommand == CMD_EMPTYLINE)
-		fputs("\n", outf);
-	     else
-		fputs(pline, outf);
-	  }			/* if */
      }
    while (iscommand != CMD_NONE && iscommand != CMD_TERM && freading);	/* enddo */
 }

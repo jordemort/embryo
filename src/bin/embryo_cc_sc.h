@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h,v 1.6 2004/10/12 16:57:37 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc.h,v 1.7 2005/03/26 15:21:02 tsauerbeck Exp $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -501,8 +501,6 @@ void        setactivefile(int fnumber);
 cell        nameincells(char *name);
 void        setfile(char *name, int fileno);
 void        setline(int line, int fileno);
-void        setfiledirect(char *name);
-void        setlinedirect(int line);
 void        setlabel(int index);
 void        endexpr(int fullexpr);
 void        startfunc(char *fname);

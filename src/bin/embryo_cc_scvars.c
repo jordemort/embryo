@@ -20,7 +20,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_scvars.c,v 1.4 2004/10/12 16:57:38 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_scvars.c,v 1.5 2005/03/26 15:21:02 tsauerbeck Exp $
  */
 #include <stdio.h>
 #include <stdlib.h>		/* for _MAX_PATH */
@@ -57,8 +57,6 @@ int      warnnum = 0;	/* number of warnings */
 int      sc_debug = sCHKBOUNDS;	/* by default: bounds checking+assertions */
 int      charbits = 8;	/* a "char" is 8 bits */
 int      sc_packstr = FALSE;	/* strings are packed by default? */
-int      sc_asmfile = FALSE;	/* create .ASM file? */
-int      sc_listing = FALSE;	/* create .LST file? */
 int      sc_compress = TRUE;	/* compress bytecode? */
 int      sc_needsemicolon = TRUE;	/* semicolon required to terminate expressions? */
 int      sc_dataalign = sizeof(cell);	/* data alignment value */

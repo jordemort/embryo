@@ -19,7 +19,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.10 2004/05/15 05:39:44 raster Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.11 2004/06/06 15:43:05 digitalfallout Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -111,7 +111,7 @@ main(int argc, char *argv[], char *env[])
    char                argv0[_MAX_PATH];
    int                 i;
 
-   strcpy(argv0, argv[0]);
+   snprintf(argv0, _MAX_PATH, "%s", argv[0]);
    /* Linux stores the name of the program in argv[0], but not the path.
     * To adjust this, I store a string with the path in argv[0]. To do
     * so, I try to get the current path with getcwd(), and if that fails

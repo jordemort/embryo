@@ -21,8 +21,13 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sclist.c,v 1.5 2005/04/13 20:34:51 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sclist.c,v 1.6 2005/04/13 20:36:07 tsauerbeck Exp $
  */
+
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
+
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>

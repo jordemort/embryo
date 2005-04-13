@@ -35,16 +35,14 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc7.c,v 1.4 2004/07/11 09:50:42 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc7.c,v 1.5 2005/04/13 19:22:58 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>		/* for atoi() */
 #include <string.h>
 #include <ctype.h>
-#if defined FORTIFY
-#include "fortify.h"
-#endif
+
 #include "embryo_cc_sc.h"
 
 #if defined _MSC_VER

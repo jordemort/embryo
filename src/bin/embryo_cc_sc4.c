@@ -18,16 +18,14 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc4.c,v 1.3 2005/03/26 15:21:02 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc4.c,v 1.4 2005/04/13 19:22:57 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>		/* for _MAX_PATH */
 #include <string.h>
-#if defined FORTIFY
-#include "fortify.h"
-#endif
+
 #include "embryo_cc_sc.h"
 
 /* When a subroutine returns to address 0, the AMX must halt. In earlier

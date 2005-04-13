@@ -18,15 +18,13 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc3.c,v 1.5 2004/07/11 09:50:42 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc3.c,v 1.6 2005/04/13 19:22:57 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>		/* for _MAX_PATH */
 #include <string.h>
-#if defined FORTIFY
-#include "fortify.h"
-#endif
+
 #include "embryo_cc_sc.h"
 
 static int          skim(int *opstr, void (*testfunc) (int), int dropval,

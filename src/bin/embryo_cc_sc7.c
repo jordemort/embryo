@@ -35,7 +35,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc7.c,v 1.5 2005/04/13 19:22:58 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc7.c,v 1.6 2005/04/13 19:37:01 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -91,7 +91,7 @@ grow_stgbuffer(int requiredsize)
       *stgbuf = '\0';
 }
 
-SC_FUNC void
+void
 stgbuffer_cleanup(void)
 {
    if (stgbuf != NULL)
@@ -120,7 +120,7 @@ stgbuffer_cleanup(void)
  *                     stgbuf  (altered)
  *                     staging (referred to only)
  */
-SC_FUNC void
+void
 stgmark(char mark)
 {
    if (staging)
@@ -155,7 +155,7 @@ filewrite(char *str)
  *                     stgbuf  (altered)
  *                     staging (referred to only)
  */
-SC_FUNC void
+void
 stgwrite(char *st)
 {
    int                 len;
@@ -197,7 +197,7 @@ stgwrite(char *st)
  *                     stgbuf  (referred to only)
  *                     staging (referred to only)
  */
-SC_FUNC void
+void
 stgout(int index)
 {
    if (!staging)
@@ -312,7 +312,7 @@ stgstring(char *start, char *end)
  *  Global references: stgidx (altered)
  *                     staging (reffered to only)
  */
-SC_FUNC void
+void
 stgdel(int index, cell code_index)
 {
    if (staging)
@@ -322,7 +322,7 @@ stgdel(int index, cell code_index)
      }				/* if */
 }
 
-SC_FUNC int
+int
 stgget(int *index, cell * code_index)
 {
    if (staging)
@@ -343,7 +343,7 @@ stgget(int *index, cell * code_index)
  *                     stgidx   (altered)
  *                     stgbuf   (contents altered)
  */
-SC_FUNC void
+void
 stgset(int onoff)
 {
    staging = onoff;
@@ -368,7 +368,7 @@ stgset(int onoff)
  */
 static SEQUENCE    *sequences;
 
-SC_FUNC int
+int
 phopt_init(void)
 {
    int                 number, i, len;
@@ -417,7 +417,7 @@ phopt_init(void)
    return TRUE;
 }
 
-SC_FUNC int
+int
 phopt_cleanup(void)
 {
    int                 i;

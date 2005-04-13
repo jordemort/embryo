@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc6.c,v 1.6 2004/09/09 00:48:12 raster Exp $
+ *  Version: $Id: embryo_cc_sc6.c,v 1.7 2005/04/13 19:37:01 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -629,7 +629,7 @@ findopcode(char *instr, int maxlen)
    return 0;			/* not found, return special index */
 }
 
-SC_FUNC void
+void
 assemble(FILE * fout, FILE * fin)
 {
    typedef struct tagFUNCSTUB

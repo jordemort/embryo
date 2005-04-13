@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.29 2005/04/13 20:01:17 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.30 2005/04/13 20:27:02 tsauerbeck Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -2727,7 +2727,7 @@ doarg(char *name, int ident, int offset, int tags[], int numtags,
 
 		       tokeninfo(&val, &name);
 		       if ((arg->defvalue.size.symname =
-			    duplicatestring(name)) == NULL)
+			    strdup(name)) == NULL)
 			  error(103);	/* insufficient memory */
 		       arg->defvalue.size.level = 0;
 		       if (size_tag_token == uSIZEOF)

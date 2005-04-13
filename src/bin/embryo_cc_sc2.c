@@ -21,7 +21,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.19 2005/04/13 20:01:19 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.20 2005/04/13 20:27:03 tsauerbeck Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -122,7 +122,7 @@ plungequalifiedfile(char *name)
    pushstk((stkitem) fcurrent);
    /* FIXME: 64bit unsafe */
    pushstk((stkitem) fline);
-   inpfname = duplicatestring(name);	/* set name of include file */
+   inpfname = strdup(name);	/* set name of include file */
    if (inpfname == NULL)
       error(103);		/* insufficient memory */
    inpf = fp;			/* set input file pointer to include file */
@@ -934,7 +934,7 @@ command(void)
 	     if (strlen(pathname) > 0)
 	       {
 		  free(inpfname);
-		  inpfname = duplicatestring(pathname);
+		  inpfname = strdup(pathname);
 		  if (inpfname == NULL)
 		     error(103);	/* insufficient memory */
 	       }		/* if */

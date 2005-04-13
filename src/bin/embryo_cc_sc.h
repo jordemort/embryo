@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h,v 1.13 2005/04/13 19:38:53 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc.h,v 1.14 2005/04/13 20:27:02 tsauerbeck Exp $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -586,7 +586,6 @@ int         phopt_init(void);
 int         phopt_cleanup(void);
 
 /* function prototypes in SCLIST.C */
-char       *duplicatestring(const char *sourcestring);
 stringpair *insert_alias(char *name, char *alias);
 stringpair *find_alias(char *name);
 int         lookup_alias(char *target, char *name);

@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h,v 1.12 2005/04/13 19:36:58 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc.h,v 1.13 2005/04/13 19:38:53 tsauerbeck Exp $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -423,16 +423,6 @@ typedef struct __s_stringpair
    void                sc_resetbin(void *handle);
    int                 sc_writebin(void *handle, void *buffer, int size);
    long                sc_lengthbin(void *handle);	/* return the length of the file */
-
-/* by default, functions and variables used in throughout the compiler
- * files are "external"
- */
-#if !defined SC_VDECL
-#define SC_VDECL  extern
-#endif
-#if !defined SC_VDEFINE
-#define SC_VDEFINE
-#endif
 
 /* function prototypes in SC1.C */
 symbol     *fetchfunc(char *name, int tag);

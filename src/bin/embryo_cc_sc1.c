@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.26 2005/04/13 19:18:12 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.27 2005/04/13 19:21:07 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <ctype.h>
@@ -43,7 +43,6 @@ static void         setopt(int argc, char **argv,
                            char *iname, char *oname,
                            char *pname, char *rname);
 static void         setconfig(char *root);
-static void         setcaption(void);
 static void         about(void);
 static void         setconstants(void);
 static void         parse(void);
@@ -685,19 +684,8 @@ setconfig(char *root)
 }
 
 static void
-setcaption(void)
-{
-/* shh be quiet!   */
-#if 0
-   printf("Small compiler " VERSION_STR
-	  "\t\tCopyright (c) 1997-2003, ITB CompuPhase\n\n");
-#endif
-}
-
-static void
 about(void)
 {
-   setcaption();
    printf("Usage:   embryo_cc <filename> [options]\n\n");
    printf("Options:\n");
 #if 0

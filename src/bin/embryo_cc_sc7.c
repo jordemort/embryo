@@ -35,8 +35,13 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc7.c,v 1.6 2005/04/13 19:37:01 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc7.c,v 1.7 2005/04/13 20:01:23 tsauerbeck Exp $
  */
+
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
+
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>		/* for atoi() */

@@ -22,8 +22,13 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc5.c,v 1.6 2005/03/26 16:44:12 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc5.c,v 1.7 2005/04/13 20:01:22 tsauerbeck Exp $
  */
+
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>

@@ -21,7 +21,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sclist.c,v 1.4 2005/04/13 20:27:03 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sclist.c,v 1.5 2005/04/13 20:34:51 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdlib.h>
@@ -140,12 +140,6 @@ insert_alias(char *name, char *alias)
    if ((cur = insert_stringpair(&alias_tab, name, alias, strlen(name))) == NULL)
       error(103);		/* insufficient memory (fatal error) */
    return cur;
-}
-
-stringpair *
-find_alias(char *name)
-{
-   return find_stringpair(alias_tab.next, name, strlen(name));
 }
 
 int

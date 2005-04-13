@@ -18,11 +18,10 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_amx.h,v 1.9 2004/09/09 00:48:12 raster Exp $
+ *  Version: $Id: embryo_cc_amx.h,v 1.10 2005/04/13 19:52:55 tsauerbeck Exp $
  */
 
 #include "embryo_cc_osdefs.h"
-#include "embryo_cc_sclinux.h"
 
 #ifndef EMBRYO_CC_AMX_H
 #define EMBRYO_CC_AMX_H

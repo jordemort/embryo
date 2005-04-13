@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc6.c,v 1.7 2005/04/13 19:37:01 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc6.c,v 1.8 2005/04/13 19:45:19 tsauerbeck Exp $
  */
 #include <assert.h>
 #include <stdio.h>
@@ -616,7 +616,7 @@ findopcode(char *instr, int maxlen)
      {
 	mid = (low + high) / 2;
 	assert(opcodelist[mid].name != NULL);
-	cmp = stricmp(str, opcodelist[mid].name);
+	cmp = strcasecmp(str, opcodelist[mid].name);
 	if (cmp > 0)
 	   low = mid + 1;
 	else
@@ -624,7 +624,7 @@ findopcode(char *instr, int maxlen)
      }				/* while */
 
    assert(low == high);
-   if (stricmp(str, opcodelist[low].name) == 0)
+   if (strcasecmp(str, opcodelist[low].name) == 0)
       return low;		/* found */
    return 0;			/* not found, return special index */
 }
@@ -658,7 +658,7 @@ assemble(FILE * fout, FILE * fin)
    for (i = 2; i < (sizeof opcodelist / sizeof opcodelist[0]); i++)
      {
 	assert(opcodelist[i].name != NULL);
-	assert(stricmp(opcodelist[i].name, opcodelist[i - 1].name) > 0);
+	assert(strcasecmp(opcodelist[i].name, opcodelist[i - 1].name) > 0);
      }				/* for */
 #endif
 

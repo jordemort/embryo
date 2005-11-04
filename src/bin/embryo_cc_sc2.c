@@ -21,7 +21,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.20 2005/04/13 20:27:03 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.21 2005/11/04 08:16:24 sebastid Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -931,7 +931,7 @@ command(void)
 	     char                pathname[_MAX_PATH];
 
 	     lptr = getstring(pathname, sizeof pathname, lptr);
-	     if (strlen(pathname) > 0)
+	     if (pathname[0] != '\0')
 	       {
 		  free(inpfname);
 		  inpfname = strdup(pathname);
@@ -1000,7 +1000,7 @@ command(void)
 			       name[i] = *lptr;
 			    name[i] = '\0';
 			 }	/* if */
-		       if (strlen(name) == 0)
+		       if (name[0] == '\0')
 			 {
 			    curlibrary = NULL;
 			 }
@@ -1308,7 +1308,7 @@ command(void)
 		     delete_subst(pattern, prefixlen);
 		  }		/* if */
 		/* add the pattern/substitution pair to the list */
-		assert(strlen(pattern) > 0);
+		assert(pattern[0] != '\0');
 		insert_subst(pattern, substitution, prefixlen);
 		free(pattern);
 		free(substitution);

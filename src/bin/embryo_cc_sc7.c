@@ -35,7 +35,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc7.c,v 1.7 2005/04/13 20:01:23 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc7.c,v 1.8 2005/11/04 08:16:24 sebastid Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -360,7 +360,7 @@ stgset(int onoff)
 	/* write any contents that may be put in the buffer by stgwrite()
 	 * when "staging" was 0
 	 */
-	if (strlen(stgbuf) > 0)
+	if (stgbuf[0] != '\0')
 	   filewrite(stgbuf);
      }				/* if */
    stgbuf[0] = '\0';

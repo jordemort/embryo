@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc6.c,v 1.10 2005/04/13 20:01:22 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc6.c,v 1.11 2005/11/04 08:16:24 sebastid Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -710,7 +710,7 @@ assemble(FILE * fout, FILE * fin)
 	  }			/* if */
 	if (match)
 	  {
-	     assert(strlen(alias) > 0);
+	     assert(alias[0] != '\0');
 	     nametablesize += strlen(alias) + 1;
 	  }			/* if */
      }				/* for */
@@ -723,7 +723,7 @@ assemble(FILE * fout, FILE * fin)
      {
 	if (constptr->value > 0)
 	  {
-	     assert(strlen(constptr->name) > 0);
+	     assert(constptr->name[0] != '\0');
 	     numlibraries++;
 	     nametablesize += strlen(constptr->name) + 1;
 	  }			/* if */
@@ -736,7 +736,7 @@ assemble(FILE * fout, FILE * fin)
      {
 	if ((constptr->value & PUBLICTAG) != 0)
 	  {
-	     assert(strlen(constptr->name) > 0);
+	     assert(constptr->name[0] != '\0');
 	     numtags++;
 	     nametablesize += strlen(constptr->name) + 1;
 	  }			/* if */
@@ -892,7 +892,7 @@ assemble(FILE * fout, FILE * fin)
      {
 	if (constptr->value > 0)
 	  {
-	     assert(strlen(constptr->name) > 0);
+	     assert(constptr->name[0] != '\0');
 	     func.address = 0;
 	     func.nameofs = nameofs;
 #ifdef WORDS_BIGENDIAN
@@ -938,7 +938,7 @@ assemble(FILE * fout, FILE * fin)
      {
 	if ((constptr->value & PUBLICTAG) != 0)
 	  {
-	     assert(strlen(constptr->name) > 0);
+	     assert(constptr->name[0] != '\0');
 	     func.address = constptr->value & TAGMASK;
 	     func.nameofs = nameofs;
 #ifdef WORDS_BIGENDIAN

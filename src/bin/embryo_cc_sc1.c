@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.  
- *  Version: $Id: embryo_cc_sc1.c,v 1.34 2007/11/25 11:38:49 doursse Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.35 2008/01/24 00:25:13 raster Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -697,7 +697,11 @@ setconfig(char *root)
 
    /* add the default "include" directory */
    if (root != NULL)
-      strcpy(path, root);	/* path + filename (hopefully) */
+     {
+	/* path + filename (hopefully) */
+	strncpy(path, root, sizeof(path) - 1);
+	path[sizeof(path) - 1] = 0;
+     }
 /* terminate just behind last \ or : */
    if ((ptr = strrchr(path, DIRSEP_CHAR)) != NULL
        || (ptr = strchr(path, ':')) != NULL)
@@ -708,7 +712,10 @@ setconfig(char *root)
 	 * to the list in that case 
 	 */
 	*(ptr + 1) = '\0';
-	strcat(path, "include");
+	if (strlen(path) < (sizeof(path) - 1 - 7))
+	  {
+	     strcat(path, "include");
+	  }
 	len = strlen(path);
 	path[len] = DIRSEP_CHAR;
 	path[len + 1] = '\0';

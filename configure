@@ -3390,7 +3390,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=embryo
- VERSION=0.9.1.040
+ VERSION=0.9.1.041
 
 
 cat >>confdefs.h <<_ACEOF

@@ -10,7 +10,7 @@ install/libembryo-doc::
 	cp -R $(DEB_SRCDIR)/doc/html debian/libembryo-doc/usr/share/doc/libembryo-doc/
 	rm $(DEB_SRCDIR)/doc/man/man3/todo.3
 
-clean/libembryo-doc::
+clean::
 	rm -rf $(DEB_SRCDIR)/doc/html $(DEB_SRCDIR)/doc/latex $(DEB_SRCDIR)/doc/
 
 DEB_INSTALL_MANPAGES_libembryo-doc := $(DEB_SRCDIR)/doc/man/man3/*.3

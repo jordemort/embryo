@@ -40,10 +40,9 @@ host_triplet = @host@
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/README.in \
 	$(srcdir)/config.h.in $(srcdir)/embryo.pc.in \
-	$(srcdir)/embryo.spec.in $(top_srcdir)/configure \
-	$(top_srcdir)/debian/changelog.in AUTHORS COPYING ChangeLog \
-	INSTALL NEWS config.guess config.sub depcomp install-sh \
-	ltmain.sh missing mkinstalldirs
+	$(srcdir)/embryo.spec.in $(top_srcdir)/configure AUTHORS \
+	COPYING ChangeLog INSTALL NEWS config.guess config.sub depcomp \
+	install-sh ltmain.sh missing
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.in
@@ -51,9 +50,9 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno configure.status.lineno
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES = embryo.pc README embryo.spec debian/changelog
+CONFIG_CLEAN_FILES = embryo.pc README embryo.spec
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgconfigdir)"
 binSCRIPT_INSTALL = $(INSTALL_SCRIPT)
 SCRIPTS = $(bin_SCRIPTS)
@@ -83,7 +82,7 @@ am__remove_distdir = \
   { test ! -d $(distdir) \
     || { find $(distdir) -type d ! -perm -200 -exec chmod u+w {} ';' \
          && rm -fr $(distdir); }; }
-DIST_ARCHIVES = $(distdir).tar.gz
+DIST_ARCHIVES = $(distdir).tar.gz $(distdir).tar.bz2
 GZIP_ENV = --best
 distuninstallcheck_listfiles = find . -type f -print
 distcleancheck_listfiles = find . -type f -print
@@ -93,6 +92,7 @@ AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
 AR = @AR@
+AS = @AS@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
@@ -102,21 +102,16 @@ CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
-CXX = @CXX@
-CXXCPP = @CXXCPP@
-CXXDEPMODE = @CXXDEPMODE@
-CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DLLTOOL = @DLLTOOL@
 ECHO = @ECHO@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
-F77 = @F77@
-FFLAGS = @FFLAGS@
 GREP = @GREP@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -129,29 +124,24 @@ LIBTOOL = @LIBTOOL@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
+OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
-PACKAGE_BIN_DIR = @PACKAGE_BIN_DIR@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
-PACKAGE_DATA_DIR = @PACKAGE_DATA_DIR@
-PACKAGE_LIB_DIR = @PACKAGE_LIB_DIR@
 PACKAGE_NAME = @PACKAGE_NAME@
 PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 RANLIB = @RANLIB@
+SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
 ac_ct_CC = @ac_ct_CC@
-ac_ct_CXX = @ac_ct_CXX@
-ac_ct_F77 = @ac_ct_F77@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
-am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
-am__fastdepCXX_TRUE = @am__fastdepCXX_TRUE@
 am__include = @am__include@
 am__leading_dot = @am__leading_dot@
 am__quote = @am__quote@
@@ -195,6 +185,7 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
+version_info = @version_info@
 SUBDIRS = src include
 MAINTAINERCLEANFILES = Makefile.in aclocal.m4 config.guess \
                        config.h.in config.sub configure install-sh \
@@ -203,8 +194,7 @@ MAINTAINERCLEANFILES = Makefile.in aclocal.m4 config.guess \
 		       embryo_docs.tar.gz embryo.c \
 		       README \
 		       embryo.pc \
-		       embryo.spec \
-		       debian/changelog
+		       embryo.spec
 
 bin_SCRIPTS = 
 EXTRA_DIST = README AUTHORS COPYING COPYING-PLAIN embryo.c.in gendoc \
@@ -212,14 +202,7 @@ EXTRA_DIST = README AUTHORS COPYING COPYING-PLAIN embryo.c.in gendoc \
 	     README.in README \
 	     embryo.pc.in \
 	     embryo.spec.in embryo.spec \
-	     debian/changelog \
-	     debian/changelog.in \
-	     debian/control \
-	     debian/copyright \
-	     debian/embryo0-bin.install \
-	     debian/libembryo0-dev.install \
-	     debian/libembryo0.install \
-	     debian/rules
+	     doc gendoc
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = embryo.pc
@@ -282,8 +265,6 @@ embryo.pc: $(top_builddir)/config.status $(srcdir)/embryo.pc.in
 README: $(top_builddir)/config.status $(srcdir)/README.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 embryo.spec: $(top_builddir)/config.status $(srcdir)/embryo.spec.in
-	cd $(top_builddir) && $(SHELL) ./config.status $@
-debian/changelog: $(top_builddir)/config.status $(top_srcdir)/debian/changelog.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 install-binSCRIPTS: $(bin_SCRIPTS)
 	@$(NORMAL_INSTALL)
@@ -467,7 +448,7 @@ distclean-tags:
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkdir_p) $(distdir)/. $(distdir)/debian
+	$(mkdir_p) $(distdir)/.
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
@@ -517,7 +498,6 @@ distdir: $(DISTFILES)
 dist-gzip: distdir
 	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
 	$(am__remove_distdir)
-
 dist-bzip2: distdir
 	tardir=$(distdir) && $(am__tar) | bzip2 -9 -c >$(distdir).tar.bz2
 	$(am__remove_distdir)
@@ -537,6 +517,7 @@ dist-zip: distdir
 
 dist dist-all: distdir
 	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
+	tardir=$(distdir) && $(am__tar) | bzip2 -9 -c >$(distdir).tar.bz2
 	$(am__remove_distdir)
 
 # This target untars the dist file and tries a VPATH configuration.  Then

@@ -11,7 +11,7 @@ install/libembryo-doc::
 	rm $(DEB_SRCDIR)/doc/man/man3/todo.3
 
 clean::
-	rm -rf $(DEB_SRCDIR)/doc/html $(DEB_SRCDIR)/doc/latex $(DEB_SRCDIR)/doc/
+	rm -rf $(DEB_SRCDIR)/doc/html $(DEB_SRCDIR)/doc/latex $(DEB_SRCDIR)/doc/man
 
 DEB_INSTALL_MANPAGES_libembryo-doc := $(DEB_SRCDIR)/doc/man/man3/*.3
 DEB_DH_STRIP_ARGS := --dbg-package=libembryo-dbg

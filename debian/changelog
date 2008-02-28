@@ -1,6 +1,6 @@
-embryo (0.9.1.042-1) unstable; urgency=low
+embryo (0.9.1.042-1) experimental; urgency=low
 
-  * Initial Release
+  * Initial Release (Closes: #468269)
 
- -- Albin Tonnerre <lut1n.tne@gmail.com>  Sat, 04 Aug 2007 12:27:46 +0200
+ -- Albin Tonnerre <albin.tonnerre@gmail.com>  Thu, 28 Feb 2008 14:05:59 +0000 
 

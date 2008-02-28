@@ -2,8 +2,8 @@ Source: embryo
 Section: libs
 Priority: optional
 Maintainer:  Debian Pkg-e Team <pkg-e-devel@lists.alioth.debian.org>
-Build-Depends: debhelper (>= 5), cdbs, doxygen
-Standards-Version: 3.7.2
+Build-Depends: debhelper (>= 6), cdbs, doxygen
+Standards-Version: 3.7.3
 
 Package: libembryo-dev
 Section: libdevel

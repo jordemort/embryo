@@ -3,8 +3,8 @@
 include /usr/share/cdbs/1/class/autotools.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 
-configure/libembryo-doc::
-	cd $(DEB_SRCDIR) && ./gendoc
+build/libembryo-doc::
+	cd $(DEB_SRCDIR) && doxygen
 
 install/libembryo-doc::
 	cp -R $(DEB_SRCDIR)/doc/html debian/libembryo-doc/usr/share/doc/libembryo-doc/
@@ -12,7 +12,10 @@ install/libembryo-doc::
 
 clean::
 	rm -rf $(DEB_SRCDIR)/doc/html $(DEB_SRCDIR)/doc/latex $(DEB_SRCDIR)/doc/man
+	mkdir -p $(DEB_SRCDIR)/doc/html
+	cp $(DEB_SRCDIR)/doc/img/*.png $(DEB_SRCDIR)/doc/html/
+	cp $(DEB_SRCDIR)/doc/img/*.gif $(DEB_SRCDIR)/doc/html/
 
-DEB_INSTALL_MANPAGES_libembryo-doc := $(DEB_SRCDIR)/doc/man/man3/*.3
+#DEB_INSTALL_MANPAGES_libembryo-doc := $(DEB_SRCDIR)/doc/man/man3/*.3
 DEB_DH_STRIP_ARGS := --dbg-package=libembryo-dbg
 DEB_CONFIGURE_EXTRA_FLAGS := --disable-rpath

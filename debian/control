@@ -5,6 +5,9 @@ Maintainer:  Debian Pkg-e Team <pkg-e-devel@lists.alioth.debian.org>
 Uploaders: Albin Tonnerre <albin.tonnerre@gmail.com>, Jan Luebbe <jluebbe@debian.org>
 Build-Depends: debhelper (>= 6), cdbs, doxygen
 Standards-Version: 3.7.3
+Vcs-Git: git://git.debian.org/pkg-e/libs/embryo.git
+Vcs-Browser: http://git.debian.org/?p=pkg-e/libs/embryo.git
+Homepage: http://www.enlightenment.org
 
 Package: libembryo-dev
 Section: libdevel
@@ -41,7 +44,7 @@ Description: SMALL-based abstract machine (AMX) bytecode interpreter
  See also http://www.compuphase.com/small.htm for details on SMALL.
 
 Package: libembryo-doc
-Section: libdevel
+Section: doc
 Architecture: all
 Enhances: libembryo-doc
 Description: libembryo0 development documentation

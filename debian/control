@@ -2,7 +2,7 @@ Source: embryo
 Section: libs
 Priority: optional
 Maintainer:  Debian Pkg-e Team <pkg-e-devel@lists.alioth.debian.org>
-Uploaders: Albin Tonnerre <albin.tonnerre@gmail.com>, Jan Luebbe <jluebbe@debian.org>
+Uploaders: Albin Tonnerre <albin.tonnerre@gmail.com>, Jan Luebbe <jluebbe@debian.org>, Xavier Oswald <x.oswald@free.fr>
 Build-Depends: debhelper (>= 6), cdbs, doxygen
 Standards-Version: 3.7.3
 Vcs-Git: git://git.debian.org/pkg-e/libs/embryo.git

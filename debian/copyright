@@ -22,7 +22,7 @@ Copyright:
   src/bin/embryo_cc_sc.h: Copyright R. Cain, 1980, J.E. Hendrix, 1982, 1983,
                           T. Riemersma, 1997-2003
 
-i  src/lib/embryo_amx.c: Copyright (c) ITB CompuPhase, 1997-2003
+  src/lib/embryo_amx.c: Copyright (c) ITB CompuPhase, 1997-2003
                          Portions Copyright (c) Carsten Haitzler, 2004
   src/lib/embryo_float.c: Copyright (c) Artran, Inc. 1999
                           Portions Copyright (c) Carsten Haitzler, 2004

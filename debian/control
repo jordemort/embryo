@@ -46,6 +46,7 @@ Description: SMALL-based abstract machine (AMX) bytecode interpreter
 Package: libembryo-doc
 Section: doc
 Architecture: all
+Enhances: libembryo-dev
 Description: libembryo0 development documentation
  Embryo is primarily a shared library that gives you an API to load
  and control interpreted programs compiled into an abstract machine

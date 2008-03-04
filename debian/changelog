@@ -1,6 +1,7 @@
-embryo (0.9.1.042-1) experimental; urgency=low
+embryo (0.9.1.042+dfsg-1) experimental; urgency=low
 
   * Initial Release (Closes: #468269)
+  * Resolve license problem by merging fix made in the upstream VCS with
+    permission from Greg Garner
 
- -- Albin Tonnerre <albin.tonnerre@gmail.com>  Thu, 28 Feb 2008 14:05:59 +0000 
-
+ -- Jan Luebbe <jluebbe@debian.org>  Tue, 04 Mar 2008 13:47:56 +0100

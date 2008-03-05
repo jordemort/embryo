@@ -3,7 +3,7 @@ Title: Embryo Guide
 Author: Carsten Haitzler
 Abstract: This document describes Embryo API
  and provides sample C code.
-Section: Apps/Programming
+Section: Programming/C
 
 Format: HTML
 Index: /usr/share/doc/libembryo-doc/html/index.html

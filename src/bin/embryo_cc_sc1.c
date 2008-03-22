@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.
- *  Version: $Id: embryo_cc_sc1.c,v 1.36 2008/03/21 17:18:25 doursse Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.37 2008/03/22 00:25:07 doursse Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -37,7 +37,7 @@
 #include <string.h>
 #include <unistd.h>
 #ifdef HAVE_EVIL
-# include <evil.h>
+# include <Evil.h>
 #endif /* HAVE_EVIL */
 
 #include "embryo_cc_osdefs.h"

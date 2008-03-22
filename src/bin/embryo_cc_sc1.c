@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.
- *  Version: $Id: embryo_cc_sc1.c,v 1.37 2008/03/22 00:25:07 doursse Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.38 2008/03/22 08:31:38 doursse Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -319,7 +319,7 @@ sc_compile(int argc, char *argv[])
    tmpdir = getenv("TMPDIR");
    if (!tmpdir) tmpdir = "/tmp";
 #else
-   tmpdir = evil_tmpdir_get();
+   tmpdir = (char *)evil_tmpdir_get();
 #endif /* ! HAVE_EVIL */
 
    snprintf(outfname, _MAX_PATH, "%s/embryo_cc.asm-tmp-XXXXXX", tmpdir);

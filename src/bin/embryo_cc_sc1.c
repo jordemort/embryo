@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.
- *  Version: $Id: embryo_cc_sc1.c,v 1.39 2008/04/11 05:29:33 doursse Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.40 2008/04/11 05:59:42 doursse Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -116,7 +116,7 @@ static int         *wqptr;	/* pointer to next entry */
 static char         binfname[_MAX_PATH];	/* binary file name */
 
 int
-main(int argc, char *argv[], char *env[])
+main(int argc, char *argv[], char *env[] __UNUSED__)
 {
    char                argv0[_MAX_PATH];
    int                 i;
@@ -597,7 +597,7 @@ initglobals(void)
 
 static void
 parseoptions(int argc, char **argv, char *iname, char *oname,
-             char *pname, char *rname)
+             char *pname __UNUSED__, char *rname __UNUSED__)
 {
    char str[PATH_MAX];
    int i, stack_size;

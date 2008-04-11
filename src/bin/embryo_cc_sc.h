@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h,v 1.14 2005/04/13 20:27:02 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc.h,v 1.15 2008/04/11 05:59:42 doursse Exp $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -29,12 +29,19 @@
  */
 #ifndef EMBRYO_CC_SC_H
 #define EMBRYO_CC_SC_H
+
 #include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <setjmp.h>
 #include "embryo_cc_osdefs.h"
 #include "embryo_cc_amx.h"
+
+#if HAVE___ATTRIBUTE__
+#define __UNUSED__ __attribute__((unused))
+#else
+#define __UNUSED__
+#endif
 
 /* Note: the "cell" and "ucell" types are defined in AMX.H */
 

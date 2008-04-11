@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc4.c,v 1.6 2005/04/13 20:01:21 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc4.c,v 1.7 2008/04/11 05:59:42 doursse Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -215,7 +215,7 @@ endexpr(int fullexpr)
  *  Global references: funcstatus  (referred to only)
  */
 void
-startfunc(char *fname)
+startfunc(char *fname __UNUSED__)
 {
    stgwrite("\tproc");
    stgwrite("\n");

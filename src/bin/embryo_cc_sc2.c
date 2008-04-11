@@ -21,7 +21,11 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c,v 1.21 2005/11/04 08:16:24 sebastid Exp $
+ *  Version: $Id: embryo_cc_sc2.c,v 1.22 2008/04/11 19:06:18 doursse Exp $
+ */
+
+/*
+ * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
  */
 
 #ifdef HAVE_CONFIG_H
@@ -649,7 +653,7 @@ ftoi(cell * val, char *curptr)
 
 	   if (c1 != 0x00000000L)
 	     {
-		fprintf(stderr, 
+		fprintf(stderr,
 			"embryo_cc: WARNING! you compiler does not SEEM to interpret IEEE floating\n"
 			"point math as embryo expects. this could be bad.\n"
 			"\n"
@@ -661,7 +665,7 @@ ftoi(cell * val, char *curptr)
 	     }
 	  else if (c2 != 0x42480000L)
 	     {
-		fprintf(stderr, 
+		fprintf(stderr,
 			"embryo_cc: WARNING! you compiler does not SEEM to interpret IEEE floating\n"
 			"point math as embryo expects. This could be bad.\n"
 			"\n"

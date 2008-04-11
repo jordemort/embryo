@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h,v 1.15 2008/04/11 05:59:42 doursse Exp $
+ *  Version: $Id: embryo_cc_sc.h,v 1.16 2008/04/11 19:06:18 doursse Exp $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -27,6 +27,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  */
+
 #ifndef EMBRYO_CC_SC_H
 #define EMBRYO_CC_SC_H
 

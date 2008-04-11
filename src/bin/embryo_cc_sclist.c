@@ -21,7 +21,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sclist.c,v 1.6 2005/04/13 20:36:07 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sclist.c,v 1.7 2008/04/11 05:29:33 doursse Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -131,7 +131,7 @@ delete_stringpair(stringpair * root, stringpair * item)
 }
 
 /* ----- alias table --------------------------------------------- */
-static stringpair   alias_tab = { NULL, NULL, NULL };	/* alias table */
+static stringpair   alias_tab = { NULL, NULL, NULL, 0 };    /* alias table */
 
 stringpair *
 insert_alias(char *name, char *alias)
@@ -217,7 +217,7 @@ delete_pathtable(void)
 
 /* ----- text substitution patterns ------------------------------ */
 
-static stringpair   substpair = { NULL, NULL, NULL };	/* list of substitution pairs */
+static stringpair   substpair = { NULL, NULL, NULL, 0 };    /* list of substitution pairs */
 static stringpair  *substindex['z' - 'A' + 1];	/* quick index to first character */
 
 static void

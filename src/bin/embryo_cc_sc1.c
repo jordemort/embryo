@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.
- *  Version: $Id: embryo_cc_sc1.c,v 1.38 2008/03/22 08:31:38 doursse Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.39 2008/04/11 05:29:33 doursse Exp $
  */
 
 #ifdef HAVE_CONFIG_H
@@ -1176,7 +1176,7 @@ declloc(int fstatic)
    symbol             *sym;
    cell                val, size;
    char               *str;
-   value               lval = { 0 };
+   value               lval = { NULL, 0, 0, 0, 0, NULL };
    int                 cur_lit = 0;
    int                 dim[sDIMEN_MAX];
    int                 numdim, level;
@@ -3422,7 +3422,7 @@ test(int label, int parens, int invert)
 {
    int                 index, tok;
    cell                cidx;
-   value               lval = { 0 };
+   value               lval = { NULL, 0, 0, 0, 0, NULL };
    int                 localstaging = FALSE;
 
    if (!staging)
@@ -3835,7 +3835,7 @@ doassert(void)
 {
    int                 flab1, index;
    cell                cidx;
-   value               lval = { 0 };
+   value               lval = { NULL, 0, 0, 0, 0, NULL };
 
    if ((sc_debug & sCHKBOUNDS) != 0)
      {

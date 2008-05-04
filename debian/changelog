@@ -1,3 +1,9 @@
+embryo (0.9.1.042+dfsg-2) UNRELEASED; urgency=low
+
+  * debian/libevas-doc.doc-base: change Section to Programming/C
+
+ -- Jan Lübbe <jluebbe@debian.org>  Sun, 04 May 2008 22:09:59 +0200
+
 embryo (0.9.1.042+dfsg-1) experimental; urgency=low
 
   * Initial Release (Closes: #468269)

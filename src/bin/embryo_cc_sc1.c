@@ -21,7 +21,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.
- *  Version: $Id: embryo_cc_sc1.c,v 1.41 2008/04/11 19:06:18 doursse Exp $
+ *  Version: $Id: embryo_cc_sc1.c,v 1.42 2008/05/06 09:18:56 raster Exp $
  */
 
 /*
@@ -614,7 +614,7 @@ parseoptions(int argc, char **argv, char *iname, char *oname,
 
    for (i = 1; i < argc; i++)
    {
-      if (!strcmp (argv[i], "-i") && *argv[i + 1])
+      if (!strcmp (argv[i], "-i") && (i + 1 < argc) && *argv[i + 1])
       {
 	 /* include directory */
 	 i++;
@@ -629,13 +629,13 @@ parseoptions(int argc, char **argv, char *iname, char *oname,
 
 	 insert_path(str);
       }
-      else if (!strcmp (argv[i], "-o") && *argv[i + 1])
+      else if (!strcmp (argv[i], "-o") && (i + 1 < argc) && *argv[i + 1])
       {
 	 /* output file */
 	 i++;
 	 strcpy(oname, argv[i]); /* FIXME */
       }
-      else if (!strcmp (argv[i], "-S") && *argv[i + 1])
+      else if (!strcmp (argv[i], "-S") && (i + 1 < argc) && *argv[i + 1])
       {
 	 /* stack size */
 	 i++;

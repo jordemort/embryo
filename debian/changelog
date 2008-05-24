@@ -1,7 +1,8 @@
 embryo (0.9.9.043-1) UNRELEASED; urgency=low
 
-  * debian/libevas-doc.doc-base: change Section to Programming/C
   * New upstream release
+  * Docs are now prebuilt in the tarball
+  * debian/libevas-doc.doc-base: change Section to Programming/C
 
  -- Jan Lübbe <jluebbe@debian.org>  Sat, 24 May 2008 16:14:01 +0200
 

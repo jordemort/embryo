@@ -49,12 +49,17 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_embryo_cc_OBJECTS = embryo_cc_sc1.$(OBJEXT) embryo_cc_sc2.$(OBJEXT) \
-	embryo_cc_sc3.$(OBJEXT) embryo_cc_sc4.$(OBJEXT) \
-	embryo_cc_sc5.$(OBJEXT) embryo_cc_sc6.$(OBJEXT) \
-	embryo_cc_sc7.$(OBJEXT) embryo_cc_scexpand.$(OBJEXT) \
-	embryo_cc_sclist.$(OBJEXT) embryo_cc_scvars.$(OBJEXT) \
-	embryo_cc_prefix.$(OBJEXT)
+am_embryo_cc_OBJECTS = embryo_cc-embryo_cc_sc1.$(OBJEXT) \
+	embryo_cc-embryo_cc_sc2.$(OBJEXT) \
+	embryo_cc-embryo_cc_sc3.$(OBJEXT) \
+	embryo_cc-embryo_cc_sc4.$(OBJEXT) \
+	embryo_cc-embryo_cc_sc5.$(OBJEXT) \
+	embryo_cc-embryo_cc_sc6.$(OBJEXT) \
+	embryo_cc-embryo_cc_sc7.$(OBJEXT) \
+	embryo_cc-embryo_cc_scexpand.$(OBJEXT) \
+	embryo_cc-embryo_cc_sclist.$(OBJEXT) \
+	embryo_cc-embryo_cc_scvars.$(OBJEXT) \
+	embryo_cc-embryo_cc_prefix.$(OBJEXT)
 embryo_cc_OBJECTS = $(am_embryo_cc_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -92,11 +97,14 @@ CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DSYMUTIL = @DSYMUTIL@
 ECHO = @ECHO@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
+EVIL_CFLAGS = @EVIL_CFLAGS@
+EVIL_LIBS = @EVIL_LIBS@
 EXEEXT = @EXEEXT@
 GREP = @GREP@
 INSTALL_DATA = @INSTALL_DATA@
@@ -110,6 +118,7 @@ LIBTOOL = @LIBTOOL@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
+NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
@@ -119,12 +128,14 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PKG_CONFIG = @PKG_CONFIG@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
+WIN32_CFLAGS = @WIN32_CFLAGS@
 ac_ct_CC = @ac_ct_CC@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
@@ -139,7 +150,6 @@ build_alias = @build_alias@
 build_cpu = @build_cpu@
 build_os = @build_os@
 build_vendor = @build_vendor@
-create_shared_lib = @create_shared_lib@
 datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
@@ -160,6 +170,8 @@ libdir = @libdir@
 libexecdir = @libexecdir@
 localedir = @localedir@
 localstatedir = @localstatedir@
+lt_enable_auto_import = @lt_enable_auto_import@
+lt_no_undefined = @lt_no_undefined@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
@@ -180,7 +192,8 @@ AM_CPPFLAGS = \
 -I$(top_builddir) \
 -DPACKAGE_BIN_DIR=\"$(bindir)\" \
 -DPACKAGE_LIB_DIR=\"$(libdir)\" \
--DPACKAGE_DATA_DIR=\"$(datadir)/$(PACKAGE)\"
+-DPACKAGE_DATA_DIR=\"$(datadir)/$(PACKAGE)\" \
+@EVIL_CFLAGS@
 
 embryo_cc_SOURCES = \
 embryo_cc_amx.h \
@@ -199,8 +212,10 @@ embryo_cc_scvars.c \
 embryo_cc_prefix.c \
 embryo_cc_prefix.h
 
-embryo_cc_LDADD = -lm
-embryo_cc_DEPENDENCIES = 
+embryo_cc_CFLAGS = @WIN32_CFLAGS@
+embryo_cc_LDADD = $(top_builddir)/src/lib/libembryo.la @EVIL_LIBS@ -lm
+embryo_cc_LDFLAGS = @lt_enable_auto_import@
+embryo_cc_DEPENDENCIES = $(top_builddir)/src/lib/libembryo.la
 EXTRA_DIST = \
 embryo_cc_sc5.scp \
 embryo_cc_sc7.scp
@@ -276,17 +291,17 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc_prefix.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc_sc1.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc_sc2.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc_sc3.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc_sc4.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc_sc5.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc_sc6.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc_sc7.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc_scexpand.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc_sclist.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc_scvars.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc-embryo_cc_prefix.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc-embryo_cc_sc1.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc-embryo_cc_sc2.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc-embryo_cc_sc3.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc-embryo_cc_sc4.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc-embryo_cc_sc5.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc-embryo_cc_sc6.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc-embryo_cc_sc7.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc-embryo_cc_scexpand.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc-embryo_cc_sclist.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_cc-embryo_cc_scvars.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
@@ -308,6 +323,160 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
+
+embryo_cc-embryo_cc_sc1.o: embryo_cc_sc1.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc1.o -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc1.Tpo" -c -o embryo_cc-embryo_cc_sc1.o `test -f 'embryo_cc_sc1.c' || echo '$(srcdir)/'`embryo_cc_sc1.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc1.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc1.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc1.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc1.c' object='embryo_cc-embryo_cc_sc1.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc1.o `test -f 'embryo_cc_sc1.c' || echo '$(srcdir)/'`embryo_cc_sc1.c
+
+embryo_cc-embryo_cc_sc1.obj: embryo_cc_sc1.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc1.obj -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc1.Tpo" -c -o embryo_cc-embryo_cc_sc1.obj `if test -f 'embryo_cc_sc1.c'; then $(CYGPATH_W) 'embryo_cc_sc1.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc1.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc1.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc1.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc1.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc1.c' object='embryo_cc-embryo_cc_sc1.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc1.obj `if test -f 'embryo_cc_sc1.c'; then $(CYGPATH_W) 'embryo_cc_sc1.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc1.c'; fi`
+
+embryo_cc-embryo_cc_sc2.o: embryo_cc_sc2.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc2.o -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc2.Tpo" -c -o embryo_cc-embryo_cc_sc2.o `test -f 'embryo_cc_sc2.c' || echo '$(srcdir)/'`embryo_cc_sc2.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc2.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc2.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc2.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc2.c' object='embryo_cc-embryo_cc_sc2.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc2.o `test -f 'embryo_cc_sc2.c' || echo '$(srcdir)/'`embryo_cc_sc2.c
+
+embryo_cc-embryo_cc_sc2.obj: embryo_cc_sc2.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc2.obj -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc2.Tpo" -c -o embryo_cc-embryo_cc_sc2.obj `if test -f 'embryo_cc_sc2.c'; then $(CYGPATH_W) 'embryo_cc_sc2.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc2.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc2.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc2.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc2.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc2.c' object='embryo_cc-embryo_cc_sc2.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc2.obj `if test -f 'embryo_cc_sc2.c'; then $(CYGPATH_W) 'embryo_cc_sc2.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc2.c'; fi`
+
+embryo_cc-embryo_cc_sc3.o: embryo_cc_sc3.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc3.o -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc3.Tpo" -c -o embryo_cc-embryo_cc_sc3.o `test -f 'embryo_cc_sc3.c' || echo '$(srcdir)/'`embryo_cc_sc3.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc3.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc3.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc3.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc3.c' object='embryo_cc-embryo_cc_sc3.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc3.o `test -f 'embryo_cc_sc3.c' || echo '$(srcdir)/'`embryo_cc_sc3.c
+
+embryo_cc-embryo_cc_sc3.obj: embryo_cc_sc3.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc3.obj -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc3.Tpo" -c -o embryo_cc-embryo_cc_sc3.obj `if test -f 'embryo_cc_sc3.c'; then $(CYGPATH_W) 'embryo_cc_sc3.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc3.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc3.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc3.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc3.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc3.c' object='embryo_cc-embryo_cc_sc3.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc3.obj `if test -f 'embryo_cc_sc3.c'; then $(CYGPATH_W) 'embryo_cc_sc3.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc3.c'; fi`
+
+embryo_cc-embryo_cc_sc4.o: embryo_cc_sc4.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc4.o -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc4.Tpo" -c -o embryo_cc-embryo_cc_sc4.o `test -f 'embryo_cc_sc4.c' || echo '$(srcdir)/'`embryo_cc_sc4.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc4.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc4.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc4.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc4.c' object='embryo_cc-embryo_cc_sc4.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc4.o `test -f 'embryo_cc_sc4.c' || echo '$(srcdir)/'`embryo_cc_sc4.c
+
+embryo_cc-embryo_cc_sc4.obj: embryo_cc_sc4.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc4.obj -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc4.Tpo" -c -o embryo_cc-embryo_cc_sc4.obj `if test -f 'embryo_cc_sc4.c'; then $(CYGPATH_W) 'embryo_cc_sc4.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc4.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc4.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc4.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc4.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc4.c' object='embryo_cc-embryo_cc_sc4.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc4.obj `if test -f 'embryo_cc_sc4.c'; then $(CYGPATH_W) 'embryo_cc_sc4.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc4.c'; fi`
+
+embryo_cc-embryo_cc_sc5.o: embryo_cc_sc5.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc5.o -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc5.Tpo" -c -o embryo_cc-embryo_cc_sc5.o `test -f 'embryo_cc_sc5.c' || echo '$(srcdir)/'`embryo_cc_sc5.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc5.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc5.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc5.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc5.c' object='embryo_cc-embryo_cc_sc5.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc5.o `test -f 'embryo_cc_sc5.c' || echo '$(srcdir)/'`embryo_cc_sc5.c
+
+embryo_cc-embryo_cc_sc5.obj: embryo_cc_sc5.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc5.obj -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc5.Tpo" -c -o embryo_cc-embryo_cc_sc5.obj `if test -f 'embryo_cc_sc5.c'; then $(CYGPATH_W) 'embryo_cc_sc5.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc5.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc5.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc5.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc5.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc5.c' object='embryo_cc-embryo_cc_sc5.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc5.obj `if test -f 'embryo_cc_sc5.c'; then $(CYGPATH_W) 'embryo_cc_sc5.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc5.c'; fi`
+
+embryo_cc-embryo_cc_sc6.o: embryo_cc_sc6.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc6.o -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc6.Tpo" -c -o embryo_cc-embryo_cc_sc6.o `test -f 'embryo_cc_sc6.c' || echo '$(srcdir)/'`embryo_cc_sc6.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc6.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc6.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc6.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc6.c' object='embryo_cc-embryo_cc_sc6.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc6.o `test -f 'embryo_cc_sc6.c' || echo '$(srcdir)/'`embryo_cc_sc6.c
+
+embryo_cc-embryo_cc_sc6.obj: embryo_cc_sc6.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc6.obj -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc6.Tpo" -c -o embryo_cc-embryo_cc_sc6.obj `if test -f 'embryo_cc_sc6.c'; then $(CYGPATH_W) 'embryo_cc_sc6.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc6.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc6.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc6.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc6.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc6.c' object='embryo_cc-embryo_cc_sc6.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc6.obj `if test -f 'embryo_cc_sc6.c'; then $(CYGPATH_W) 'embryo_cc_sc6.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc6.c'; fi`
+
+embryo_cc-embryo_cc_sc7.o: embryo_cc_sc7.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc7.o -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc7.Tpo" -c -o embryo_cc-embryo_cc_sc7.o `test -f 'embryo_cc_sc7.c' || echo '$(srcdir)/'`embryo_cc_sc7.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc7.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc7.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc7.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc7.c' object='embryo_cc-embryo_cc_sc7.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc7.o `test -f 'embryo_cc_sc7.c' || echo '$(srcdir)/'`embryo_cc_sc7.c
+
+embryo_cc-embryo_cc_sc7.obj: embryo_cc_sc7.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sc7.obj -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sc7.Tpo" -c -o embryo_cc-embryo_cc_sc7.obj `if test -f 'embryo_cc_sc7.c'; then $(CYGPATH_W) 'embryo_cc_sc7.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc7.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sc7.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sc7.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sc7.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sc7.c' object='embryo_cc-embryo_cc_sc7.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sc7.obj `if test -f 'embryo_cc_sc7.c'; then $(CYGPATH_W) 'embryo_cc_sc7.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sc7.c'; fi`
+
+embryo_cc-embryo_cc_scexpand.o: embryo_cc_scexpand.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_scexpand.o -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_scexpand.Tpo" -c -o embryo_cc-embryo_cc_scexpand.o `test -f 'embryo_cc_scexpand.c' || echo '$(srcdir)/'`embryo_cc_scexpand.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_scexpand.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_scexpand.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_scexpand.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_scexpand.c' object='embryo_cc-embryo_cc_scexpand.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_scexpand.o `test -f 'embryo_cc_scexpand.c' || echo '$(srcdir)/'`embryo_cc_scexpand.c
+
+embryo_cc-embryo_cc_scexpand.obj: embryo_cc_scexpand.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_scexpand.obj -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_scexpand.Tpo" -c -o embryo_cc-embryo_cc_scexpand.obj `if test -f 'embryo_cc_scexpand.c'; then $(CYGPATH_W) 'embryo_cc_scexpand.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_scexpand.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_scexpand.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_scexpand.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_scexpand.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_scexpand.c' object='embryo_cc-embryo_cc_scexpand.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_scexpand.obj `if test -f 'embryo_cc_scexpand.c'; then $(CYGPATH_W) 'embryo_cc_scexpand.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_scexpand.c'; fi`
+
+embryo_cc-embryo_cc_sclist.o: embryo_cc_sclist.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sclist.o -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sclist.Tpo" -c -o embryo_cc-embryo_cc_sclist.o `test -f 'embryo_cc_sclist.c' || echo '$(srcdir)/'`embryo_cc_sclist.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sclist.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sclist.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sclist.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sclist.c' object='embryo_cc-embryo_cc_sclist.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sclist.o `test -f 'embryo_cc_sclist.c' || echo '$(srcdir)/'`embryo_cc_sclist.c
+
+embryo_cc-embryo_cc_sclist.obj: embryo_cc_sclist.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_sclist.obj -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_sclist.Tpo" -c -o embryo_cc-embryo_cc_sclist.obj `if test -f 'embryo_cc_sclist.c'; then $(CYGPATH_W) 'embryo_cc_sclist.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sclist.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_sclist.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_sclist.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_sclist.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_sclist.c' object='embryo_cc-embryo_cc_sclist.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_sclist.obj `if test -f 'embryo_cc_sclist.c'; then $(CYGPATH_W) 'embryo_cc_sclist.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_sclist.c'; fi`
+
+embryo_cc-embryo_cc_scvars.o: embryo_cc_scvars.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_scvars.o -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_scvars.Tpo" -c -o embryo_cc-embryo_cc_scvars.o `test -f 'embryo_cc_scvars.c' || echo '$(srcdir)/'`embryo_cc_scvars.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_scvars.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_scvars.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_scvars.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_scvars.c' object='embryo_cc-embryo_cc_scvars.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_scvars.o `test -f 'embryo_cc_scvars.c' || echo '$(srcdir)/'`embryo_cc_scvars.c
+
+embryo_cc-embryo_cc_scvars.obj: embryo_cc_scvars.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_scvars.obj -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_scvars.Tpo" -c -o embryo_cc-embryo_cc_scvars.obj `if test -f 'embryo_cc_scvars.c'; then $(CYGPATH_W) 'embryo_cc_scvars.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_scvars.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_scvars.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_scvars.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_scvars.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_scvars.c' object='embryo_cc-embryo_cc_scvars.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_scvars.obj `if test -f 'embryo_cc_scvars.c'; then $(CYGPATH_W) 'embryo_cc_scvars.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_scvars.c'; fi`
+
+embryo_cc-embryo_cc_prefix.o: embryo_cc_prefix.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_prefix.o -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_prefix.Tpo" -c -o embryo_cc-embryo_cc_prefix.o `test -f 'embryo_cc_prefix.c' || echo '$(srcdir)/'`embryo_cc_prefix.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_prefix.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_prefix.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_prefix.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_prefix.c' object='embryo_cc-embryo_cc_prefix.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_prefix.o `test -f 'embryo_cc_prefix.c' || echo '$(srcdir)/'`embryo_cc_prefix.c
+
+embryo_cc-embryo_cc_prefix.obj: embryo_cc_prefix.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -MT embryo_cc-embryo_cc_prefix.obj -MD -MP -MF "$(DEPDIR)/embryo_cc-embryo_cc_prefix.Tpo" -c -o embryo_cc-embryo_cc_prefix.obj `if test -f 'embryo_cc_prefix.c'; then $(CYGPATH_W) 'embryo_cc_prefix.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_prefix.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/embryo_cc-embryo_cc_prefix.Tpo" "$(DEPDIR)/embryo_cc-embryo_cc_prefix.Po"; else rm -f "$(DEPDIR)/embryo_cc-embryo_cc_prefix.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_cc_prefix.c' object='embryo_cc-embryo_cc_prefix.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(embryo_cc_CFLAGS) $(CFLAGS) -c -o embryo_cc-embryo_cc_prefix.obj `if test -f 'embryo_cc_prefix.c'; then $(CYGPATH_W) 'embryo_cc_prefix.c'; else $(CYGPATH_W) '$(srcdir)/embryo_cc_prefix.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

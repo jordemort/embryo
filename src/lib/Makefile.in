@@ -56,8 +56,10 @@ am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)"
 libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
-am_libembryo_la_OBJECTS = embryo_amx.lo embryo_args.lo embryo_float.lo \
-	embryo_main.lo embryo_rand.lo embryo_str.lo embryo_time.lo
+am_libembryo_la_OBJECTS = libembryo_la-embryo_amx.lo \
+	libembryo_la-embryo_args.lo libembryo_la-embryo_float.lo \
+	libembryo_la-embryo_main.lo libembryo_la-embryo_rand.lo \
+	libembryo_la-embryo_str.lo libembryo_la-embryo_time.lo
 libembryo_la_OBJECTS = $(am_libembryo_la_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -97,11 +99,14 @@ CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DSYMUTIL = @DSYMUTIL@
 ECHO = @ECHO@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
+EVIL_CFLAGS = @EVIL_CFLAGS@
+EVIL_LIBS = @EVIL_LIBS@
 EXEEXT = @EXEEXT@
 GREP = @GREP@
 INSTALL_DATA = @INSTALL_DATA@
@@ -115,6 +120,7 @@ LIBTOOL = @LIBTOOL@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
+NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
@@ -124,12 +130,14 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PKG_CONFIG = @PKG_CONFIG@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
+WIN32_CFLAGS = @WIN32_CFLAGS@
 ac_ct_CC = @ac_ct_CC@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
@@ -144,7 +152,6 @@ build_alias = @build_alias@
 build_cpu = @build_cpu@
 build_os = @build_os@
 build_vendor = @build_vendor@
-create_shared_lib = @create_shared_lib@
 datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
@@ -165,6 +172,8 @@ libdir = @libdir@
 libexecdir = @libexecdir@
 localedir = @localedir@
 localstatedir = @localstatedir@
+lt_enable_auto_import = @lt_enable_auto_import@
+lt_no_undefined = @lt_no_undefined@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
@@ -188,8 +197,8 @@ AM_CPPFLAGS = \
 -DPACKAGE_LIB_DIR=\"$(libdir)\" \
 -DPACKAGE_DATA_DIR=\"$(datadir)/$(PACKAGE)\"
 
-lib_LTLIBRARIES = libembryo.la
 include_HEADERS = Embryo.h
+lib_LTLIBRARIES = libembryo.la
 libembryo_la_SOURCES = \
 embryo_amx.c \
 embryo_args.c \
@@ -197,12 +206,13 @@ embryo_float.c \
 embryo_main.c \
 embryo_rand.c \
 embryo_str.c \
-embryo_time.c \
-embryo_private.h
+embryo_time.c
 
+libembryo_la_CFLAGS = @WIN32_CFLAGS@
 libembryo_la_LIBADD = -lm @fnmatch_libs@
 libembryo_la_DEPENDENCIES = $(top_builddir)/config.h
-libembryo_la_LDFLAGS = @create_shared_lib@ -version-info @version_info@
+libembryo_la_LDFLAGS = @lt_no_undefined@ @lt_enable_auto_import@ -version-info @version_info@
+EXTRA_DIST = embryo_private.h
 all: all-am
 
 .SUFFIXES:
@@ -272,13 +282,13 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_amx.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_args.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_float.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_main.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_rand.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_str.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/embryo_time.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libembryo_la-embryo_amx.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libembryo_la-embryo_args.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libembryo_la-embryo_float.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libembryo_la-embryo_main.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libembryo_la-embryo_rand.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libembryo_la-embryo_str.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libembryo_la-embryo_time.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
@@ -300,6 +310,55 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
+
+libembryo_la-embryo_amx.lo: embryo_amx.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -MT libembryo_la-embryo_amx.lo -MD -MP -MF "$(DEPDIR)/libembryo_la-embryo_amx.Tpo" -c -o libembryo_la-embryo_amx.lo `test -f 'embryo_amx.c' || echo '$(srcdir)/'`embryo_amx.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libembryo_la-embryo_amx.Tpo" "$(DEPDIR)/libembryo_la-embryo_amx.Plo"; else rm -f "$(DEPDIR)/libembryo_la-embryo_amx.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_amx.c' object='libembryo_la-embryo_amx.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -c -o libembryo_la-embryo_amx.lo `test -f 'embryo_amx.c' || echo '$(srcdir)/'`embryo_amx.c
+
+libembryo_la-embryo_args.lo: embryo_args.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -MT libembryo_la-embryo_args.lo -MD -MP -MF "$(DEPDIR)/libembryo_la-embryo_args.Tpo" -c -o libembryo_la-embryo_args.lo `test -f 'embryo_args.c' || echo '$(srcdir)/'`embryo_args.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libembryo_la-embryo_args.Tpo" "$(DEPDIR)/libembryo_la-embryo_args.Plo"; else rm -f "$(DEPDIR)/libembryo_la-embryo_args.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_args.c' object='libembryo_la-embryo_args.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -c -o libembryo_la-embryo_args.lo `test -f 'embryo_args.c' || echo '$(srcdir)/'`embryo_args.c
+
+libembryo_la-embryo_float.lo: embryo_float.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -MT libembryo_la-embryo_float.lo -MD -MP -MF "$(DEPDIR)/libembryo_la-embryo_float.Tpo" -c -o libembryo_la-embryo_float.lo `test -f 'embryo_float.c' || echo '$(srcdir)/'`embryo_float.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libembryo_la-embryo_float.Tpo" "$(DEPDIR)/libembryo_la-embryo_float.Plo"; else rm -f "$(DEPDIR)/libembryo_la-embryo_float.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_float.c' object='libembryo_la-embryo_float.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -c -o libembryo_la-embryo_float.lo `test -f 'embryo_float.c' || echo '$(srcdir)/'`embryo_float.c
+
+libembryo_la-embryo_main.lo: embryo_main.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -MT libembryo_la-embryo_main.lo -MD -MP -MF "$(DEPDIR)/libembryo_la-embryo_main.Tpo" -c -o libembryo_la-embryo_main.lo `test -f 'embryo_main.c' || echo '$(srcdir)/'`embryo_main.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libembryo_la-embryo_main.Tpo" "$(DEPDIR)/libembryo_la-embryo_main.Plo"; else rm -f "$(DEPDIR)/libembryo_la-embryo_main.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_main.c' object='libembryo_la-embryo_main.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -c -o libembryo_la-embryo_main.lo `test -f 'embryo_main.c' || echo '$(srcdir)/'`embryo_main.c
+
+libembryo_la-embryo_rand.lo: embryo_rand.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -MT libembryo_la-embryo_rand.lo -MD -MP -MF "$(DEPDIR)/libembryo_la-embryo_rand.Tpo" -c -o libembryo_la-embryo_rand.lo `test -f 'embryo_rand.c' || echo '$(srcdir)/'`embryo_rand.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libembryo_la-embryo_rand.Tpo" "$(DEPDIR)/libembryo_la-embryo_rand.Plo"; else rm -f "$(DEPDIR)/libembryo_la-embryo_rand.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_rand.c' object='libembryo_la-embryo_rand.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -c -o libembryo_la-embryo_rand.lo `test -f 'embryo_rand.c' || echo '$(srcdir)/'`embryo_rand.c
+
+libembryo_la-embryo_str.lo: embryo_str.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -MT libembryo_la-embryo_str.lo -MD -MP -MF "$(DEPDIR)/libembryo_la-embryo_str.Tpo" -c -o libembryo_la-embryo_str.lo `test -f 'embryo_str.c' || echo '$(srcdir)/'`embryo_str.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libembryo_la-embryo_str.Tpo" "$(DEPDIR)/libembryo_la-embryo_str.Plo"; else rm -f "$(DEPDIR)/libembryo_la-embryo_str.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_str.c' object='libembryo_la-embryo_str.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -c -o libembryo_la-embryo_str.lo `test -f 'embryo_str.c' || echo '$(srcdir)/'`embryo_str.c
+
+libembryo_la-embryo_time.lo: embryo_time.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -MT libembryo_la-embryo_time.lo -MD -MP -MF "$(DEPDIR)/libembryo_la-embryo_time.Tpo" -c -o libembryo_la-embryo_time.lo `test -f 'embryo_time.c' || echo '$(srcdir)/'`embryo_time.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libembryo_la-embryo_time.Tpo" "$(DEPDIR)/libembryo_la-embryo_time.Plo"; else rm -f "$(DEPDIR)/libembryo_la-embryo_time.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='embryo_time.c' object='libembryo_la-embryo_time.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libembryo_la_CFLAGS) $(CFLAGS) -c -o libembryo_la-embryo_time.lo `test -f 'embryo_time.c' || echo '$(srcdir)/'`embryo_time.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

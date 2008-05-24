@@ -8,6 +8,9 @@
 /* Define to 1 if using `alloca.c'. */
 #undef C_ALLOCA
 
+/* Define to mention that embryo is built */
+#undef EFL_EMBRYO_BUILD
+
 /* Define to 1 if you have `alloca', as a function or macro. */
 #undef HAVE_ALLOCA
 
@@ -17,6 +20,9 @@
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
+
+/* Set to 1 if evil package is installed */
+#undef HAVE_EVIL
 
 /* Define to 1 if you have the `fnmatch' function. */
 #undef HAVE_FNMATCH
@@ -53,6 +59,12 @@
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
+
+/* Define to 1 if your compiler has __attribute__ */
+#undef HAVE___ATTRIBUTE__
+
+/* Define to 1 if your C compiler doesn't accept -c and -o together. */
+#undef NO_MINUS_C_MINUS_O
 
 /* Name of package */
 #undef PACKAGE

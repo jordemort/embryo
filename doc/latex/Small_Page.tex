@@ -1,0 +1,181 @@
+This section describes the basics of Small, as compiled and interpreted with Embryo.
+
+For the full documentation, of which this is a summary, see   http://www.compuphase.com/smalldoc.pdf 
+
+This summary assumes that you are familar with C. For a full list of differences between C and Small, again, see the full documentation.\hypertarget{Small_Page_Small_Variables_Section}{}\section{Variables}\label{Small_Page_Small_Variables_Section}
+\hypertarget{Small_Page_Small_Type_Subsection}{}\subsection{Types}\label{Small_Page_Small_Type_Subsection}
+There is only one type, known as the \char`\"{}cell\char`\"{}, which can hold an integer.\hypertarget{Small_Page_Small_Scope_Subsection}{}\subsection{Scope}\label{Small_Page_Small_Scope_Subsection}
+The scope and usage of a variable depends on its declaration.
+
+\begin{itemize}
+\item A local variable is normally declared with the {\tt new} keyword. E.g. 
+
+\begin{Code}\begin{verbatim} new variable 
+\end{verbatim}
+\end{Code}
+
+ \item A static function variable is defined within a function with the {\tt static} keyword. \item A global static variable is one that is only available within the file it was declared in. Again, use the {\tt static} keyword, but outside of any function. \item A stock variable is one that may not be compiled into a program if it is not used. It is declared using {\tt stock}. \item A public variable is one that can be read by the host program using \hyperlink{group__Embryo__Public__Variable__Group_g9714d1cbd46b3b0315a71c23413ad921}{embryo\_\-program\_\-variable\_\-find}. It is declared using {\tt public} keyword.\end{itemize}
+Remember that the keywords above are to be used on their own. That is, for example: 
+
+\begin{Code}\begin{verbatim} public testvar 
+\end{verbatim}
+\end{Code}
+
+ not: 
+
+\begin{Code}\begin{verbatim} new public testvar 
+\end{verbatim}
+\end{Code}
+
+\hypertarget{Small_Page_Small_Constants_Subsection}{}\subsection{Constants}\label{Small_Page_Small_Constants_Subsection}
+You can declare constants in two ways: \begin{itemize}
+\item Using the preprocessor macro {\tt define}. \item By inserting {\tt const} between the keyword and variable name of a variable declaration. For example, to declare the variable {\tt var1} constant, you type 
+
+\begin{Code}\begin{verbatim} new const var1 = 2 
+\end{verbatim}
+\end{Code}
+
+ Now {\tt var1} cannot be changed.\end{itemize}
+\hypertarget{Small_Page_Small_Arrays_Subsection}{}\subsection{Arrays}\label{Small_Page_Small_Arrays_Subsection}
+To declare an array, append square brackets to the end of the variable name. The following examples show how to declare arrays. Note the use of the ellipsis operator, which bases the array based on the last two declared values:
+
+
+
+\begin{Code}\begin{verbatim}new msg[] = "A message."
+new ints[] = {1, 3, 4}
+new ints2[20] = {1, 3}         // All other elements 0.
+new ints3[10] = {1, ... }      // All elements = 1
+new ints4[10] = {10, 20, ... } // Elements = 10 -> 100.
+                               // The difference can be negative.
+new ints5[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}
+\end{verbatim}
+\end{Code}
+
+
+
+\begin{Desc}
+\item[Note:]Array initialisers need to be constant.\end{Desc}
+\hypertarget{Small_Page_Small_Func_Calls_Section}{}\section{Function Calls}\label{Small_Page_Small_Func_Calls_Section}
+A typical function declaration is as follows:
+
+
+
+\begin{Code}\begin{verbatim}testfunc(param) {
+  // Do something ...
+  // over a couple of lines.
+}
+\end{verbatim}
+\end{Code}
+
+
+
+You can pass by reference. That is, the parameter you pass is changed outside of the function. For example:
+
+
+
+\begin{Code}\begin{verbatim}testfunc(&param) {
+  param = 10
+  // The passed variable will be set to 10 outside of the function.
+}
+\end{verbatim}
+\end{Code}
+
+
+
+To pass an array:
+
+
+
+\begin{Code}\begin{verbatim}testfunc(param[]) {
+  // Do something to the array
+}
+\end{verbatim}
+\end{Code}
+
+
+
+\begin{Desc}
+\item[Note:]Arrays are passed by reference.\end{Desc}
+\hypertarget{Small_Page_Small_Control_Subsection}{}\section{Control Structures.}\label{Small_Page_Small_Control_Subsection}
+Small has the following control structures, which similar to their C counterparts: \begin{itemize}
+\item 
+
+\begin{Code}\begin{verbatim} if (expression) statement1 else statement2 
+\end{verbatim}
+\end{Code}
+
+ \item 
+
+\begin{Code}\begin{verbatim} switch (expression) {
+  case 0:
+    statement1 // Can only be one statement.  Look Ma, no breaks!
+  case 1..3:   // For values between 1 and 3 inclusive.
+    statement2
+  default:     // Optional
+    statement3
+}
+\end{verbatim}
+\end{Code}
+
+ \item 
+
+\begin{Code}\begin{verbatim} while(expression) statement 
+\end{verbatim}
+\end{Code}
+
+ \item 
+
+\begin{Code}\begin{verbatim} do statement while (expression) 
+\end{verbatim}
+\end{Code}
+
+ \item 
+
+\begin{Code}\begin{verbatim} for (init_expression; before_iter_test_expression; after_iter_expression) statement 
+\end{verbatim}
+\end{Code}
+
+\end{itemize}
+\hypertarget{Small_Page_Small_Preprocessor_Section}{}\section{Preprocessor}\label{Small_Page_Small_Preprocessor_Section}
+The following preprocessor directives are available: \begin{itemize}
+\item 
+
+\begin{Code}\begin{verbatim} #assert constant_expression 
+\end{verbatim}
+\end{Code}
+
+ \item 
+
+\begin{Code}\begin{verbatim} #define pattern replacement 
+\end{verbatim}
+\end{Code}
+
+ \item 
+
+\begin{Code}\begin{verbatim} #define pattern(%1,%2,...) replacement 
+\end{verbatim}
+\end{Code}
+
+ \item 
+
+\begin{Code}\begin{verbatim} #include filename 
+\end{verbatim}
+\end{Code}
+
+ \item 
+
+\begin{Code}\begin{verbatim} #if constant_expression
+  // Various bits of code
+#else
+  // Other bits of code
+#endif 
+\end{verbatim}
+\end{Code}
+
+ \item 
+
+\begin{Code}\begin{verbatim} #undef pattern 
+\end{verbatim}
+\end{Code}
+
+ \end{itemize}

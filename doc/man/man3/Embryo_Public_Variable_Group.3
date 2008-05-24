@@ -1,0 +1,83 @@
+.TH "Public Variable Access Functions" 3 "19 May 2008" "Embryo" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Public Variable Access Functions \- In an Embryo program, a global variable can be declared public, as described in \fBScope\fP.  
+
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "EAPI Embryo_Cell \fBembryo_program_variable_find\fP (Embryo_Program *ep, const char *name)"
+.br
+.RI "\fIRetrieves the location of the public variable in the given program with the given name. \fP"
+.ti -1c
+.RI "EAPI int \fBembryo_program_variable_count_get\fP (Embryo_Program *ep)"
+.br
+.RI "\fIRetrieves the number of public variables in the given program. \fP"
+.ti -1c
+.RI "EAPI Embryo_Cell \fBembryo_program_variable_get\fP (Embryo_Program *ep, int num)"
+.br
+.RI "\fIRetrieves the location of the public variable in the given program with the given identifier. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+In an Embryo program, a global variable can be declared public, as described in \fBScope\fP. 
+.PP
+The functions here allow the host program to access these public variables. 
+.SH "Function Documentation"
+.PP 
+.SS "EAPI int embryo_program_variable_count_get (Embryo_Program * ep)"
+.PP
+Retrieves the number of public variables in the given program. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The given program. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The number of public variables. 
+.RE
+.PP
+
+.SS "EAPI Embryo_Cell embryo_program_variable_find (Embryo_Program * ep, const char * name)"
+.PP
+Retrieves the location of the public variable in the given program with the given name. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The given program. 
+.br
+\fIname\fP The given name. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The address of the variable if found. \fCEMBRYO_CELL_NONE\fP otherwise. 
+.RE
+.PP
+
+.PP
+References EMBRYO_CELL_NONE.
+.SS "EAPI Embryo_Cell embryo_program_variable_get (Embryo_Program * ep, int num)"
+.PP
+Retrieves the location of the public variable in the given program with the given identifier. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The given program. 
+.br
+\fInum\fP The identifier of the public variable. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The virtual machine address of the variable if found. \fCEMBRYO_CELL_NONE\fP otherwise. 
+.RE
+.PP
+
+.PP
+References EMBRYO_CELL_NONE.

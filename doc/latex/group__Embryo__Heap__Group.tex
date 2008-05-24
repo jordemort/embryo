@@ -1,0 +1,55 @@
+\hypertarget{group__Embryo__Heap__Group}{
+\section{Heap Functions}
+\label{group__Embryo__Heap__Group}\index{Heap Functions@{Heap Functions}}
+}
+The heap is an area of memory that can be allocated for program use at runtime.  
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+EAPI Embryo\_\-Cell \hyperlink{group__Embryo__Heap__Group_g9dc1279d6ed98dfd66bed904e2dfadec}{embryo\_\-data\_\-heap\_\-push} (Embryo\_\-Program $\ast$ep, int cells)
+\begin{CompactList}\small\item\em Increases the size of the heap of the given virtual machine by the given number of Embryo\_\-Cells. \item\end{CompactList}\item 
+EAPI void \hyperlink{group__Embryo__Heap__Group_gba1369c72afa0acb6e437ef6923dae63}{embryo\_\-data\_\-heap\_\-pop} (Embryo\_\-Program $\ast$ep, Embryo\_\-Cell down\_\-to)
+\begin{CompactList}\small\item\em Decreases the size of the heap of the given virtual machine down to the given size. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+The heap is an area of memory that can be allocated for program use at runtime. 
+
+The heap functions here change the amount of heap memory available. 
+
+\subsection{Function Documentation}
+\hypertarget{group__Embryo__Heap__Group_gba1369c72afa0acb6e437ef6923dae63}{
+\index{Embryo\_\-Heap\_\-Group@{Embryo\_\-Heap\_\-Group}!embryo\_\-data\_\-heap\_\-pop@{embryo\_\-data\_\-heap\_\-pop}}
+\index{embryo\_\-data\_\-heap\_\-pop@{embryo\_\-data\_\-heap\_\-pop}!Embryo_Heap_Group@{Embryo\_\-Heap\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI void embryo\_\-data\_\-heap\_\-pop (Embryo\_\-Program $\ast$ {\em ep}, \/  Embryo\_\-Cell {\em down\_\-to})}}
+\label{group__Embryo__Heap__Group_gba1369c72afa0acb6e437ef6923dae63}
+
+
+Decreases the size of the heap of the given virtual machine down to the given size. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The program with the given virtual machine. \item[{\em down\_\-to}]The given size. \end{description}
+\end{Desc}
+\hypertarget{group__Embryo__Heap__Group_g9dc1279d6ed98dfd66bed904e2dfadec}{
+\index{Embryo\_\-Heap\_\-Group@{Embryo\_\-Heap\_\-Group}!embryo\_\-data\_\-heap\_\-push@{embryo\_\-data\_\-heap\_\-push}}
+\index{embryo\_\-data\_\-heap\_\-push@{embryo\_\-data\_\-heap\_\-push}!Embryo_Heap_Group@{Embryo\_\-Heap\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI Embryo\_\-Cell embryo\_\-data\_\-heap\_\-push (Embryo\_\-Program $\ast$ {\em ep}, \/  int {\em cells})}}
+\label{group__Embryo__Heap__Group_g9dc1279d6ed98dfd66bed904e2dfadec}
+
+
+Increases the size of the heap of the given virtual machine by the given number of Embryo\_\-Cells. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The program with the given virtual machine. \item[{\em cells}]The given number of Embryo\_\-Cells. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]The address of the new memory region on success. {\tt EMBRYO\_\-CELL\_\-NONE} otherwise. \end{Desc}
+
+
+References EMBRYO\_\-CELL\_\-NONE.
+
+Referenced by embryo\_\-program\_\-run().

@@ -35,7 +35,11 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc7.c,v 1.8 2005/11/04 08:16:24 sebastid Exp $
+ *  Version: $Id: embryo_cc_sc7.c,v 1.9 2008/04/11 19:06:18 doursse Exp $
+ */
+
+/*
+ * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
  */
 
 #ifdef HAVE_CONFIG_H

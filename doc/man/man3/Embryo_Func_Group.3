@@ -1,0 +1,58 @@
+.TH "Function Functions" 3 "19 May 2008" "Embryo" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Function Functions \- Functions that deal with Embryo program functions.  
+
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "EAPI void \fBembryo_program_native_call_add\fP (Embryo_Program *ep, const char *name, Embryo_Cell(*func)(Embryo_Program *ep, Embryo_Cell *params))"
+.br
+.RI "\fIAdds a native program call to the given Embryo program. \fP"
+.ti -1c
+.RI "EAPI Embryo_Function \fBembryo_program_function_find\fP (Embryo_Program *ep, const char *name)"
+.br
+.RI "\fIReturns the function in the given program with the given name. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Functions that deal with Embryo program functions. 
+.PP
+.SH "Function Documentation"
+.PP 
+.SS "EAPI Embryo_Function embryo_program_function_find (Embryo_Program * ep, const char * name)"
+.PP
+Returns the function in the given program with the given name. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The given program. 
+.br
+\fIname\fP The given function name. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The function if successful. Otherwise, \fCEMBRYO_FUNCTION_NONE\fP. 
+.RE
+.PP
+
+.PP
+References EMBRYO_FUNCTION_NONE.
+.SS "EAPI void embryo_program_native_call_add (Embryo_Program * ep, const char * name, Embryo_Cell(*)(Embryo_Program *ep, Embryo_Cell *params) func)"
+.PP
+Adds a native program call to the given Embryo program. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The given Embryo program. 
+.br
+\fIname\fP The name for the call used in the script. 
+.br
+\fIfunc\fP The function to use when the call is made. 
+.RE
+.PP
+

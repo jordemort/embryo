@@ -1,0 +1,68 @@
+\hypertarget{group__Embryo__Error__Group}{
+\section{Error Functions}
+\label{group__Embryo__Error__Group}\index{Error Functions@{Error Functions}}
+}
+Functions that set and retrieve error codes in Embryo programs.  
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+EAPI void \hyperlink{group__Embryo__Error__Group_g3d331b8571f05d5893e02aa3561c27cf}{embryo\_\-program\_\-error\_\-set} (Embryo\_\-Program $\ast$ep, int error)
+\begin{CompactList}\small\item\em Sets the error code for the given program to the given code. \item\end{CompactList}\item 
+EAPI int \hyperlink{group__Embryo__Error__Group_g0f7550fc4564d7ccda4ddb7d4e96432e}{embryo\_\-program\_\-error\_\-get} (Embryo\_\-Program $\ast$ep)
+\begin{CompactList}\small\item\em Retrieves the current error code for the given program. \item\end{CompactList}\item 
+EAPI const char $\ast$ \hyperlink{group__Embryo__Error__Group_g9ebc58d5e5d534116773ae23db795fd2}{embryo\_\-error\_\-string\_\-get} (int error)
+\begin{CompactList}\small\item\em Retrieves a string describing the given error code. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Functions that set and retrieve error codes in Embryo programs. 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{group__Embryo__Error__Group_g9ebc58d5e5d534116773ae23db795fd2}{
+\index{Embryo\_\-Error\_\-Group@{Embryo\_\-Error\_\-Group}!embryo\_\-error\_\-string\_\-get@{embryo\_\-error\_\-string\_\-get}}
+\index{embryo\_\-error\_\-string\_\-get@{embryo\_\-error\_\-string\_\-get}!Embryo_Error_Group@{Embryo\_\-Error\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI const char$\ast$ embryo\_\-error\_\-string\_\-get (int {\em error})}}
+\label{group__Embryo__Error__Group_g9ebc58d5e5d534116773ae23db795fd2}
+
+
+Retrieves a string describing the given error code. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em error}]The given error code. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]String describing the given error code. If the given code is not known, the string \char`\"{}(unknown)\char`\"{} is returned. \end{Desc}
+\hypertarget{group__Embryo__Error__Group_g0f7550fc4564d7ccda4ddb7d4e96432e}{
+\index{Embryo\_\-Error\_\-Group@{Embryo\_\-Error\_\-Group}!embryo\_\-program\_\-error\_\-get@{embryo\_\-program\_\-error\_\-get}}
+\index{embryo\_\-program\_\-error\_\-get@{embryo\_\-program\_\-error\_\-get}!Embryo_Error_Group@{Embryo\_\-Error\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI int embryo\_\-program\_\-error\_\-get (Embryo\_\-Program $\ast$ {\em ep})}}
+\label{group__Embryo__Error__Group_g0f7550fc4564d7ccda4ddb7d4e96432e}
+
+
+Retrieves the current error code for the given program. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given program. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]The current error code. \end{Desc}
+\hypertarget{group__Embryo__Error__Group_g3d331b8571f05d5893e02aa3561c27cf}{
+\index{Embryo\_\-Error\_\-Group@{Embryo\_\-Error\_\-Group}!embryo\_\-program\_\-error\_\-set@{embryo\_\-program\_\-error\_\-set}}
+\index{embryo\_\-program\_\-error\_\-set@{embryo\_\-program\_\-error\_\-set}!Embryo_Error_Group@{Embryo\_\-Error\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI void embryo\_\-program\_\-error\_\-set (Embryo\_\-Program $\ast$ {\em ep}, \/  int {\em error})}}
+\label{group__Embryo__Error__Group_g3d331b8571f05d5893e02aa3561c27cf}
+
+
+Sets the error code for the given program to the given code. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given program. \item[{\em error}]The given error code. \end{description}
+\end{Desc}

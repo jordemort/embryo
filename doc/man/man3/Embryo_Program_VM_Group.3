@@ -1,0 +1,70 @@
+.TH "Virtual Machine Functions" 3 "19 May 2008" "Embryo" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Virtual Machine Functions \- Functions that deal with creating and destroying virtual machine sessions for a given program.  
+
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "EAPI void \fBembryo_program_vm_reset\fP (Embryo_Program *ep)"
+.br
+.RI "\fIResets the current virtual machine session of the given program. \fP"
+.ti -1c
+.RI "EAPI void \fBembryo_program_vm_push\fP (Embryo_Program *ep)"
+.br
+.RI "\fIStarts a new virtual machine session for the given program. \fP"
+.ti -1c
+.RI "EAPI void \fBembryo_program_vm_pop\fP (Embryo_Program *ep)"
+.br
+.RI "\fIFrees the current virtual machine session associated with the given program. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Functions that deal with creating and destroying virtual machine sessions for a given program. 
+.PP
+A given embryo program can have multiple virtual machine sessions running. This is useful when you have a native call that in turn calls a function in the embryo program. The native call can start a new virtual machine session to run the function it needs. Once completed, the session can be popped off the program's stack, and the native call can return its value to the old session.
+.PP
+A new virtual machine session is created by pushing a new virtual machine onto the session stack of a program using \fBembryo_program_vm_push\fP. The current virtual machine session can be destroyed by calling \fBembryo_program_vm_pop\fP. 
+.SH "Function Documentation"
+.PP 
+.SS "EAPI void embryo_program_vm_pop (Embryo_Program * ep)"
+.PP
+Frees the current virtual machine session associated with the given program. 
+.PP
+See \fBVirtual Machine Functions\fP for more information about how this works. Note that you will need to retrieve any return data or data on the stack before you pop.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The given program. 
+.RE
+.PP
+
+.SS "EAPI void embryo_program_vm_push (Embryo_Program * ep)"
+.PP
+Starts a new virtual machine session for the given program. 
+.PP
+See \fBVirtual Machine Functions\fP for more information about how this works.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The given program. 
+.RE
+.PP
+
+.PP
+References embryo_program_vm_reset().
+.SS "EAPI void embryo_program_vm_reset (Embryo_Program * ep)"
+.PP
+Resets the current virtual machine session of the given program. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The given program. 
+.RE
+.PP
+
+.PP
+Referenced by embryo_program_vm_push().

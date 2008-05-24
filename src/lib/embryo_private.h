@@ -8,18 +8,41 @@
 #include <limits.h>
 #include <stdarg.h>
 #include <string.h>
-#if HAVE_ALLOCA_H
-#include <alloca.h>
+
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
+
+#ifdef HAVE_ALLOCA_H
+# include <alloca.h>
+#elif defined __GNUC__
+# define alloca __builtin_alloca
+#elif defined _AIX
+# define alloca __alloca
+#elif defined _MSC_VER
+# include <malloc.h>
+# define alloca _alloca
+#else
+# include <stddef.h>
+# ifdef  __cplusplus
+extern "C"
+# endif
+void *alloca (size_t);
 #endif
 
 #include "Embryo.h"
-#include "config.h"
 
 #ifdef __GNUC__
 # if __GNUC__ >= 4
 // BROKEN in gcc 4 on amd64
 //#  pragma GCC visibility push(hidden)
 # endif
+#endif
+
+#if HAVE___ATTRIBUTE__
+#define __UNUSED__ __attribute__((unused))
+#else
+#define __UNUSED__
 #endif
 
 typedef enum _Embryo_Opcode Embryo_Opcode;
@@ -246,19 +269,19 @@ struct _Embryo_Program
    Embryo_Native *native_calls;
    int            native_calls_size;
    int            native_calls_alloc;
-   
+
    unsigned char *code;
    unsigned char  dont_free_code : 1;
    Embryo_Cell    retval;
-   
+
    Embryo_Param  *params;
    int            params_size;
    int            params_alloc;
-   
+
    int            run_count;
-   
+
    int            max_run_cycles;
-   
+
    void          *data;
 };
 
@@ -294,5 +317,5 @@ void _embryo_fp_init(Embryo_Program *ep);
 void _embryo_rand_init(Embryo_Program *ep);
 void _embryo_str_init(Embryo_Program *ep);
 void _embryo_time_init(Embryo_Program *ep);
-    
+
 #endif

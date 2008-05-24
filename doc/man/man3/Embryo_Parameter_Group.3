@@ -1,0 +1,90 @@
+.TH "Function Parameter Functions" 3 "19 May 2008" "Embryo" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Function Parameter Functions \- Functions that set parameters for the next function that is called.  
+
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "EAPI int \fBembryo_parameter_cell_push\fP (Embryo_Program *ep, Embryo_Cell cell)"
+.br
+.RI "\fIPushes an Embryo_Cell onto the function stack to use as a parameter for the next function that is called in the given program. \fP"
+.ti -1c
+.RI "EAPI int \fBembryo_parameter_string_push\fP (Embryo_Program *ep, const char *str)"
+.br
+.RI "\fIPushes a string onto the function stack to use as a parameter for the next function that is called in the given program. \fP"
+.ti -1c
+.RI "EAPI int \fBembryo_parameter_cell_array_push\fP (Embryo_Program *ep, Embryo_Cell *cells, int num)"
+.br
+.RI "\fIPushes an array of Embryo_Cells onto the function stack to be used as parameters for the next function that is called in the given program. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Functions that set parameters for the next function that is called. 
+.PP
+.SH "Function Documentation"
+.PP 
+.SS "EAPI int embryo_parameter_cell_array_push (Embryo_Program * ep, Embryo_Cell * cells, int num)"
+.PP
+Pushes an array of Embryo_Cells onto the function stack to be used as parameters for the next function that is called in the given program. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The given program. 
+.br
+\fIcells\fP The array of Embryo_Cells. 
+.br
+\fInum\fP The number of cells in \fCcells\fP. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fC1\fP if successful. \fC0\fP otherwise. 
+.RE
+.PP
+
+.PP
+References embryo_parameter_cell_push().
+.SS "EAPI int embryo_parameter_cell_push (Embryo_Program * ep, Embryo_Cell cell)"
+.PP
+Pushes an Embryo_Cell onto the function stack to use as a parameter for the next function that is called in the given program. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The given program. 
+.br
+\fIcell\fP The Embryo_Cell to push onto the stack. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fC1\fP if successful. \fC0\fP otherwise. 
+.RE
+.PP
+
+.PP
+Referenced by embryo_parameter_cell_array_push().
+.SS "EAPI int embryo_parameter_string_push (Embryo_Program * ep, const char * str)"
+.PP
+Pushes a string onto the function stack to use as a parameter for the next function that is called in the given program. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The given program. 
+.br
+\fIstr\fP The string to push onto the stack. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fC1\fP if successful. \fC0\fP otherwise. 
+.RE
+.PP
+
+.PP
+References embryo_parameter_string_push().
+.PP
+Referenced by embryo_parameter_string_push().

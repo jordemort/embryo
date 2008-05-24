@@ -1,0 +1,117 @@
+\hypertarget{group__Embryo__Run__Group}{
+\section{Program Run Functions}
+\label{group__Embryo__Run__Group}\index{Program Run Functions@{Program Run Functions}}
+}
+Functions that are involved in actually running functions in an Embryo program.  
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+EAPI int \hyperlink{group__Embryo__Run__Group_g4497fa4413a00d7f482772cdc6f7309d}{embryo\_\-program\_\-recursion\_\-get} (Embryo\_\-Program $\ast$ep)
+\begin{CompactList}\small\item\em Returns the number of virtual machines are running for the given program. \item\end{CompactList}\item 
+EAPI int \hyperlink{group__Embryo__Run__Group_ga061469476a430fd33e89951300fd62a}{embryo\_\-program\_\-run} (Embryo\_\-Program $\ast$ep, Embryo\_\-Function fn)
+\begin{CompactList}\small\item\em Runs the given function of the given Embryo program in the current virtual machine. \item\end{CompactList}\item 
+EAPI Embryo\_\-Cell \hyperlink{group__Embryo__Run__Group_g91a7c05bafd22e94d776a117a297201d}{embryo\_\-program\_\-return\_\-value\_\-get} (Embryo\_\-Program $\ast$ep)
+\begin{CompactList}\small\item\em Retreives the return value of the last called function of the given program. \item\end{CompactList}\item 
+EAPI void \hyperlink{group__Embryo__Run__Group_g493d2e507082b46cdbc57708a1f6e239}{embryo\_\-program\_\-max\_\-cycle\_\-run\_\-set} (Embryo\_\-Program $\ast$ep, int max)
+\begin{CompactList}\small\item\em Sets the maximum number of abstract machine cycles any given program run can execute before being put to sleep and returning. \item\end{CompactList}\item 
+EAPI int \hyperlink{group__Embryo__Run__Group_g2bf3e76b53faadccc60c11093c795425}{embryo\_\-program\_\-max\_\-cycle\_\-run\_\-get} (Embryo\_\-Program $\ast$ep)
+\begin{CompactList}\small\item\em Retreives the maximum number of abstract machine cycles a program is allowed to run. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Functions that are involved in actually running functions in an Embryo program. 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{group__Embryo__Run__Group_g2bf3e76b53faadccc60c11093c795425}{
+\index{Embryo\_\-Run\_\-Group@{Embryo\_\-Run\_\-Group}!embryo\_\-program\_\-max\_\-cycle\_\-run\_\-get@{embryo\_\-program\_\-max\_\-cycle\_\-run\_\-get}}
+\index{embryo\_\-program\_\-max\_\-cycle\_\-run\_\-get@{embryo\_\-program\_\-max\_\-cycle\_\-run\_\-get}!Embryo_Run_Group@{Embryo\_\-Run\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI int embryo\_\-program\_\-max\_\-cycle\_\-run\_\-get (Embryo\_\-Program $\ast$ {\em ep})}}
+\label{group__Embryo__Run__Group_g2bf3e76b53faadccc60c11093c795425}
+
+
+Retreives the maximum number of abstract machine cycles a program is allowed to run. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given program. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]The number of cycles a run cycle is allowed to run for this program.\end{Desc}
+This returns the value set by \hyperlink{group__Embryo__Run__Group_g493d2e507082b46cdbc57708a1f6e239}{embryo\_\-program\_\-max\_\-cycle\_\-run\_\-set()}. See \hyperlink{group__Embryo__Run__Group_g493d2e507082b46cdbc57708a1f6e239}{embryo\_\-program\_\-max\_\-cycle\_\-run\_\-set()} for more information. \hypertarget{group__Embryo__Run__Group_g493d2e507082b46cdbc57708a1f6e239}{
+\index{Embryo\_\-Run\_\-Group@{Embryo\_\-Run\_\-Group}!embryo\_\-program\_\-max\_\-cycle\_\-run\_\-set@{embryo\_\-program\_\-max\_\-cycle\_\-run\_\-set}}
+\index{embryo\_\-program\_\-max\_\-cycle\_\-run\_\-set@{embryo\_\-program\_\-max\_\-cycle\_\-run\_\-set}!Embryo_Run_Group@{Embryo\_\-Run\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI void embryo\_\-program\_\-max\_\-cycle\_\-run\_\-set (Embryo\_\-Program $\ast$ {\em ep}, \/  int {\em max})}}
+\label{group__Embryo__Run__Group_g493d2e507082b46cdbc57708a1f6e239}
+
+
+Sets the maximum number of abstract machine cycles any given program run can execute before being put to sleep and returning. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given program. \item[{\em max}]The number of machine cycles as a limit.\end{description}
+\end{Desc}
+This sets the maximum number of abstract machine (virtual machine) instructions that a single run of an embryo function (even if its main) can use before embryo \hyperlink{group__Embryo__Run__Group_ga061469476a430fd33e89951300fd62a}{embryo\_\-program\_\-run()} reutrns with the value EMBRYO\_\-PROGRAM\_\-TOOLONG. If the function fully executes within this number of cycles, \hyperlink{group__Embryo__Run__Group_ga061469476a430fd33e89951300fd62a}{embryo\_\-program\_\-run()} will return as normal with either EMBRYO\_\-PROGRAM\_\-OK, EMBRYO\_\-PROGRAM\_\-FAIL or EMBRYO\_\-PROGRAM\_\-SLEEP. If the run exceeds this instruction count, then EMBRYO\_\-PROGRAM\_\-TOOLONG will be returned indicating the program exceeded its run count. If the app wishes to continue running this anyway - it is free to process its own events or whatever it wants and continue the function by calling embryo\_\-program\_\-run(program, EMBRYO\_\-FUNCTION\_\-CONT); which will start the run again until the instruction count is reached. This can keep being done to allow the calling program to still be able to control things outside the embryo function being called. If the maximum run cycle count is 0 then the program is allowed to run forever only returning when it is done.
+
+It is important to note that abstract machine cycles are NOT the same as the host machine cpu cycles. They are not fixed in runtime per cycle, so this is more of a helper tool than a way to HARD-FORCE a script to only run for a specific period of time. If the cycle count is set to something low like 5000 or 1000, then every 1000 (or 5000) cycles control will be returned to the calling process where it can check a timer to see if a physical runtime limit has been elapsed and then abort runing further assuming a \char`\"{}runaway script\char`\"{} or keep continuing the script run. This limits resolution to only that many cycles which do not take a determined amount of time to execute, as this varies from cpu to cpu and also depends on how loaded the system is. Making the max cycle run too low will impact performance requiring the abstract machine to do setup and teardown cycles too often comapred to cycles actually executed.
+
+Also note it does NOT include nested abstract machines. IF this abstract machine run calls embryo script that calls a native function that in turn calls more embryo script, then the 2nd (and so on) levels are not included in this run count. They can set their own max instruction count values separately.
+
+The default max cycle run value is 0 in any program until set with this function. \hypertarget{group__Embryo__Run__Group_g4497fa4413a00d7f482772cdc6f7309d}{
+\index{Embryo\_\-Run\_\-Group@{Embryo\_\-Run\_\-Group}!embryo\_\-program\_\-recursion\_\-get@{embryo\_\-program\_\-recursion\_\-get}}
+\index{embryo\_\-program\_\-recursion\_\-get@{embryo\_\-program\_\-recursion\_\-get}!Embryo_Run_Group@{Embryo\_\-Run\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI int embryo\_\-program\_\-recursion\_\-get (Embryo\_\-Program $\ast$ {\em ep})}}
+\label{group__Embryo__Run__Group_g4497fa4413a00d7f482772cdc6f7309d}
+
+
+Returns the number of virtual machines are running for the given program. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given program. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]The number of virtual machines running. \end{Desc}
+\hypertarget{group__Embryo__Run__Group_g91a7c05bafd22e94d776a117a297201d}{
+\index{Embryo\_\-Run\_\-Group@{Embryo\_\-Run\_\-Group}!embryo\_\-program\_\-return\_\-value\_\-get@{embryo\_\-program\_\-return\_\-value\_\-get}}
+\index{embryo\_\-program\_\-return\_\-value\_\-get@{embryo\_\-program\_\-return\_\-value\_\-get}!Embryo_Run_Group@{Embryo\_\-Run\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI Embryo\_\-Cell embryo\_\-program\_\-return\_\-value\_\-get (Embryo\_\-Program $\ast$ {\em ep})}}
+\label{group__Embryo__Run__Group_g91a7c05bafd22e94d776a117a297201d}
+
+
+Retreives the return value of the last called function of the given program. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given program. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]An Embryo\_\-Cell representing the return value of the function that was last called. \end{Desc}
+\hypertarget{group__Embryo__Run__Group_ga061469476a430fd33e89951300fd62a}{
+\index{Embryo\_\-Run\_\-Group@{Embryo\_\-Run\_\-Group}!embryo\_\-program\_\-run@{embryo\_\-program\_\-run}}
+\index{embryo\_\-program\_\-run@{embryo\_\-program\_\-run}!Embryo_Run_Group@{Embryo\_\-Run\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI int embryo\_\-program\_\-run (Embryo\_\-Program $\ast$ {\em ep}, \/  Embryo\_\-Function {\em fn})}}
+\label{group__Embryo__Run__Group_ga061469476a430fd33e89951300fd62a}
+
+
+Runs the given function of the given Embryo program in the current virtual machine. 
+
+The parameter {\tt fn} can be found using \hyperlink{group__Embryo__Func__Group_g8da497a811da37c0396eeeb6b9331679}{embryo\_\-program\_\-function\_\-find}.
+
+\begin{Desc}
+\item[Note:]For Embryo to be able to run a function, it must have been declared {\tt public} in the Small source code.\end{Desc}
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given program. \item[{\em fn}]The given function. Normally \char`\"{}main\char`\"{}, in which case the constant {\tt EMBRYO\_\-FUNCTION\_\-MAIN} can be used. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]{\tt EMBRYO\_\-PROGRAM\_\-OK} on success. {\tt EMBRYO\_\-PROGRAM\_\-SLEEP} if the program is halted by the Small {\tt sleep} call. {\tt EMBRYO\_\-PROGRAM\_\-FAIL} if there is an error. {\tt EMBRYO\_\-PROGRAM\_\-TOOLONG} if the program executes for longer than it is allowed to in abstract machine instruction count. \end{Desc}
+
+
+References EMBRYO\_\-CELL\_\-NONE, embryo\_\-data\_\-address\_\-get(), embryo\_\-data\_\-heap\_\-push(), embryo\_\-data\_\-string\_\-set(), EMBRYO\_\-ERROR\_\-BOUNDS, EMBRYO\_\-ERROR\_\-DIVIDE, EMBRYO\_\-ERROR\_\-HEAPLOW, EMBRYO\_\-ERROR\_\-INDEX, EMBRYO\_\-ERROR\_\-INIT, EMBRYO\_\-ERROR\_\-INVINSTR, EMBRYO\_\-ERROR\_\-MEMACCESS, EMBRYO\_\-ERROR\_\-SLEEP, EMBRYO\_\-FUNCTION\_\-CONT, EMBRYO\_\-FUNCTION\_\-MAIN, EMBRYO\_\-PROGRAM\_\-FAIL, EMBRYO\_\-PROGRAM\_\-OK, and EMBRYO\_\-PROGRAM\_\-SLEEP.

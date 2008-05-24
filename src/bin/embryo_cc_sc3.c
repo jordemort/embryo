@@ -18,7 +18,11 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc3.c,v 1.8 2005/04/13 20:01:21 tsauerbeck Exp $
+ *  Version: $Id: embryo_cc_sc3.c,v 1.10 2008/04/11 19:06:18 doursse Exp $
+ */
+
+/*
+ * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
  */
 
 #ifdef HAVE_CONFIG_H
@@ -515,7 +519,7 @@ plnge(int *opstr, int opoff, int (*hier) (value * lval), value * lval,
 {
    int                 lvalue, opidx;
    int                 count;
-   value               lval2 = { 0 };
+   value               lval2 = { NULL, 0, 0, 0, 0, NULL };
 
    lvalue = plnge1(hier, lval);
    if (nextop(&opidx, opstr) == 0)
@@ -547,7 +551,7 @@ static int
 plnge_rel(int *opstr, int opoff, int (*hier) (value * lval), value * lval)
 {
    int                 lvalue, opidx;
-   value               lval2 = { 0 };	/* intialize, to avoid a compiler warning */
+   value               lval2 = { NULL, 0, 0, 0, 0, NULL };
    int                 count;
 
    /* this function should only be called for relational operators */
@@ -630,7 +634,7 @@ plnge2(void         (*oper) (void),
 	  {			/* constant on right side */
 	     if (commutative(oper))
 	       {		/* test for commutative operators */
-		  value               lvaltmp = { 0 };
+		  value               lvaltmp = { NULL, 0, 0, 0, 0, NULL };
 		  stgdel(index, cidx);	/* scratch push1() and constant fetch (then
 					 * fetch the constant again */
 		  const2(lval2->constval << dbltest(oper, lval1, lval2));
@@ -760,7 +764,7 @@ calc(cell left, void (*oper) (), cell right, char *boolresult)
 int
 expression(int *constant, cell * val, int *tag, int chkfuncresult)
 {
-   value               lval = { 0 };
+   value               lval = { NULL, 0, 0, 0, 0, NULL };
 
    if (hier14(&lval))
       rvalue(&lval);
@@ -824,9 +828,8 @@ int
 hier14(value * lval1)
 {
    int                 lvalue;
-   value               lval2 = { 0 }, lval3 =
-   {
-   0};
+   value               lval2 = { NULL, 0, 0, 0, 0, NULL };
+   value               lval3 = { NULL, 0, 0, 0, 0, NULL };
    void                (*oper) (void);
    int                 tok, level, i;
    cell                val;
@@ -1064,7 +1067,7 @@ static int
 hier13(value * lval)
 {
    int                 lvalue, flab1, flab2;
-   value               lval2 = { 0 };
+   value               lval2 = { NULL, 0, 0, 0, 0, NULL };
    int                 array1, array2;
 
    lvalue = plnge1(hier12, lval);
@@ -1484,7 +1487,7 @@ hier1(value * lval1)
 {
    int                 lvalue, index, tok, symtok;
    cell                val, cidx;
-   value               lval2 = { 0 };
+   value               lval2 = { NULL, 0, 0, 0, 0, NULL };
    char               *st;
    char                close;
    symbol             *sym;
@@ -1901,7 +1904,7 @@ callfunction(symbol * sym)
    int                 nargs = 0;	/* number of arguments */
    int                 heapalloc = 0;
    int                 namedparams = FALSE;
-   value               lval = { 0 };
+   value               lval = { NULL, 0, 0, 0, 0, NULL };
    arginfo            *arg;
    char                arglist[sMAXARGS];
    constvalue          arrayszlst = { NULL, "", 0, 0 };	/* array size list starts empty */
@@ -2015,7 +2018,7 @@ callfunction(symbol * sym)
 /*
  * Dont need this warning - its varargs. there is no way of knowing the
  * required tag/type...
- * 
+ *
           if (!checktag(arg[argidx].tags,arg[argidx].numtags,lval.tag))
             error(213);
  */

@@ -1,0 +1,59 @@
+.TH "Heap Functions" 3 "19 May 2008" "Embryo" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Heap Functions \- The heap is an area of memory that can be allocated for program use at runtime.  
+
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "EAPI Embryo_Cell \fBembryo_data_heap_push\fP (Embryo_Program *ep, int cells)"
+.br
+.RI "\fIIncreases the size of the heap of the given virtual machine by the given number of Embryo_Cells. \fP"
+.ti -1c
+.RI "EAPI void \fBembryo_data_heap_pop\fP (Embryo_Program *ep, Embryo_Cell down_to)"
+.br
+.RI "\fIDecreases the size of the heap of the given virtual machine down to the given size. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The heap is an area of memory that can be allocated for program use at runtime. 
+.PP
+The heap functions here change the amount of heap memory available. 
+.SH "Function Documentation"
+.PP 
+.SS "EAPI void embryo_data_heap_pop (Embryo_Program * ep, Embryo_Cell down_to)"
+.PP
+Decreases the size of the heap of the given virtual machine down to the given size. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The program with the given virtual machine. 
+.br
+\fIdown_to\fP The given size. 
+.RE
+.PP
+
+.SS "EAPI Embryo_Cell embryo_data_heap_push (Embryo_Program * ep, int cells)"
+.PP
+Increases the size of the heap of the given virtual machine by the given number of Embryo_Cells. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIep\fP The program with the given virtual machine. 
+.br
+\fIcells\fP The given number of Embryo_Cells. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The address of the new memory region on success. \fCEMBRYO_CELL_NONE\fP otherwise. 
+.RE
+.PP
+
+.PP
+References EMBRYO_CELL_NONE.
+.PP
+Referenced by embryo_program_run().

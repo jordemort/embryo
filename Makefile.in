@@ -14,7 +14,6 @@
 
 @SET_MAKE@
 
-
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
@@ -41,8 +40,8 @@ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/README.in \
 	$(srcdir)/config.h.in $(srcdir)/embryo.pc.in \
 	$(srcdir)/embryo.spec.in $(top_srcdir)/configure AUTHORS \
-	COPYING ChangeLog INSTALL NEWS config.guess config.sub depcomp \
-	install-sh ltmain.sh missing
+	COPYING ChangeLog INSTALL NEWS compile config.guess config.sub \
+	depcomp install-sh ltmain.sh missing
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.in
@@ -53,9 +52,6 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES = embryo.pc README embryo.spec
-am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgconfigdir)"
-binSCRIPT_INSTALL = $(INSTALL_SCRIPT)
-SCRIPTS = $(bin_SCRIPTS)
 SOURCES =
 DIST_SOURCES =
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
@@ -70,6 +66,7 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
+am__installdirs = "$(DESTDIR)$(pkgconfigdir)"
 pkgconfigDATA_INSTALL = $(INSTALL_DATA)
 DATA = $(pkgconfig_DATA)
 ETAGS = etags
@@ -106,11 +103,14 @@ CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DSYMUTIL = @DSYMUTIL@
 ECHO = @ECHO@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
+EVIL_CFLAGS = @EVIL_CFLAGS@
+EVIL_LIBS = @EVIL_LIBS@
 EXEEXT = @EXEEXT@
 GREP = @GREP@
 INSTALL_DATA = @INSTALL_DATA@
@@ -124,6 +124,7 @@ LIBTOOL = @LIBTOOL@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
+NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
@@ -133,12 +134,14 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PKG_CONFIG = @PKG_CONFIG@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
+WIN32_CFLAGS = @WIN32_CFLAGS@
 ac_ct_CC = @ac_ct_CC@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
@@ -153,7 +156,6 @@ build_alias = @build_alias@
 build_cpu = @build_cpu@
 build_os = @build_os@
 build_vendor = @build_vendor@
-create_shared_lib = @create_shared_lib@
 datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
@@ -174,6 +176,8 @@ libdir = @libdir@
 libexecdir = @libexecdir@
 localedir = @localedir@
 localstatedir = @localstatedir@
+lt_enable_auto_import = @lt_enable_auto_import@
+lt_no_undefined = @lt_no_undefined@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
@@ -187,22 +191,39 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 version_info = @version_info@
 SUBDIRS = src include
-MAINTAINERCLEANFILES = Makefile.in aclocal.m4 config.guess \
-                       config.h.in config.sub configure install-sh \
-		       ltconfig ltmain.sh missing mkinstalldirs \
-		       stamp-h.in build-stamp configure-stamp depcomp \
-		       embryo_docs.tar.gz embryo.c \
-		       README \
-		       embryo.pc \
-		       embryo.spec
+MAINTAINERCLEANFILES = \
+Makefile.in \
+aclocal.m4 \
+compile \
+config.guess \
+config.h.in \
+config.sub \
+configure \
+depcomp \
+install-sh \
+ltmain.sh \
+missing \
+embryo_docs.tar.gz \
+m4/libtool.m4 \
+m4/lt~obsolete.m4 \
+m4/ltoptions.m4 \
+m4/ltsugar.m4 \
+m4/ltversion.m4
 
-bin_SCRIPTS = 
-EXTRA_DIST = README AUTHORS COPYING COPYING-PLAIN embryo.c.in gendoc \
-             Doxyfile \
-	     README.in README \
-	     embryo.pc.in \
-	     embryo.spec.in embryo.spec \
-	     doc gendoc
+EXTRA_DIST = \
+AUTHORS \
+COPYING \
+COPYING-PLAIN \
+autogen.sh \
+embryo.c.in \
+embryo.pc.in \
+embryo.spec.in \
+embryo.spec \
+README.in \
+README \
+Doxyfile \
+doc \
+gendoc
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = embryo.pc
@@ -266,25 +287,6 @@ README: $(top_builddir)/config.status $(srcdir)/README.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 embryo.spec: $(top_builddir)/config.status $(srcdir)/embryo.spec.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
-install-binSCRIPTS: $(bin_SCRIPTS)
-	@$(NORMAL_INSTALL)
-	test -z "$(bindir)" || $(mkdir_p) "$(DESTDIR)$(bindir)"
-	@list='$(bin_SCRIPTS)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  if test -f $$d$$p; then \
-	    f=`echo "$$p" | sed 's|^.*/||;$(transform)'`; \
-	    echo " $(binSCRIPT_INSTALL) '$$d$$p' '$(DESTDIR)$(bindir)/$$f'"; \
-	    $(binSCRIPT_INSTALL) "$$d$$p" "$(DESTDIR)$(bindir)/$$f"; \
-	  else :; fi; \
-	done
-
-uninstall-binSCRIPTS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(bin_SCRIPTS)'; for p in $$list; do \
-	  f=`echo "$$p" | sed 's|^.*/||;$(transform)'`; \
-	  echo " rm -f '$(DESTDIR)$(bindir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(bindir)/$$f"; \
-	done
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -589,10 +591,10 @@ distcleancheck: distclean
 	       exit 1; } >&2
 check-am: all-am
 check: check-recursive
-all-am: Makefile $(SCRIPTS) $(DATA) config.h
+all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgconfigdir)"; do \
+	for dir in "$(DESTDIR)$(pkgconfigdir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-recursive
@@ -642,7 +644,7 @@ info-am:
 
 install-data-am: install-pkgconfigDATA
 
-install-exec-am: install-binSCRIPTS
+install-exec-am:
 
 install-info: install-info-recursive
 
@@ -668,8 +670,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-binSCRIPTS uninstall-info-am \
-	uninstall-pkgconfigDATA
+uninstall-am: uninstall-info-am uninstall-pkgconfigDATA
 
 uninstall-info: uninstall-info-recursive
 
@@ -680,15 +681,15 @@ uninstall-info: uninstall-info-recursive
 	distclean-generic distclean-hdr distclean-libtool \
 	distclean-recursive distclean-tags distcleancheck distdir \
 	distuninstallcheck dvi dvi-am html html-am info info-am \
-	install install-am install-binSCRIPTS install-data \
-	install-data-am install-exec install-exec-am install-info \
-	install-info-am install-man install-pkgconfigDATA \
-	install-strip installcheck installcheck-am installdirs \
-	installdirs-am maintainer-clean maintainer-clean-generic \
-	maintainer-clean-recursive mostlyclean mostlyclean-generic \
-	mostlyclean-libtool mostlyclean-recursive pdf pdf-am ps ps-am \
-	tags tags-recursive uninstall uninstall-am \
-	uninstall-binSCRIPTS uninstall-info-am uninstall-pkgconfigDATA
+	install install-am install-data install-data-am install-exec \
+	install-exec-am install-info install-info-am install-man \
+	install-pkgconfigDATA install-strip installcheck \
+	installcheck-am installdirs installdirs-am maintainer-clean \
+	maintainer-clean-generic maintainer-clean-recursive \
+	mostlyclean mostlyclean-generic mostlyclean-libtool \
+	mostlyclean-recursive pdf pdf-am ps ps-am tags tags-recursive \
+	uninstall uninstall-am uninstall-info-am \
+	uninstall-pkgconfigDATA
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

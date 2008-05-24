@@ -1,0 +1,75 @@
+\hypertarget{group__Embryo__Public__Variable__Group}{
+\section{Public Variable Access Functions}
+\label{group__Embryo__Public__Variable__Group}\index{Public Variable Access Functions@{Public Variable Access Functions}}
+}
+In an Embryo program, a global variable can be declared public, as described in \hyperlink{Small_Page_Small_Scope_Subsection}{Scope}.  
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+EAPI Embryo\_\-Cell \hyperlink{group__Embryo__Public__Variable__Group_g9714d1cbd46b3b0315a71c23413ad921}{embryo\_\-program\_\-variable\_\-find} (Embryo\_\-Program $\ast$ep, const char $\ast$name)
+\begin{CompactList}\small\item\em Retrieves the location of the public variable in the given program with the given name. \item\end{CompactList}\item 
+EAPI int \hyperlink{group__Embryo__Public__Variable__Group_g3515ce41a3a62d86b866f4cadd0c74cd}{embryo\_\-program\_\-variable\_\-count\_\-get} (Embryo\_\-Program $\ast$ep)
+\begin{CompactList}\small\item\em Retrieves the number of public variables in the given program. \item\end{CompactList}\item 
+EAPI Embryo\_\-Cell \hyperlink{group__Embryo__Public__Variable__Group_g9f9174d8fdde8fdca879f61df78744bb}{embryo\_\-program\_\-variable\_\-get} (Embryo\_\-Program $\ast$ep, int num)
+\begin{CompactList}\small\item\em Retrieves the location of the public variable in the given program with the given identifier. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+In an Embryo program, a global variable can be declared public, as described in \hyperlink{Small_Page_Small_Scope_Subsection}{Scope}. 
+
+The functions here allow the host program to access these public variables. 
+
+\subsection{Function Documentation}
+\hypertarget{group__Embryo__Public__Variable__Group_g3515ce41a3a62d86b866f4cadd0c74cd}{
+\index{Embryo\_\-Public\_\-Variable\_\-Group@{Embryo\_\-Public\_\-Variable\_\-Group}!embryo\_\-program\_\-variable\_\-count\_\-get@{embryo\_\-program\_\-variable\_\-count\_\-get}}
+\index{embryo\_\-program\_\-variable\_\-count\_\-get@{embryo\_\-program\_\-variable\_\-count\_\-get}!Embryo_Public_Variable_Group@{Embryo\_\-Public\_\-Variable\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI int embryo\_\-program\_\-variable\_\-count\_\-get (Embryo\_\-Program $\ast$ {\em ep})}}
+\label{group__Embryo__Public__Variable__Group_g3515ce41a3a62d86b866f4cadd0c74cd}
+
+
+Retrieves the number of public variables in the given program. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given program. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]The number of public variables. \end{Desc}
+\hypertarget{group__Embryo__Public__Variable__Group_g9714d1cbd46b3b0315a71c23413ad921}{
+\index{Embryo\_\-Public\_\-Variable\_\-Group@{Embryo\_\-Public\_\-Variable\_\-Group}!embryo\_\-program\_\-variable\_\-find@{embryo\_\-program\_\-variable\_\-find}}
+\index{embryo\_\-program\_\-variable\_\-find@{embryo\_\-program\_\-variable\_\-find}!Embryo_Public_Variable_Group@{Embryo\_\-Public\_\-Variable\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI Embryo\_\-Cell embryo\_\-program\_\-variable\_\-find (Embryo\_\-Program $\ast$ {\em ep}, \/  const char $\ast$ {\em name})}}
+\label{group__Embryo__Public__Variable__Group_g9714d1cbd46b3b0315a71c23413ad921}
+
+
+Retrieves the location of the public variable in the given program with the given name. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given program. \item[{\em name}]The given name. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]The address of the variable if found. {\tt EMBRYO\_\-CELL\_\-NONE} otherwise. \end{Desc}
+
+
+References EMBRYO\_\-CELL\_\-NONE.\hypertarget{group__Embryo__Public__Variable__Group_g9f9174d8fdde8fdca879f61df78744bb}{
+\index{Embryo\_\-Public\_\-Variable\_\-Group@{Embryo\_\-Public\_\-Variable\_\-Group}!embryo\_\-program\_\-variable\_\-get@{embryo\_\-program\_\-variable\_\-get}}
+\index{embryo\_\-program\_\-variable\_\-get@{embryo\_\-program\_\-variable\_\-get}!Embryo_Public_Variable_Group@{Embryo\_\-Public\_\-Variable\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI Embryo\_\-Cell embryo\_\-program\_\-variable\_\-get (Embryo\_\-Program $\ast$ {\em ep}, \/  int {\em num})}}
+\label{group__Embryo__Public__Variable__Group_g9f9174d8fdde8fdca879f61df78744bb}
+
+
+Retrieves the location of the public variable in the given program with the given identifier. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given program. \item[{\em num}]The identifier of the public variable. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]The virtual machine address of the variable if found. {\tt EMBRYO\_\-CELL\_\-NONE} otherwise. \end{Desc}
+
+
+References EMBRYO\_\-CELL\_\-NONE.

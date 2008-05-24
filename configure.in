@@ -1,7 +1,7 @@
 # get rid of that stupid cache mechanism
 rm -f config.cache
 
-AC_INIT(embryo, 0.9.1.042, enlightenment-devel@lists.sourceforge.net)
+AC_INIT(embryo, 0.9.9.043, enlightenment-devel@lists.sourceforge.net)
 AC_PREREQ(2.52)
 AC_CONFIG_SRCDIR(configure.in)
 AC_CANONICAL_BUILD
@@ -16,6 +16,7 @@ AC_PROG_CC
 AM_PROG_CC_STDC
 AC_HEADER_STDC
 AC_C_CONST
+AM_PROG_CC_C_O
 
 AC_LIBTOOL_WIN32_DLL
 define([AC_LIBTOOL_LANG_CXX_CONFIG], [:])dnl
@@ -29,18 +30,46 @@ SNAP=`echo $PACKAGE_VERSION | awk -F. '{printf("%s", $4);}'`
 version_info=`expr $VMAJ + $VMIN`":$VMIC:$VMIN"
 AC_SUBST(version_info)
 
-AC_FUNC_ALLOCA
-
-AC_CHECK_FUNCS(gettimeofday)
-
-create_shared_lib=""
+WIN32_CFLAGS=""
+lt_no_undefined=""
+lt_enable_auto_import=""
 case "$host_os" in
-	mingw|mingw32)
-		create_shared_lib="-no-undefined "
+	mingw*|cegcc)
+		PKG_CHECK_MODULES([EVIL], evil)
+		AC_DEFINE(HAVE_EVIL, 1, [Set to 1 if evil package is installed])
+		dnl needed for correct definition of EAPI
+		AC_DEFINE(EFL_EMBRYO_BUILD, 1, [Define to mention that embryo is built])
+		AC_DEFINE(HAVE_GETTIMEOFDAY, 1, [Defined to 1 (MinGW / CeGCC platform)])
+		if test "x$host_os" = "xcegcc" ; then
+			WIN32_CFLAGS="-mwin32"
+			lt_enable_auto_import="-Wl,--enable-auto-import"
+		fi
+		lt_no_undefined="-no-undefined"
 		;;
+	*)
+		AC_CHECK_FUNCS(gettimeofday)
 esac
+AC_SUBST(WIN32_CFLAGS)
+AC_SUBST(lt_no_undefined)
+AC_SUBST(lt_enable_auto_import)
 
-AC_SUBST(create_shared_lib)
+dnl Checking for __attribute__ support
+AC_MSG_CHECKING([for __attribute__])
+AC_CACHE_VAL(_cv_have___attribute__,
+  [
+    AC_TRY_COMPILE([#include <stdlib.h>],
+      [int func(int x); int foo(int x __attribute__ ((unused))) { exit(1); }],
+      [_cv_have___attribute__="yes"],
+      [_cv_have___attribute__="no"])
+  ]
+)
+
+if test "x${_cv_have___attribute__}" = "xyes" ; then
+   AC_DEFINE(HAVE___ATTRIBUTE__, 1, [Define to 1 if your compiler has __attribute__])
+fi
+AC_MSG_RESULT(${_cv_have___attribute__})
+
+AC_FUNC_ALLOCA
 
 AC_CHECK_HEADERS(fnmatch.h,, AC_MSG_ERROR([Cannot find fnmatch.h. Make sure your CFLAGS environment variable contains include lines for the location of this file]))
 

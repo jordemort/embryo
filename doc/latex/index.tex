@@ -1,0 +1,18 @@
+ \begin{Desc}
+\item[Version:]0.0.1 \end{Desc}
+\begin{Desc}
+\item[Author:]Carsten Haitzler $<$\href{mailto:raster@rasterman.com}{\tt raster@rasterman.com}$>$ \end{Desc}
+\begin{Desc}
+\item[Date:]2004\end{Desc}
+\hypertarget{index_intro}{}\section{What is Embryo?}\label{index_intro}
+Embryo is a tiny library designed to interpret limited Small programs compiled by the included compiler, {\tt embryo\_\-cc}. It is mostly a cleaned up and smaller version of the original Small abstract machine. The compiler is mostly untouched.
+
+For more information about the Small language, see \hyperlink{Small_Page}{Brief Introduction to Small}.\hypertarget{index_How_to_Use}{}\section{How to Use Embryo?}\label{index_How_to_Use}
+To use Embryo in your code, you need to do at least the following:
+
+\begin{itemize}
+\item Include \hyperlink{Embryo_8h}{Embryo.h}. \item Load the Embryo program using one of the \hyperlink{group__Embryo__Program__Creation__Group}{Program Creation and Destruction Functions}. \item Set up the native calls with \hyperlink{group__Embryo__Func__Group_g1164bbcc4dc623c54a1916f05499c9cb}{embryo\_\-program\_\-native\_\-call\_\-add}. \item Create a virtual machine with \hyperlink{group__Embryo__Program__VM__Group_g4c0362643f9ae872754caabe32ad9764}{embryo\_\-program\_\-vm\_\-push}. \item Then run the program with \hyperlink{group__Embryo__Run__Group_ga061469476a430fd33e89951300fd62a}{embryo\_\-program\_\-run}.\end{itemize}
+\begin{Desc}
+\item[\hyperlink{todo__todo000001}{Todo}]Clean up compiler code. \end{Desc}
+\begin{Desc}
+\item[\hyperlink{todo__todo000001}{Todo}]Proper overview of the operation of the interpreter, that is how the heap, stack, virtual machines, etc fit together. \end{Desc}

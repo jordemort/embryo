@@ -1,0 +1,52 @@
+\hypertarget{group__Embryo__Func__Group}{
+\section{Function Functions}
+\label{group__Embryo__Func__Group}\index{Function Functions@{Function Functions}}
+}
+Functions that deal with Embryo program functions.  
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+EAPI void \hyperlink{group__Embryo__Func__Group_g1164bbcc4dc623c54a1916f05499c9cb}{embryo\_\-program\_\-native\_\-call\_\-add} (Embryo\_\-Program $\ast$ep, const char $\ast$name, Embryo\_\-Cell($\ast$func)(Embryo\_\-Program $\ast$ep, Embryo\_\-Cell $\ast$params))
+\begin{CompactList}\small\item\em Adds a native program call to the given Embryo program. \item\end{CompactList}\item 
+EAPI Embryo\_\-Function \hyperlink{group__Embryo__Func__Group_g8da497a811da37c0396eeeb6b9331679}{embryo\_\-program\_\-function\_\-find} (Embryo\_\-Program $\ast$ep, const char $\ast$name)
+\begin{CompactList}\small\item\em Returns the function in the given program with the given name. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Functions that deal with Embryo program functions. 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{group__Embryo__Func__Group_g8da497a811da37c0396eeeb6b9331679}{
+\index{Embryo\_\-Func\_\-Group@{Embryo\_\-Func\_\-Group}!embryo\_\-program\_\-function\_\-find@{embryo\_\-program\_\-function\_\-find}}
+\index{embryo\_\-program\_\-function\_\-find@{embryo\_\-program\_\-function\_\-find}!Embryo_Func_Group@{Embryo\_\-Func\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI Embryo\_\-Function embryo\_\-program\_\-function\_\-find (Embryo\_\-Program $\ast$ {\em ep}, \/  const char $\ast$ {\em name})}}
+\label{group__Embryo__Func__Group_g8da497a811da37c0396eeeb6b9331679}
+
+
+Returns the function in the given program with the given name. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given program. \item[{\em name}]The given function name. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]The function if successful. Otherwise, {\tt EMBRYO\_\-FUNCTION\_\-NONE}. \end{Desc}
+
+
+References EMBRYO\_\-FUNCTION\_\-NONE.\hypertarget{group__Embryo__Func__Group_g1164bbcc4dc623c54a1916f05499c9cb}{
+\index{Embryo\_\-Func\_\-Group@{Embryo\_\-Func\_\-Group}!embryo\_\-program\_\-native\_\-call\_\-add@{embryo\_\-program\_\-native\_\-call\_\-add}}
+\index{embryo\_\-program\_\-native\_\-call\_\-add@{embryo\_\-program\_\-native\_\-call\_\-add}!Embryo_Func_Group@{Embryo\_\-Func\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI void embryo\_\-program\_\-native\_\-call\_\-add (Embryo\_\-Program $\ast$ {\em ep}, \/  const char $\ast$ {\em name}, \/  Embryo\_\-Cell($\ast$)(Embryo\_\-Program $\ast$ep, Embryo\_\-Cell $\ast$params) {\em func})}}
+\label{group__Embryo__Func__Group_g1164bbcc4dc623c54a1916f05499c9cb}
+
+
+Adds a native program call to the given Embryo program. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ep}]The given Embryo program. \item[{\em name}]The name for the call used in the script. \item[{\em func}]The function to use when the call is made. \end{description}
+\end{Desc}

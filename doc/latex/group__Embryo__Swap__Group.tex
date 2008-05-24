@@ -1,0 +1,51 @@
+\hypertarget{group__Embryo__Swap__Group}{
+\section{Byte Swapping Functions}
+\label{group__Embryo__Swap__Group}\index{Byte Swapping Functions@{Byte Swapping Functions}}
+}
+Functions that are used to ensure that integers passed to the virtual machine are in small endian format.  
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+EAPI void \hyperlink{group__Embryo__Swap__Group_g06748df04e7ec028a5bf81b6a2a820db}{embryo\_\-swap\_\-16} (unsigned short $\ast$v)
+\begin{CompactList}\small\item\em Ensures that the given unsigned short integer is in the small endian format. \item\end{CompactList}\item 
+EAPI void \hyperlink{group__Embryo__Swap__Group_g9131c33a606c33dbe1dd8a2632567cdf}{embryo\_\-swap\_\-32} (unsigned int $\ast$v)
+\begin{CompactList}\small\item\em Ensures that the given unsigned integer is in the small endian format. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Functions that are used to ensure that integers passed to the virtual machine are in small endian format. 
+
+These functions are used to ensure that the virtual machine operates correctly on big endian machines. 
+
+\subsection{Function Documentation}
+\hypertarget{group__Embryo__Swap__Group_g06748df04e7ec028a5bf81b6a2a820db}{
+\index{Embryo\_\-Swap\_\-Group@{Embryo\_\-Swap\_\-Group}!embryo\_\-swap\_\-16@{embryo\_\-swap\_\-16}}
+\index{embryo\_\-swap\_\-16@{embryo\_\-swap\_\-16}!Embryo_Swap_Group@{Embryo\_\-Swap\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI void embryo\_\-swap\_\-16 (unsigned short $\ast$ {\em v})}}
+\label{group__Embryo__Swap__Group_g06748df04e7ec028a5bf81b6a2a820db}
+
+
+Ensures that the given unsigned short integer is in the small endian format. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]Pointer to the given integer. \end{description}
+\end{Desc}
+\hypertarget{group__Embryo__Swap__Group_g9131c33a606c33dbe1dd8a2632567cdf}{
+\index{Embryo\_\-Swap\_\-Group@{Embryo\_\-Swap\_\-Group}!embryo\_\-swap\_\-32@{embryo\_\-swap\_\-32}}
+\index{embryo\_\-swap\_\-32@{embryo\_\-swap\_\-32}!Embryo_Swap_Group@{Embryo\_\-Swap\_\-Group}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}EAPI void embryo\_\-swap\_\-32 (unsigned int $\ast$ {\em v})}}
+\label{group__Embryo__Swap__Group_g9131c33a606c33dbe1dd8a2632567cdf}
+
+
+Ensures that the given unsigned integer is in the small endian format. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]Pointer to the given integer. \end{description}
+\end{Desc}
+
+
+Referenced by embryo\_\-program\_\-load().

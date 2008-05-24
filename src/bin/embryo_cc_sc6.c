@@ -18,7 +18,11 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc6.c,v 1.11 2005/11/04 08:16:24 sebastid Exp $
+ *  Version: $Id: embryo_cc_sc6.c,v 1.13 2008/04/11 19:06:18 doursse Exp $
+ */
+
+/*
+ * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
  */
 
 #ifdef HAVE_CONFIG_H
@@ -209,8 +213,9 @@ write_encoded(FILE * fbin, ucell * c, int num)
 #if defined __BORLANDC__ || defined __WATCOMC__
 #pragma argsused
 #endif
+
 static cell
-noop(FILE * fbin, char *params, cell opcode)
+noop(FILE * fbin __UNUSED__, char *params __UNUSED__, cell opcode __UNUSED__)
 {
    return 0;
 }
@@ -218,8 +223,9 @@ noop(FILE * fbin, char *params, cell opcode)
 #if defined __BORLANDC__ || defined __WATCOMC__
 #pragma argsused
 #endif
+
 static cell
-parm0(FILE * fbin, char *params, cell opcode)
+parm0(FILE * fbin, char *params __UNUSED__, cell opcode)
 {
    if (fbin != NULL)
       write_encoded(fbin, (ucell *) & opcode, 1);
@@ -257,8 +263,9 @@ parm2(FILE * fbin, char *params, cell opcode)
 #if defined __BORLANDC__ || defined __WATCOMC__
 #pragma argsused
 #endif
+
 static cell
-do_dump(FILE * fbin, char *params, cell opcode)
+do_dump(FILE * fbin, char *params, cell opcode __UNUSED__)
 {
    ucell               p;
    int                 num = 0;
@@ -422,8 +429,9 @@ do_switch(FILE * fbin, char *params, cell opcode)
 #if defined __BORLANDC__ || defined __WATCOMC__
 #pragma argsused
 #endif
+
 static cell
-do_case(FILE * fbin, char *params, cell opcode)
+do_case(FILE * fbin, char *params, cell opcode __UNUSED__)
 {
    int                 i;
    ucell               p, v;
@@ -445,8 +453,9 @@ do_case(FILE * fbin, char *params, cell opcode)
 #if defined __BORLANDC__ || defined __WATCOMC__
 #pragma argsused
 #endif
+
 static cell
-curfile(FILE * fbin, char *params, cell opcode)
+curfile(FILE * fbin __UNUSED__, char *params, cell opcode __UNUSED__)
 {
    fcurrent = (int)hex2long(params, NULL);
    return 0;

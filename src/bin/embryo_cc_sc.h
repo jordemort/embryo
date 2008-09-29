@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h,v 1.16 2008/04/11 19:06:18 doursse Exp $
+ *  Version: $Id: embryo_cc_sc.h 35497 2008-08-17 07:44:18Z raster $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from

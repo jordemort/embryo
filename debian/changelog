@@ -1,3 +1,17 @@
+embryo (0.9.9.050-1) UNRELEASED; urgency=low
+
+  * New upstream release
+  * Add libembryo0.symbols
+  * debian/control:
+    - Drop B-D on doxygen, no longer needed
+    - Update Standards-Version to 3.8.0
+    - B-D on dpkg-dev >= 1.14.8 as we use symbols support
+  * debian/rules:
+    - don't rm doc/man/man3/todo.3 as it's now shipped in the upstream tarball
+    - CFLAGS += -visibility=hidden to avoid exporting private symbols
+
+ -- Albin Tonnerre <albin.tonnerre@gmail.com>  Mon, 29 Sep 2008 20:12:23 +0200
+
 embryo (0.9.9.043-1) experimental; urgency=low
 
   * New upstream release

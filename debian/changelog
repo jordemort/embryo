@@ -1,4 +1,4 @@
-embryo (0.9.9.050-1) UNRELEASED; urgency=low
+embryo (0.9.9.050-1) experimental; urgency=low
 
   * New upstream release
   * Add libembryo0.symbols
@@ -10,7 +10,7 @@ embryo (0.9.9.050-1) UNRELEASED; urgency=low
     - don't rm doc/man/man3/todo.3 as it's now shipped in the upstream tarball
     - CFLAGS += -visibility=hidden to avoid exporting private symbols
 
- -- Albin Tonnerre <albin.tonnerre@gmail.com>  Mon, 29 Sep 2008 20:12:23 +0200
+ -- Albin Tonnerre <albin.tonnerre@gmail.com>  Mon, 10 Nov 2008 00:20:43 +0100
 
 embryo (0.9.9.043-1) experimental; urgency=low
 

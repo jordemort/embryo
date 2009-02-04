@@ -5,9 +5,12 @@ include /usr/share/cdbs/1/rules/debhelper.mk
 
 CFLAGS += -fvisibility=hidden
 
+build/libembryo-doc::
+	$(MAKE) doc
+
 install/libembryo-doc::
 	cp -R $(DEB_SRCDIR)/doc/html debian/libembryo-doc/usr/share/doc/libembryo-doc/
 
 #DEB_INSTALL_MANPAGES_libembryo-doc := $(DEB_SRCDIR)/doc/man/man3/*.3
 DEB_DH_STRIP_ARGS := --dbg-package=libembryo-dbg
-DEB_CONFIGURE_EXTRA_FLAGS := --disable-rpath
+DEB_CONFIGURE_EXTRA_FLAGS := --disable-rpath --enable-doc

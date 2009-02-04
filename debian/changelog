@@ -1,3 +1,15 @@
+embryo (0.9.9.050+svn20090204-1) experimental; urgency=low
+
+  * New SVN snapshot
+    - Use new 'make doc' target to generate the documentation:
+      + Add --enable-doc to configure options
+      + use 'make doc'
+      + build-depend on doxygen
+  * Use a proper short description for libembryo-dbg
+  * [lintian] Add ${misc:Depends} to Depends
+
+ -- Albin Tonnerre <albin.tonnerre@gmail.com>  Wed, 04 Feb 2009 20:11:52 +0100
+
 embryo (0.9.9.050-1) experimental; urgency=low
 
   * New upstream release

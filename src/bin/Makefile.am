@@ -30,10 +30,9 @@ embryo_cc_scvars.c \
 embryo_cc_prefix.c \
 embryo_cc_prefix.h
 
-embryo_cc_CFLAGS = @WIN32_CFLAGS@
+embryo_cc_CFLAGS = @EMBRYO_CFLAGS@
 embryo_cc_LDADD = $(top_builddir)/src/lib/libembryo.la @EVIL_LIBS@ -lm
 embryo_cc_LDFLAGS = @lt_enable_auto_import@
-embryo_cc_DEPENDENCIES = $(top_builddir)/src/lib/libembryo.la
 
 EXTRA_DIST = \
 embryo_cc_sc5.scp \

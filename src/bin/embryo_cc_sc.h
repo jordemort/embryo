@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h 35497 2008-08-17 07:44:18Z raster $
+ *  Version: $Id$
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -35,14 +35,9 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <setjmp.h>
+
 #include "embryo_cc_osdefs.h"
 #include "embryo_cc_amx.h"
-
-#if HAVE___ATTRIBUTE__
-#define __UNUSED__ __attribute__((unused))
-#else
-#define __UNUSED__
-#endif
 
 /* Note: the "cell" and "ucell" types are defined in AMX.H */
 

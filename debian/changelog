@@ -1,3 +1,9 @@
+embryo (0.9.9.050+svn20090204-1~fr.1) freerunner; urgency=low
+
+  * Build for Freerunner
+
+ -- Nikita V. Youshchenko <yoush@debian.org>  Mon, 09 Mar 2009 18:32:08 +0300
+
 embryo (0.9.9.050+svn20090204-1) experimental; urgency=low
 
   * New SVN snapshot

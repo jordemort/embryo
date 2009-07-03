@@ -1,3 +1,10 @@
+embryo (0.9.9.061-1) UNRELEASED; urgency=low
+
+  * New upstream release
+  * Move libembryo-dbg to the debug section
+
+ -- Albin Tonnerre <albin.tonnerre@gmail.com>  Fri, 03 Jul 2009 18:37:49 +0200
+
 embryo (0.9.9.050+svn20090204-1) experimental; urgency=low
 
   * New SVN snapshot

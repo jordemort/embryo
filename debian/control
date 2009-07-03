@@ -60,7 +60,7 @@ Description: libembryo0 development documentation
 
 Package: libembryo-dbg
 Architecture: any
-Section: libdevel
+Section: debug
 Depends: ${misc:Depends}, libembryo0 (= ${binary:Version})
 Priority: extra
 Description: Debugging symbols for libembryo

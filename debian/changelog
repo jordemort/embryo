@@ -1,4 +1,4 @@
-embryo (0.9.9.061-1) UNRELEASED; urgency=low
+embryo (0.9.9.061-1) unstable; urgency=low
 
   * New upstream release
   * Move libembryo-dbg to the debug section
@@ -6,8 +6,9 @@ embryo (0.9.9.061-1) UNRELEASED; urgency=low
   * Add patches to fix library soname. The SONAME got bumped, but no API/ABI
     changes happened between the version in the archive and 0.9.9.061, so let's
     use the SONAME currently used in the archive
+  * Upload to unstable
 
- -- Albin Tonnerre <albin.tonnerre@gmail.com>  Fri, 03 Jul 2009 18:37:49 +0200
+ -- Albin Tonnerre <albin.tonnerre@gmail.com>  Fri, 03 Jul 2009 19:07:24 +0200
 
 embryo (0.9.9.050+svn20090204-1) experimental; urgency=low
 

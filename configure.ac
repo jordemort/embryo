@@ -1,7 +1,7 @@
 # get rid of that stupid cache mechanism
 rm -f config.cache
 
-AC_INIT([embryo], [0.9.9.050], [enlightenment-devel@lists.sourceforge.net])
+AC_INIT([embryo], [0.9.9.061], [enlightenment-devel@lists.sourceforge.net])
 AC_PREREQ([2.52])
 AC_CONFIG_SRCDIR([configure.ac])
 AC_CONFIG_MACRO_DIR([m4])
@@ -24,6 +24,16 @@ SNAP=`echo $PACKAGE_VERSION | awk -F. '{printf("%s", $4);}'`
 version_info=`expr $VMAJ + $VMIN`":$VMIC:$VMIN"
 AC_SUBST(version_info)
 
+release="ver-svn-02"
+case "$host_os" in
+   mingw32ce* | cegcc*)
+      ;;
+   *)
+      release_info="-release $release"
+      ;;
+esac
+AC_SUBST(release_info)
+
 
 ### Default options with respect to host
 
@@ -41,10 +51,12 @@ AC_PROG_CC
 
 EFL_CHECK_DOXYGEN([build_doc="yes"], [build_doc="no"])
 
-
-### Checks for libraries
+# pkg-config
 
 PKG_PROG_PKG_CONFIG
+
+
+### Checks for libraries
 
 # Evil library for compilation on Windows
 
@@ -164,7 +176,7 @@ echo "------------------------------------------------------------------------"
 echo
 echo "Configuration Options Summary:"
 echo
-echo "  Documentation........: ${enable_doc}"
+echo "  Documentation........: ${build_doc}"
 echo
 echo "  Compilation..........: make"
 echo

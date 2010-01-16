@@ -2,7 +2,7 @@ Source: embryo
 Section: libs
 Priority: optional
 Maintainer:  Debian Pkg-e Team <pkg-e-devel@lists.alioth.debian.org>
-Uploaders: Albin Tonnerre <albin.tonnerre@gmail.com>,
+Uploaders: Albin Tonnerre <lutin@debian.org>,
  Jan Lübbe <jluebbe@debian.org>, Xavier Oswald <x.oswald@free.fr>
 Build-Depends: dpkg-dev (>= 1.14.8), debhelper (>= 7.0.50~)
 Build-Depends-Indep: doxygen

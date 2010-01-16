@@ -22,7 +22,7 @@ Description: Development files for libembryo0
  similar to a real machine with a CPU, but it is emulated in
  software.
  .
- This packages contains headers and static libraries for Embryo.
+ This package contains headers and static libraries for Embryo.
 
 Package: libembryo0
 Architecture: any
@@ -57,7 +57,7 @@ Description: libembryo0 development documentation
  similar to a real machine with a CPU, but it is emulated in
  software.
  .
- This packages provides development documentation for Embryo.
+ This package provides development documentation for Embryo.
 
 Package: libembryo-dbg
 Architecture: any

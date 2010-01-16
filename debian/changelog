@@ -1,3 +1,14 @@
+embryo (0.9.9.061-2) unstable; urgency=low
+
+  * Switch from CDBS to dh7
+  * Bump Standards-Version to 3.8.3
+  * Move doxygen to Build-Depends-Indep
+  * Update my email address
+  * Fix typo in package description (Closes: #557503)
+  * Convert to 3.0 source format
+
+ -- Albin Tonnerre <lutin@debian.org>  Sat, 16 Jan 2010 15:27:03 +0100
+
 embryo (0.9.9.061-1) unstable; urgency=low
 
   * New upstream release

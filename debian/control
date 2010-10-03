@@ -14,8 +14,8 @@ Homepage: http://www.enlightenment.org
 Package: libembryo-dev
 Section: libdevel
 Architecture: any
-Depends: ${misc:Depends}, libembryo0 (= ${binary:Version}), pkg-config
-Description: Development files for libembryo0
+Depends: ${misc:Depends}, libembryo1 (= ${binary:Version}), pkg-config
+Description: Development files for libembryo1
  Embryo is primarily a shared library that gives you an API to load
  and control interpreted programs compiled into an abstract machine
  bytecode that it understands.  This abstract (or virtual) machine is
@@ -24,7 +24,7 @@ Description: Development files for libembryo0
  .
  This package contains headers and static libraries for Embryo.
 
-Package: libembryo0
+Package: libembryo1
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Suggests: libembryo-bin
@@ -50,7 +50,7 @@ Section: doc
 Architecture: all
 Depends: ${misc:Depends}
 Enhances: libembryo-dev
-Description: libembryo0 development documentation
+Description: libembryo1 development documentation
  Embryo is primarily a shared library that gives you an API to load
  and control interpreted programs compiled into an abstract machine
  bytecode that it understands.  This abstract (or virtual) machine is
@@ -62,7 +62,7 @@ Description: libembryo0 development documentation
 Package: libembryo-dbg
 Architecture: any
 Section: debug
-Depends: ${misc:Depends}, libembryo0 (= ${binary:Version})
+Depends: ${misc:Depends}, libembryo1 (= ${binary:Version})
 Priority: extra
 Description: Debugging symbols for libembryo
  Embryo is primarily a shared library that gives you an API to load

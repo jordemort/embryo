@@ -6,7 +6,7 @@ Uploaders: Albin Tonnerre <lutin@debian.org>,
  Jan Lübbe <jluebbe@debian.org>, Xavier Oswald <x.oswald@free.fr>
 Build-Depends: dpkg-dev (>= 1.14.8), debhelper (>= 7.0.50~)
 Build-Depends-Indep: doxygen
-Standards-Version: 3.8.3
+Standards-Version: 3.9.1
 Vcs-Git: git://git.debian.org/pkg-e/libs/embryo.git
 Vcs-Browser: http://git.debian.org/?p=pkg-e/libs/embryo.git
 Homepage: http://www.enlightenment.org

@@ -1,7 +1,7 @@
 /*  Abstract Machine for the Small compiler
  *
  *  Copyright (c) ITB CompuPhase, 1997-2003
- *  Portions Copyright (c) Carsten Haitzler, 2004 <raster@rasterman.com>
+ *  Portions Copyright (c) Carsten Haitzler, 2004-2010 <raster@rasterman.com>
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -20,9 +20,6 @@
  *  3.  This notice may not be removed or altered from any source distribution.
  */
 
-/*
- * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
- */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -209,12 +206,13 @@ _embryo_program_init(Embryo_Program *ep, void *code)
    ep->flags = EMBRYO_FLAG_RELOC;
 
      {
-	Embryo_Cell cip, code_size;
+	Embryo_Cell cip, code_size, cip_end;
 	Embryo_Cell *code;
 
 	code_size = hdr->dat - hdr->cod;
 	code = (Embryo_Cell *)((unsigned char *)ep->code + (int)hdr->cod);
-	for (cip = 0; cip < (code_size / sizeof(Embryo_Cell)); cip++)
+        cip_end = code_size / sizeof(Embryo_Cell);
+	for (cip = 0; cip < cip_end; cip++)
 	  {
 /* move this here - later we probably want something that verifies opcodes
  * are valid and ok...
@@ -396,7 +394,7 @@ embryo_program_native_call_add(Embryo_Program *ep, const char *name, Embryo_Cell
    Embryo_Header    *hdr;
    int               i, num;
 
-   if ((ep == NULL ) || (name == NULL) || (func == NULL)) return;
+   if ((!ep ) || (!name) || (!func)) return;
    if (strlen(name) > sNAMEMAX) return;
 
    hdr = (Embryo_Header *)ep->code;
@@ -409,13 +407,13 @@ embryo_program_native_call_add(Embryo_Program *ep, const char *name, Embryo_Cell
      {
 	Embryo_Native *calls;
 
-	ep->native_calls_alloc += 16;
+	ep->native_calls_alloc += 32;
 	calls = realloc(ep->native_calls,
 			ep->native_calls_alloc * sizeof(Embryo_Native));
 	if (!calls)
 	  {
 	     ep->native_calls_size--;
-	     ep->native_calls_alloc -= 16;
+	     ep->native_calls_alloc -= 32;
 	     return;
 	  }
 	ep->native_calls = calls;
@@ -550,7 +548,11 @@ embryo_program_vm_pop(Embryo_Program *ep)
  * @ingroup Embryo_Swap_Group
  */
 EAPI void
-embryo_swap_16(unsigned short *v)
+embryo_swap_16(unsigned short *v
+#ifndef WORDS_BIGENDIAN
+               __UNUSED__
+#endif               
+              )
 {
 #ifdef WORDS_BIGENDIAN
    _embryo_byte_swap_16(v);
@@ -564,7 +566,11 @@ embryo_swap_16(unsigned short *v)
  * @ingroup Embryo_Swap_Group
  */
 EAPI void
-embryo_swap_32(unsigned int *v)
+embryo_swap_32(unsigned int *v
+#ifndef WORDS_BIGENDIAN
+               __UNUSED__
+#endif
+               )
 {
 #ifdef WORDS_BIGENDIAN
    _embryo_byte_swap_32(v);
@@ -680,13 +686,11 @@ embryo_program_variable_count_get(Embryo_Program *ep)
 EAPI Embryo_Cell
 embryo_program_variable_get(Embryo_Program *ep, int num)
 {
-   Embryo_Header *hdr;
    Embryo_Cell    paddr;
    char           pname[sNAMEMAX + 1];
 
    if (!ep) return EMBRYO_CELL_NONE;
    if (!ep->base) return EMBRYO_CELL_NONE;
-   hdr = (Embryo_Header *)ep->base;
    if (_embryo_var_get(ep, num, pname, &paddr) == EMBRYO_ERROR_NONE)
      return paddr;
    return EMBRYO_CELL_NONE;
@@ -705,7 +709,7 @@ embryo_program_variable_get(Embryo_Program *ep, int num)
  * @ingroup Embryo_Error_Group
  */
 EAPI void
-embryo_program_error_set(Embryo_Program *ep, int error)
+embryo_program_error_set(Embryo_Program *ep, Embryo_Error error)
 {
    if (!ep) return;
    ep->error = error;
@@ -717,7 +721,7 @@ embryo_program_error_set(Embryo_Program *ep, int error)
  * @return  The current error code.
  * @ingroup Embryo_Error_Group
  */
-EAPI int
+EAPI Embryo_Error
 embryo_program_error_get(Embryo_Program *ep)
 {
    if (!ep) return EMBRYO_ERROR_NONE;
@@ -764,7 +768,7 @@ embryo_program_data_get(Embryo_Program *ep)
  * @ingroup Embryo_Error_Group
  */
 EAPI const char *
-embryo_error_string_get(int error)
+embryo_error_string_get(Embryo_Error error)
 {
    const char *messages[] =
      {
@@ -795,7 +799,8 @@ embryo_error_string_get(int error)
 	  /* EMBRYO_ERROR_INIT_JIT  */ "Cannot initialize the JIT",
 	  /* EMBRYO_ERROR_PARAMS    */ "Parameter error",
      };
-   if ((error < 0) || (error >= (int)(sizeof(messages) / sizeof(messages[0]))))
+   if (((int)error < 0) || 
+       ((int)error >= (int)(sizeof(messages) / sizeof(messages[0]))))
      return (const char *)"(unknown)";
    return messages[error];
 }
@@ -964,12 +969,10 @@ EAPI Embryo_Cell
 embryo_data_heap_push(Embryo_Program *ep, int cells)
 {
    Embryo_Header *hdr;
-   unsigned char *data;
    Embryo_Cell    addr;
 
    if ((!ep) || (!ep->base)) return EMBRYO_CELL_NONE;
    hdr = (Embryo_Header *)ep->base;
-   data = ep->base + (int)hdr->dat;
    if (ep->stk - ep->hea - (cells * sizeof(Embryo_Cell)) < STKMARGIN)
      return EMBRYO_CELL_NONE;
    addr = ep->hea;
@@ -1048,7 +1051,7 @@ embryo_program_recursion_get(Embryo_Program *ep)
  *          it is allowed to in abstract machine instruction count.
  * @ingroup Embryo_Run_Group
  */
-EAPI int
+EAPI Embryo_Status
 embryo_program_run(Embryo_Program *ep, Embryo_Function fn)
 {
    Embryo_Header    *hdr;
@@ -2069,7 +2072,7 @@ embryo_program_run(Embryo_Program *ep, Embryo_Function fn)
 
 		       entry_name = GETENTRYNAME(hdr, func_entry);
 		       if (i == offs)
-			 printf("EMBRYO: CALL [%i] %s() non-existant!\n", i, entry_name);
+			 printf("EMBRYO: CALL [%i] %s() non-existent!\n", i, entry_name);
 		       func_entry =
 			 (Embryo_Func_Stub *)((unsigned char *)func_entry + hdr->defsize);
 		    }
@@ -2200,7 +2203,7 @@ embryo_program_return_value_get(Embryo_Program *ep)
  * run for a specific period of time. If the cycle count is set to something
  * low like 5000 or 1000, then every 1000 (or 5000) cycles control will be
  * returned to the calling process where it can check a timer to see if a
- * physical runtime limit has been elapsed and then abort runing further
+ * physical runtime limit has been elapsed and then abort running further
  * assuming a "runaway script" or keep continuing the script run. This
  * limits resolution to only that many cycles which do not take a determined
  * amount of time to execute, as this varies from cpu to cpu and also depends
@@ -2336,9 +2339,9 @@ embryo_parameter_cell_array_push(Embryo_Program *ep, Embryo_Cell *cells, int num
    Embryo_Param *pr;
    Embryo_Cell *cell_array;
 
-   cell_array = malloc(num * sizeof(Embryo_Cell));
    if ((!cells) || (num <= 0))
      return embryo_parameter_cell_push(ep, 0);
+   cell_array = malloc(num * sizeof(Embryo_Cell));
    ep->params_size++;
    if (ep->params_size > ep->params_alloc)
      {

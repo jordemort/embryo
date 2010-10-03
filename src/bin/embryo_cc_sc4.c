@@ -18,12 +18,9 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc4.c 35497 2008-08-17 07:44:18Z raster $
+ *  Version: $Id: embryo_cc_sc4.c 52451 2010-09-19 03:00:12Z raster $
  */
 
-/*
- * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
- */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
@@ -32,7 +29,7 @@
 #include <assert.h>
 #include <ctype.h>
 #include <stdio.h>
-#include <stdlib.h>		/* for _MAX_PATH */
+#include <limits.h>		/* for PATH_MAX */
 #include <string.h>
 
 #include "embryo_cc_sc.h"
@@ -250,7 +247,7 @@ alignframe(int numbytes)
    /* "numbytes" should be a power of 2 for this code to work */
    int                 i, count = 0;
 
-   for (i = 0; i < sizeof numbytes * 8; i++)
+   for (i = 0; i < (int)(sizeof(numbytes) * 8); i++)
       if (numbytes & (1 << i))
 	 count++;
    assert(count == 1);
@@ -484,9 +481,9 @@ copyarray(symbol * sym, cell size)
 }
 
 void
-fillarray(symbol * sym, cell size, cell value)
+fillarray(symbol * sym, cell size, cell val)
 {
-   const1(value);		/* load value in PRI */
+   const1(val);		/* load val in PRI */
 
    assert(sym != NULL);
    /* the symbol can be a local array, a global array, or an array
@@ -640,7 +637,7 @@ ffswitch(int label)
 }
 
 void
-ffcase(cell value, char *labelname, int newtable)
+ffcase(cell val, char *labelname, int newtable)
 {
    if (newtable)
      {
@@ -648,7 +645,7 @@ ffcase(cell value, char *labelname, int newtable)
 	code_idx += opcodes(1);
      }				/* if */
    stgwrite("\tcase ");
-   outval(value, FALSE);
+   outval(val, FALSE);
    stgwrite(" ");
    stgwrite(labelname);
    stgwrite("\n");
@@ -752,17 +749,17 @@ modstk(int delta)
 
 /* set the stack to a hard offset from the frame */
 void
-setstk(cell value)
+setstk(cell val)
 {
    stgwrite("\tlctrl 5\n");	/* get FRM */
-   assert(value <= 0);		/* STK should always become <= FRM */
-   if (value < 0)
+   assert(val <= 0);		/* STK should always become <= FRM */
+   if (val < 0)
      {
 	stgwrite("\tadd.c ");
-	outval(value, TRUE);	/* add (negative) offset */
+	outval(val, TRUE);	/* add (negative) offset */
 	code_idx += opcodes(1) + opargs(1);
-	// ??? write zeros in the space between STK and the value in PRI (the new stk)
-	//     get value of STK in ALT
+	// ??? write zeros in the space between STK and the val in PRI (the new stk)
+	//     get val of STK in ALT
 	//     zero PRI
 	//     need new FILL opcode that takes a variable size
      }				/* if */
@@ -792,10 +789,10 @@ setheap_pri(void)
 }
 
 void
-setheap(cell value)
+setheap(cell val)
 {
-   stgwrite("\tconst.pri ");	/* load default value in PRI */
-   outval(value, TRUE);
+   stgwrite("\tconst.pri ");	/* load default val in PRI */
+   outval(val, TRUE);
    code_idx += opcodes(1) + opargs(1);
    setheap_pri();
 }
@@ -878,12 +875,12 @@ charalign(void)
  *  Add a constant to the primary register.
  */
 void
-addconst(cell value)
+addconst(cell val)
 {
-   if (value != 0)
+   if (val != 0)
      {
 	stgwrite("\tadd.c ");
-	outval(value, TRUE);
+	outval(val, TRUE);
 	code_idx += opcodes(1) + opargs(1);
      }				/* if */
 }

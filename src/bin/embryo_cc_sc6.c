@@ -18,12 +18,9 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc6.c 35497 2008-08-17 07:44:18Z raster $
+ *  Version: $Id: embryo_cc_sc6.c 52451 2010-09-19 03:00:12Z raster $
  */
 
-/*
- * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
- */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
@@ -34,7 +31,6 @@
 #include <stdlib.h>		/* for macro max() */
 #include <string.h>
 #include <ctype.h>
-#include "embryo_cc_osdefs.h"
 #include "embryo_cc_sc.h"
 
 typedef             cell(*OPCODE_PROC) (FILE * fbin, char *params, cell opcode);
@@ -87,7 +83,7 @@ hex2long(char *s, char **n)
 	result = (result << 4) | digit;
 	s++;
      }				/* for */
-   if (n != NULL)
+   if (n)
       *n = s;
    if (negate)
       result = (~result) + 1;	/* take two's complement of the result */
@@ -148,7 +144,7 @@ stripcomment(char *str)
 {
    char               *ptr = strchr(str, ';');
 
-   if (ptr != NULL)
+   if (ptr)
      {
 	*ptr++ = '\n';		/* terminate the line, but leave the '\n' */
 	*ptr = '\0';
@@ -227,7 +223,7 @@ noop(FILE * fbin __UNUSED__, char *params __UNUSED__, cell opcode __UNUSED__)
 static cell
 parm0(FILE * fbin, char *params __UNUSED__, cell opcode)
 {
-   if (fbin != NULL)
+   if (fbin)
       write_encoded(fbin, (ucell *) & opcode, 1);
    return opcodes(1);
 }
@@ -237,7 +233,7 @@ parm1(FILE * fbin, char *params, cell opcode)
 {
    ucell               p = hex2long(params, NULL);
 
-   if (fbin != NULL)
+   if (fbin)
      {
 	write_encoded(fbin, (ucell *) & opcode, 1);
 	write_encoded(fbin, &p, 1);
@@ -252,7 +248,7 @@ parm2(FILE * fbin, char *params, cell opcode)
 
    p[0] = hex2long(params, &params);
    p[1] = hex2long(params, NULL);
-   if (fbin != NULL)
+   if (fbin)
      {
 	write_encoded(fbin, (ucell *) & opcode, 1);
 	write_encoded(fbin, p, 2);
@@ -273,7 +269,7 @@ do_dump(FILE * fbin, char *params, cell opcode __UNUSED__)
    while (*params != '\0')
      {
 	p = hex2long(params, &params);
-	if (fbin != NULL)
+	if (fbin)
 	   write_encoded(fbin, &p, 1);
 	num++;
 	while (isspace(*params))
@@ -307,7 +303,7 @@ do_call(FILE * fbin, char *params, cell opcode)
    assert(sym->vclass == sGLOBAL);
 
    p = sym->addr;
-   if (fbin != NULL)
+   if (fbin)
      {
 	write_encoded(fbin, (ucell *) & opcode, 1);
 	write_encoded(fbin, &p, 1);
@@ -324,7 +320,7 @@ do_jump(FILE * fbin, char *params, cell opcode)
    i = (int)hex2long(params, NULL);
    assert(i >= 0 && i < labnum);
 
-   if (fbin != NULL)
+   if (fbin)
      {
 	assert(lbltab != NULL);
 	p = lbltab[i];
@@ -354,7 +350,7 @@ do_file(FILE * fbin, char *params, cell opcode)
    assert(len > 0 && len < 256);
    clen = len + sizeof(cell);	/* add size of file ordinal */
 
-   if (fbin != NULL)
+   if (fbin)
      {
 	write_encoded(fbin, (ucell *) & opcode, 1);
 	write_encoded(fbin, &clen, 1);
@@ -389,7 +385,7 @@ do_symbol(FILE * fbin, char *params, cell opcode)
       params[len++] = '\0';	/* pad with zeros up to full cell */
    clen = len + 2 * sizeof(cell);	/* add size of symbol address and flags */
 
-   if (fbin != NULL)
+   if (fbin)
      {
 	write_encoded(fbin, (ucell *) & opcode, 1);
 	write_encoded(fbin, &clen, 1);
@@ -400,7 +396,7 @@ do_symbol(FILE * fbin, char *params, cell opcode)
 
 #if !defined NDEBUG
    /* function should start right after the symbolic information */
-   if (fbin == NULL && mclass == 0 && type == iFUNCTN)
+   if (!fbin && mclass == 0 && type == iFUNCTN)
       assert(offset == codeindex + opcodes(1) + opargs(1) + clen);
 #endif
 
@@ -416,7 +412,7 @@ do_switch(FILE * fbin, char *params, cell opcode)
    i = (int)hex2long(params, NULL);
    assert(i >= 0 && i < labnum);
 
-   if (fbin != NULL)
+   if (fbin)
      {
 	assert(lbltab != NULL);
 	p = lbltab[i];
@@ -440,7 +436,7 @@ do_case(FILE * fbin, char *params, cell opcode __UNUSED__)
    i = (int)hex2long(params, NULL);
    assert(i >= 0 && i < labnum);
 
-   if (fbin != NULL)
+   if (fbin)
      {
 	assert(lbltab != NULL);
 	p = lbltab[i];
@@ -662,14 +658,14 @@ assemble(FILE * fout, FILE * fin)
    constvalue         *constptr;
    cell                mainaddr;
    int                 nametable, tags, libraries, publics, natives, pubvars;
-   int                 cod, dat, hea, stp, cip, size, defsize;
+   int                 cod, defsize;
 
 #if !defined NDEBUG
    /* verify that the opcode list is sorted (skip entry 1; it is reserved
-    * for a non-existant opcode)
+    * for a non-existent opcode)
     */
    assert(opcodelist[1].name != NULL);
-   for (i = 2; i < (sizeof opcodelist / sizeof opcodelist[0]); i++)
+   for (i = 2; i < (int)(sizeof(opcodelist) / sizeof(opcodelist[0])); i++)
      {
 	assert(opcodelist[i].name != NULL);
 	assert(strcasecmp(opcodelist[i].name, opcodelist[i - 1].name) > 0);
@@ -683,7 +679,7 @@ assemble(FILE * fout, FILE * fin)
    numpubvars = 0;
    mainaddr = -1;
    /* count number of public and native functions and public variables */
-   for (sym = glbtab.next; sym != NULL; sym = sym->next)
+   for (sym = glbtab.next; sym; sym = sym->next)
      {
 	char                alias[sNAMEMAX + 1] = "";
 	int                 match = 0;
@@ -727,7 +723,7 @@ assemble(FILE * fout, FILE * fin)
 
    /* count number of libraries */
    numlibraries = 0;
-   for (constptr = libname_tab.next; constptr != NULL;
+   for (constptr = libname_tab.next; constptr;
 	constptr = constptr->next)
      {
 	if (constptr->value > 0)
@@ -740,7 +736,7 @@ assemble(FILE * fout, FILE * fin)
 
    /* count number of public tags */
    numtags = 0;
-   for (constptr = tagname_tab.next; constptr != NULL;
+   for (constptr = tagname_tab.next; constptr;
 	constptr = constptr->next)
      {
 	if ((constptr->value & PUBLICTAG) != 0)
@@ -785,11 +781,11 @@ assemble(FILE * fout, FILE * fin)
    tags = hdr.tags = hdr.pubvars + numpubvars * sizeof(FUNCSTUB);
    nametable = hdr.nametable = hdr.tags + numtags * sizeof(FUNCSTUB);
    cod = hdr.cod = hdr.nametable + nametablesize + padding;
-   dat = hdr.dat = hdr.cod + code_idx;
-   hea = hdr.hea = hdr.dat + glb_declared * sizeof(cell);
-   stp = hdr.stp = hdr.hea + sc_stksize * sizeof(cell);
-   cip = hdr.cip = mainaddr;
-   size = hdr.size = hdr.hea;	/* preset, this is incorrect in case of compressed output */
+   hdr.dat = hdr.cod + code_idx;
+   hdr.hea = hdr.dat + glb_declared * sizeof(cell);
+   hdr.stp = hdr.hea + sc_stksize * sizeof(cell);
+   hdr.cip = mainaddr;
+   hdr.size = hdr.hea;	/* preset, this is incorrect in case of compressed output */
 #ifdef WORDS_BIGENDIAN
    align32(&hdr.size);
    align16(&hdr.magic);
@@ -816,7 +812,7 @@ assemble(FILE * fout, FILE * fin)
 
    /* write the public functions table */
    count = 0;
-   for (sym = glbtab.next; sym != NULL; sym = sym->next)
+   for (sym = glbtab.next; sym; sym = sym->next)
      {
 	if (sym->ident == iFUNCTN
 	    && (sym->usage & uPUBLIC) != 0 && (sym->usage & uDEFINE) != 0)
@@ -851,12 +847,12 @@ assemble(FILE * fout, FILE * fin)
    if (numnatives > 0)
      {
 	nativelist = (symbol **) malloc(numnatives * sizeof(symbol *));
-	if (nativelist == NULL)
+	if (!nativelist)
 	   error(103);		/* insufficient memory */
 #if !defined NDEBUG
 	memset(nativelist, 0, numnatives * sizeof(symbol *));	/* for NULL checking */
 #endif
-	for (sym = glbtab.next; sym != NULL; sym = sym->next)
+	for (sym = glbtab.next; sym; sym = sym->next)
 	  {
 	     if (sym->ident == iFUNCTN && (sym->usage & uNATIVE) != 0
 		 && (sym->usage & uREAD) != 0 && sym->addr >= 0)
@@ -896,7 +892,7 @@ assemble(FILE * fout, FILE * fin)
 
    /* write the libraries table */
    count = 0;
-   for (constptr = libname_tab.next; constptr != NULL;
+   for (constptr = libname_tab.next; constptr;
 	constptr = constptr->next)
      {
 	if (constptr->value > 0)
@@ -919,7 +915,7 @@ assemble(FILE * fout, FILE * fin)
 
    /* write the public variables table */
    count = 0;
-   for (sym = glbtab.next; sym != NULL; sym = sym->next)
+   for (sym = glbtab.next; sym; sym = sym->next)
      {
 	if (sym->ident == iVARIABLE && (sym->usage & uPUBLIC) != 0)
 	  {
@@ -942,7 +938,7 @@ assemble(FILE * fout, FILE * fin)
 
    /* write the public tagnames table */
    count = 0;
-   for (constptr = tagname_tab.next; constptr != NULL;
+   for (constptr = tagname_tab.next; constptr;
 	constptr = constptr->next)
      {
 	if ((constptr->value & PUBLICTAG) != 0)
@@ -984,11 +980,11 @@ assemble(FILE * fout, FILE * fin)
 	/* only very short programs have zero labels; no first pass is needed
 	 * if there are no labels */
 	lbltab = (cell *) malloc(labnum * sizeof(cell));
-	if (lbltab == NULL)
+	if (!lbltab)
 	   error(103);		/* insufficient memory */
 	codeindex = 0;
 	sc_resetasm(fin);
-	while (sc_readasm(fin, line, sizeof line) != NULL)
+	while (sc_readasm(fin, line, sizeof line))
 	  {
 	     stripcomment(line);
 	     instr = skipwhitespace(line);
@@ -1012,7 +1008,7 @@ assemble(FILE * fout, FILE * fin)
 		     /* nothing */ ;
 		  assert(params > instr);
 		  i = findopcode(instr, (int)(params - instr));
-		  if (opcodelist[i].name == NULL)
+		  if (!opcodelist[i].name)
 		    {
 		       *params = '\0';
 		       error(104, instr);	/* invalid assembler instruction */
@@ -1031,7 +1027,7 @@ assemble(FILE * fout, FILE * fin)
    for (pass = sIN_CSEG; pass <= sIN_DSEG; pass++)
      {
 	sc_resetasm(fin);
-	while (sc_readasm(fin, line, sizeof line) != NULL)
+	while (sc_readasm(fin, line, sizeof line))
 	  {
 	     stripcomment(line);
 	     instr = skipwhitespace(line);
@@ -1057,7 +1053,7 @@ assemble(FILE * fout, FILE * fin)
    if (bytes_out - bytes_in > 0)
       error(106);		/* compression buffer overflow */
 
-   if (lbltab != NULL)
+   if (lbltab)
      {
 	free(lbltab);
 #if !defined NDEBUG

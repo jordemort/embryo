@@ -1,7 +1,4 @@
-/*
- *  vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
- *
- *  Small compiler - File input, preprocessing and lexical analysis functions
+/*  Small compiler - File input, preprocessing and lexical analysis functions
  *
  *  Copyright (c) ITB CompuPhase, 1997-2003
  *
@@ -21,12 +18,9 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c 35497 2008-08-17 07:44:18Z raster $
+ *  Version: $Id: embryo_cc_sc2.c 52451 2010-09-19 03:00:12Z raster $
  */
 
-/*
- * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
- */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
@@ -38,7 +32,6 @@
 #include <string.h>
 #include <ctype.h>
 #include <math.h>
-#include "embryo_cc_osdefs.h"
 #include "embryo_cc_sc.h"
 #include "Embryo.h"
 
@@ -98,18 +91,19 @@ plungequalifiedfile(char *name)
      {
 	fp = (FILE *) sc_opensrc(name);
 	ext = strchr(name, '\0');	/* save position */
-	if (fp == NULL)
+	if (!fp)
 	  {
 	     /* try to append an extension */
 	     strcpy(ext, extensions[ext_idx]);
 	     fp = (FILE *) sc_opensrc(name);
-	     if (fp == NULL)
+	     if (!fp)
 		*ext = '\0';	/* on failure, restore filename */
 	  }			/* if */
 	ext_idx++;
      }
-   while (fp == NULL && ext_idx < (sizeof extensions / sizeof extensions[0]));
-   if (fp == NULL)
+   while ((!fp) && 
+          (ext_idx < (int)(sizeof extensions / sizeof extensions[0])));
+   if (!fp)
      {
 	*ext = '\0';		/* restore filename */
 	return FALSE;
@@ -117,17 +111,13 @@ plungequalifiedfile(char *name)
    pushstk((stkitem) inpf);
    pushstk((stkitem) inpfname);	/* pointer to current file name */
    pushstk((stkitem) curlibrary);
-   /* FIXME: 64bit unsafe */
    pushstk((stkitem) iflevel);
    assert(skiplevel == 0);
-   /* FIXME: 64bit unsafe */
    pushstk((stkitem) icomment);
-   /* FIXME: 64bit unsafe */
    pushstk((stkitem) fcurrent);
-   /* FIXME: 64bit unsafe */
    pushstk((stkitem) fline);
    inpfname = strdup(name);	/* set name of include file */
-   if (inpfname == NULL)
+   if (!inpfname)
       error(103);		/* insufficient memory */
    inpf = fp;			/* set input file pointer to include file */
    fnumber++;
@@ -152,9 +142,9 @@ plungefile(char *name, int try_currentpath, int try_includepaths)
 
    if (try_includepaths && name[0] != DIRSEP_CHAR)
      {
-	for (i = 0; !result && (ptr = get_path(i)) != NULL; i++)
+	for (i = 0; !result && (ptr = get_path(i)); i++)
 	  {
-	     char                path[_MAX_PATH];
+	     char                path[PATH_MAX];
 
 	     strncpy(path, ptr, sizeof path);
 	     path[sizeof path - 1] = '\0';	/* force '\0' termination */
@@ -190,7 +180,7 @@ check_empty(char *lptr)
 static void
 doinclude(void)
 {
-   char                name[_MAX_PATH], c;
+   char                name[PATH_MAX], c;
    int                 i, result;
 
    while (*lptr <= ' ' && *lptr != 0)	/* skip leading whitespace */
@@ -208,11 +198,11 @@ doinclude(void)
      }				/* if */
 
    i = 0;
-   while (*lptr != c && *lptr != '\0' && i < sizeof name - 1)	/* find the end of the string */
+   while ((*lptr != c) && (*lptr != '\0') && (i < (int)(sizeof(name) - 1))) /* find the end of the string */
       name[i++] = *lptr++;
    while (i > 0 && name[i - 1] <= ' ')
       i--;			/* strip trailing whitespace */
-   assert(i >= 0 && i < sizeof name);
+   assert((i >= 0) && (i < (int)(sizeof(name))));
    name[i] = '\0';		/* zero-terminate the string */
 
    if (*lptr != c)
@@ -253,11 +243,11 @@ readline(char *line)
    cont = FALSE;
    do
      {
-	if (inpf == NULL || sc_eofsrc(inpf))
+	if (!inpf || sc_eofsrc(inpf))
 	  {
 	     if (cont)
 		error(49);	/* invalid line continuation */
-	     if (inpf != NULL && inpf != inpf_org)
+	     if (inpf && inpf != inpf_org)
 		sc_closesrc(inpf);
 	     i = (int)(long)popstk();
 	     if (i == -1)
@@ -288,7 +278,7 @@ readline(char *line)
 	     elsedone = 0;
 	  }			/* if */
 
-	if (sc_readsrc(inpf, line, num) == NULL)
+	if (!sc_readsrc(inpf, line, num))
 	  {
 	     *line = '\0';	/* delete line */
 	     cont = FALSE;
@@ -307,10 +297,10 @@ readline(char *line)
 	       }		/* if */
 	     cont = FALSE;
 	     /* check whether a full line was read */
-	     if (strchr(line, '\n') == NULL && !sc_eofsrc(inpf))
+	     if (!strchr(line, '\n') && !sc_eofsrc(inpf))
 		error(75);	/* line too long */
 	     /* check if the next line must be concatenated to this line */
-	     if ((ptr = strchr(line, '\n')) != NULL && ptr > line)
+	     if ((ptr = strchr(line, '\n')) && ptr > line)
 	       {
 		  assert(*(ptr + 1) == '\0');	/* '\n' should be last in the string */
 		  while (ptr > line
@@ -379,7 +369,7 @@ stripcom(char *line)
 	       }
 	     else if (*line == '/' && *(line + 1) == '/')
 	       {		/* comment to end of line */
-		  if (strchr(line, '\a') != NULL)
+		  if (strchr(line, '\a'))
 		     error(49);	/* invalid line continuation */
 		  *line++ = '\n';	/* put "newline" at first slash */
 		  *line = '\0';	/* put "zero-terminator" at second slash */
@@ -640,8 +630,9 @@ ftoi(cell * val, char *curptr)
      }
    else if (rational_digits == 0)
      {
+	float f = (float) fnum;
 	/* floating point */
-      *val = EMBRYO_FLOAT_TO_CELL((float) fnum);
+      *val = EMBRYO_FLOAT_TO_CELL(f);
 #if !defined NDEBUG
 	/* I assume that the C/C++ compiler stores "float" values in IEEE 754
 	 * format (as mandated in the ANSI standard). Test this assumption anyway.
@@ -932,14 +923,14 @@ command(void)
      case tpFILE:
 	if (skiplevel == 0)
 	  {
-	     char                pathname[_MAX_PATH];
+	     char                pathname[PATH_MAX];
 
 	     lptr = getstring(pathname, sizeof pathname, lptr);
 	     if (pathname[0] != '\0')
 	       {
 		  free(inpfname);
 		  inpfname = strdup(pathname);
-		  if (inpfname == NULL)
+		  if (!inpfname)
 		     error(103);	/* insufficient memory */
 	       }		/* if */
 	  }			/* if */
@@ -999,7 +990,9 @@ command(void)
 			 {
 			    int                 i;
 
-			    for (i = 0; i < sizeof name && alphanum(*lptr);
+			    for (i = 0; 
+                                 (i < (int)(sizeof(name))) && 
+                                 (alphanum(*lptr));
 				 i++, lptr++)
 			       name[i] = *lptr;
 			    name[i] = '\0';
@@ -1013,7 +1006,7 @@ command(void)
 			    if (strlen(name) > sEXPMAX)
 			       error(220, name, sEXPMAX);	/* exported symbol is truncated */
 			    /* add the name if it does not yet exist in the table */
-			    if (find_constval(&libname_tab, name, 0) == NULL)
+			    if (!find_constval(&libname_tab, name, 0))
 			       curlibrary =
 				  append_constval(&libname_tab, name, 0, 0);
 			 }	/* if */
@@ -1032,9 +1025,11 @@ command(void)
 		       int                 i;
 
 		       /* first gather all information, start with the tag name */
-		       while (*lptr <= ' ' && *lptr != '\0')
+		       while ((*lptr <= ' ') && (*lptr != '\0'))
 			  lptr++;
-		       for (i = 0; i < sizeof name && alphanum(*lptr);
+		       for (i = 0; 
+                            (i < (int)(sizeof(name))) && 
+                            (alphanum(*lptr));
 			    i++, lptr++)
 			  name[i] = *lptr;
 		       name[i] = '\0';
@@ -1094,17 +1089,19 @@ command(void)
 		       do
 			 {
 			    /* get the name */
-			    while (*lptr <= ' ' && *lptr != '\0')
+			    while ((*lptr <= ' ') && (*lptr != '\0'))
 			       lptr++;
-			    for (i = 0; i < sizeof name && isalpha(*lptr);
+			    for (i = 0; 
+                                 (i < (int)(sizeof(name))) && 
+                                 (isalpha(*lptr));
 				 i++, lptr++)
 			       name[i] = *lptr;
 			    name[i] = '\0';
 			    /* get the symbol */
 			    sym = findloc(name);
-			    if (sym == NULL)
+			    if (!sym)
 			       sym = findglb(name);
-			    if (sym != NULL)
+			    if (sym)
 			      {
 				 sym->usage |= uREAD;
 				 if (sym->ident == iVARIABLE
@@ -1182,9 +1179,9 @@ command(void)
 		     break;
 		  case tSYMBOL:
 		     sym = findloc(str);
-		     if (sym == NULL)
+		     if (!sym)
 			sym = findglb(str);
-		     if (sym == NULL || (sym->ident != iFUNCTN
+		     if (!sym || (sym->ident != iFUNCTN
 			 && sym->ident != iREFFUNC
 			 && (sym->usage & uDEFINE) == 0))
 		       {
@@ -1247,7 +1244,7 @@ command(void)
 		  }		/* if */
 		/* store matched pattern */
 		pattern = malloc(count + 1);
-		if (pattern == NULL)
+		if (!pattern)
 		   error(103);	/* insufficient memory */
 		lptr = start;
 		count = 0;
@@ -1273,7 +1270,7 @@ command(void)
 		     /* keep position of the start of trailing whitespace */
 		     if (*lptr <= ' ')
 		       {
-			  if (end == NULL)
+			  if (!end)
 			     end = lptr;
 		       }
 		     else
@@ -1283,11 +1280,11 @@ command(void)
 		     count++;
 		     lptr++;
 		  }		/* while */
-		if (end == NULL)
+		if (!end)
 		   end = lptr;
 		/* store matched substitution */
 		substitution = malloc(count + 1);	/* +1 for '\0' */
-		if (substitution == NULL)
+		if (!substitution)
 		   error(103);	/* insufficient memory */
 		lptr = start;
 		count = 0;
@@ -1304,7 +1301,7 @@ command(void)
 		     prefixlen++, start++)
 		   /* nothing */ ;
 		assert(prefixlen > 0);
-		if ((def = find_subst(pattern, prefixlen)) != NULL)
+		if ((def = find_subst(pattern, prefixlen)))
 		  {
 		     if (strcmp(def->first, pattern) != 0
 			 || strcmp(def->second, substitution) != 0)
@@ -1502,18 +1499,18 @@ substpattern(char *line, size_t buffersize, char *pattern, char *substitution)
 		    {
 		       if (is_startstring(e))	/* skip strings */
 			  e = skipstring(e);
-		       else if (strchr("({[", *e) != NULL)	/* skip parenthized groups */
+		       else if (strchr("({[", *e))	/* skip parenthized groups */
 			  e = skippgroup(e);
 		       if (*e != '\0')
 			  e++;	/* skip non-alphapetic character (or closing quote of
 				 * a string, or the closing paranthese of a group) */
 		    }		/* while */
 		  /* store the parameter (overrule any earlier) */
-		  if (args[arg] != NULL)
+		  if (args[arg])
 		     free(args[arg]);
 		  len = (int)(e - s);
 		  args[arg] = malloc(len + 1);
-		  if (args[arg] == NULL)
+		  if (!args[arg])
 		     error(103);	/* insufficient memory */
 		  strncpy(args[arg], s, len);
 		  args[arg][len] = '\0';
@@ -1587,7 +1584,7 @@ substpattern(char *line, size_t buffersize, char *pattern, char *substitution)
 	       {
 		  arg = *(e + 1) - '0';
 		  assert(arg >= 0 && arg <= 9);
-		  if (args[arg] != NULL)
+		  if (args[arg])
 		     len += strlen(args[arg]);
 		  e++;		/* skip %, digit is skipped later */
 	       }
@@ -1611,7 +1608,7 @@ substpattern(char *line, size_t buffersize, char *pattern, char *substitution)
 		    {
 		       arg = *(e + 1) - '0';
 		       assert(arg >= 0 && arg <= 9);
-		       if (args[arg] != NULL)
+		       if (args[arg])
 			 {
 			    strins(s, args[arg], strlen(args[arg]));
 			    s += strlen(args[arg]);
@@ -1628,7 +1625,7 @@ substpattern(char *line, size_t buffersize, char *pattern, char *substitution)
      }				/* if */
 
    for (arg = 0; arg < 10; arg++)
-      if (args[arg] != NULL)
+      if (args[arg])
 	 free(args[arg]);
 
    return match;
@@ -1670,7 +1667,7 @@ substallpatterns(char *line, int buffersize)
 	  }			/* while */
 	assert(prefixlen > 0);
 	subst = find_subst(start, prefixlen);
-	if (subst != NULL)
+	if (subst)
 	  {
 	     /* properly match the pattern and substitute */
 	     if (!substpattern
@@ -2225,7 +2222,7 @@ stowlit(cell value)
 
 	litmax += sDEF_LITMAX;
 	p = (cell *) realloc(litq, litmax * sizeof(cell));
-	if (p == NULL)
+	if (!p)
 	   error(102, "literal table");	/* literal table overflow (fatal error) */
 	litq = p;
      }				/* if */
@@ -2358,10 +2355,10 @@ add_symbol(symbol * root, symbol * entry, int sort)
    symbol             *newsym;
 
    if (sort)
-      while (root->next != NULL && strcmp(entry->name, root->next->name) > 0)
+      while (root->next && strcmp(entry->name, root->next->name) > 0)
 	 root = root->next;
 
-   if ((newsym = (symbol *) malloc(sizeof(symbol))) == NULL)
+   if (!(newsym = (symbol *)malloc(sizeof(symbol))))
      {
 	error(103);
 	return NULL;
@@ -2431,7 +2428,7 @@ delete_symbols(symbol * root, int level, int delete_labels,
 
    /* erase only the symbols with a deeper nesting level than the
     * specified nesting level */
-   while (root->next != NULL)
+   while (root->next)
      {
 	sym = root->next;
 	if (sym->compound < level)
@@ -2494,10 +2491,10 @@ find_symbol(symbol * root, char *name, int fnumber)
    symbol             *ptr = root->next;
    unsigned long       hash = namehash(name);
 
-   while (ptr != NULL)
+   while (ptr)
      {
 	if (hash == ptr->hash && strcmp(name, ptr->name) == 0
-	    && ptr->parent == NULL && (ptr->fnumber < 0
+	    && !ptr->parent && (ptr->fnumber < 0
 				       || ptr->fnumber == fnumber))
 	   return ptr;
 	ptr = ptr->next;
@@ -2510,7 +2507,7 @@ find_symbol_child(symbol * root, symbol * sym)
 {
    symbol             *ptr = root->next;
 
-   while (ptr != NULL)
+   while (ptr)
      {
 	if (ptr->parent == sym)
 	   return ptr;
@@ -2543,7 +2540,7 @@ refer_symbol(symbol * entry, symbol * bywhom)
      }				/* if */
 
    /* see if there is an empty spot in the referrer list */
-   for (count = 0; count < entry->numrefers && entry->refer[count] != NULL;
+   for (count = 0; count < entry->numrefers && entry->refer[count];
 	count++)
       /* nothing */ ;
    assert(count <= entry->numrefers);
@@ -2555,7 +2552,7 @@ refer_symbol(symbol * entry, symbol * bywhom)
 	assert(newsize > 0);
 	/* grow the referrer list */
 	refer = (symbol **) realloc(entry->refer, newsize * sizeof(symbol *));
-	if (refer == NULL)
+	if (!refer)
 	   return FALSE;	/* insufficient memory */
 	/* initialize the new entries */
 	entry->refer = refer;
@@ -2585,7 +2582,7 @@ markusage(symbol * sym, int usage)
 	      * outside functions; in the case of syntax errors, however, the
 	      * compiler may arrive through this function
 	      */
-	     if (curfunc != NULL)
+	     if (curfunc)
 		refer_symbol(sym, curfunc);
 	  }			/* if */
      }				/* if */
@@ -2618,9 +2615,9 @@ findconst(char *name)
    symbol             *sym;
 
    sym = find_symbol(&loctab, name, -1);	/* try local symbols first */
-   if (sym == NULL || sym->ident != iCONSTEXPR)	/* not found, or not a constant */
+   if (!sym || sym->ident != iCONSTEXPR)	/* not found, or not a constant */
       sym = find_symbol(&glbtab, name, fcurrent);
-   if (sym == NULL || sym->ident != iCONSTEXPR)
+   if (!sym || sym->ident != iCONSTEXPR)
       return NULL;
    assert(sym->parent == NULL);	/* constants have no hierarchy */
    return sym;
@@ -2632,7 +2629,7 @@ finddepend(symbol * parent)
    symbol             *sym;
 
    sym = find_symbol_child(&loctab, parent);	/* try local symbols first */
-   if (sym == NULL)		/* not found */
+   if (!sym)		/* not found */
       sym = find_symbol_child(&glbtab, parent);
    return sym;
 }
@@ -2654,7 +2651,7 @@ addsym(char *name, cell addr, int ident, int vclass, int tag, int usage)
    assert(ident != iLABEL || findloc(name) == NULL);
 
    /* create an empty referrer list */
-   if ((refer = (symbol **) malloc(sizeof(symbol *))) == NULL)
+   if (!(refer = (symbol **)malloc(sizeof(symbol *))))
      {
 	error(103);		/* insufficient memory */
 	return NULL;

@@ -18,10 +18,8 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_amx.h 35497 2008-08-17 07:44:18Z raster $
+ *  Version: $Id: embryo_cc_amx.h 51650 2010-08-26 01:34:13Z lucas $
  */
-
-#include "embryo_cc_osdefs.h"
 
 #ifndef EMBRYO_CC_AMX_H
 #define EMBRYO_CC_AMX_H
@@ -67,11 +65,20 @@
 #define sEXPMAX         19	/* maximum name length for file version <= 6 */
 #define sNAMEMAX        31	/* maximum name length of symbol name */
 
+#if defined (_MSC_VER) || (defined (__SUNPRO_C) && __SUNPRO_C < 0x5100)
+# pragma pack(1)
+# define EMBRYO_STRUCT_PACKED
+#elif defined (__GNUC__) || (defined (__SUNPRO_C) && __SUNPRO_C >= 0x5100)
+# define EMBRYO_STRUCT_PACKED __attribute__((packed))
+#else
+# define EMBRYO_STRUCT_PACKED
+#endif
+
    typedef struct tagAMX_FUNCSTUB
    {
       unsigned int        address;
       char                name[sEXPMAX + 1];
-   } __attribute__((packed)) AMX_FUNCSTUB;
+   } EMBRYO_STRUCT_PACKED AMX_FUNCSTUB;
 
 /* The AMX structure is the internal structure for many functions. Not all
  * fields are valid at all times; many fields are cached in local variables.
@@ -108,7 +115,7 @@
       cell reset_stk     ;
       cell reset_hea     ;
       cell          *syscall_d;	/* relocated value/address for the SYSCALL.D opcode */
-   } __attribute__((packed)) AMX;
+   } EMBRYO_STRUCT_PACKED AMX;
 
 /* The AMX_HEADER structure is both the memory format as the file format. The
  * structure is used internaly.
@@ -132,7 +139,12 @@
       int pubvars    ;	/* the "public variables" table */
       int tags       ;	/* the "public tagnames" table */
       int nametable  ;	/* name table, file version 7 only */
-   } __attribute__((packed)) AMX_HEADER;
+   } EMBRYO_STRUCT_PACKED AMX_HEADER;
+
+#if defined _MSC_VER || (defined (__SUNPRO_C) && __SUNPRO_C < 0x5100)
+# pragma pack()
+#endif
+
 #define AMX_MAGIC       0xf1e0
 
    enum
@@ -206,7 +218,7 @@
             amx_GetAddr((amx), (param), &amx_cstr_);                 \
             amx_StrLen(amx_cstr_, &amx_length_);                     \
             if (amx_length_ > 0 &&                                   \
-                ((result) = (char*)alloca(amx_length_ + 1)) != NULL) \
+                ((result) = (char *)alloca(amx_length_ + 1))) \
               amx_GetString((result), amx_cstr_);                    \
             else (result) = NULL;                                    \
 }

@@ -20,14 +20,14 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_scvars.c 35497 2008-08-17 07:44:18Z raster $
+ *  Version: $Id: embryo_cc_scvars.c 50816 2010-08-04 16:57:32Z lucas $
  */
 
-/*
- * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
- */
 
-#include <stdlib.h>		/* for _MAX_PATH */
+#ifdef HAVE_CONFIG_H
+# include <config.h>		/* for PATH_MAX */
+#endif
+
 #include "embryo_cc_sc.h"
 
 /*  global variables
@@ -45,7 +45,7 @@ constvalue libname_tab = { NULL, "", 0, 0 };	/* library table (#pragma library "
 constvalue *curlibrary = NULL;	/* current library */
 symbol  *curfunc;	/* pointer to current function */
 char    *inpfname;	/* pointer to name of the file currently read from */
-char     outfname[_MAX_PATH];	/* output file name */
+char     outfname[PATH_MAX];	/* output file name */
 char     sc_ctrlchar = CTRL_CHAR;	/* the control character (or escape character) */
 int      litidx = 0;	/* index to literal table */
 int      litmax = sDEF_LITMAX;	/* current size of the literal table */

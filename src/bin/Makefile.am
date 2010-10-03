@@ -11,11 +11,11 @@ AM_CPPFLAGS = \
 -DPACKAGE_DATA_DIR=\"$(datadir)/$(PACKAGE)\" \
 @EVIL_CFLAGS@
 
-bin_PROGRAMS = embryo_cc
+bin_PROGRAMS = @EMBRYO_CC_PRG@
+EXTRA_PROGRAMS = embryo_cc
 
 embryo_cc_SOURCES = \
 embryo_cc_amx.h \
-embryo_cc_osdefs.h \
 embryo_cc_sc.h \
 embryo_cc_sc1.c \
 embryo_cc_sc2.c \

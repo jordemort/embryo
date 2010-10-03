@@ -1,7 +1,4 @@
-/*
- *  vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
- *
- *  Small compiler - Error message system
+/*  Small compiler - Error message system
  *  In fact a very simple system, using only 'panic mode'.
  *
  *  Copyright (c) ITB CompuPhase, 1997-2003
@@ -22,22 +19,23 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc5.c 35497 2008-08-17 07:44:18Z raster $
+ *  Version: $Id: embryo_cc_sc5.c 51964 2010-09-08 03:33:11Z lucas $
  */
 
-/*
- * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
- */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
 
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+
+#ifndef _MSC_VER
+# include <unistd.h>
+#endif
+
 #include "embryo_cc_sc.h"
 #include "embryo_cc_sc5.scp"
 
@@ -51,17 +49,16 @@ static int errstart;	/* line number at which the instruction started */
  *  errors are ignored until lex() finds a semicolumn or a keyword
  *  (lex() resets "errflag" in that case).
  *
- *  Global references: inpfname   (reffered to only)
- *                     fline      (reffered to only)
- *                     fcurrent   (reffered to only)
+ *  Global references: inpfname   (referred to only)
+ *                     fline      (referred to only)
+ *                     fcurrent   (referred to only)
  *                     errflag    (altered)
  */
 int
 error(int number, ...)
 {
-   static char        *prefix[3] = { "error", "fatal error", "warning" };
    static int          lastline, lastfile, errorcount;
-   char               *msg, *pre;
+   char               *msg;
    va_list             argptr;
    char                string[1024];
    int start;
@@ -78,20 +75,17 @@ error(int number, ...)
    if (number < 100)
      {
 	msg = errmsg[number - 1];
-	pre = prefix[0];
 	errflag = TRUE;	/* set errflag (skip rest of erroneous expression) */
 	errnum++;
      }
    else if (number < 200)
      {
 	msg = fatalmsg[number - 100];
-	pre = prefix[1];
 	errnum++; /* a fatal error also counts as an error */
      }
    else
      {
 	msg = warnmsg[number - 200];
-	pre = prefix[2];
 	warnnum++;
      }
 
@@ -116,7 +110,7 @@ error(int number, ...)
 	sc_error(0, "\nCompilation aborted.", NULL, 0, 0, argptr);
 	va_end(argptr);
 
-	if (outf != NULL)
+	if (outf)
 	  {
 	     sc_closeasm(outf);
 	     outf = NULL;

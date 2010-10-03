@@ -1,7 +1,3 @@
-/*
- * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
- */
-
 #ifdef HAVE_CONFIG_H
 # include "config.h"
 #endif
@@ -11,6 +7,9 @@
 
 #include "Embryo.h"
 #include "embryo_private.h"
+
+static Embryo_Version _version = { VMAJ, VMIN, VMIC, VREV };
+EAPI Embryo_Version *embryo_version = &_version;
 
 static int _embryo_init_count = 0;
 
@@ -31,8 +30,8 @@ static int _embryo_init_count = 0;
 EAPI int
 embryo_init(void)
 {
-   _embryo_init_count++;
-   if (_embryo_init_count > 1) return _embryo_init_count;
+   if (++_embryo_init_count != 1)
+     return _embryo_init_count;
 
    srand(time(NULL));
 
@@ -48,8 +47,8 @@ embryo_init(void)
 EAPI int
 embryo_shutdown(void)
 {
-   _embryo_init_count--;
-   if (_embryo_init_count > 0) return _embryo_init_count;
+   if (--_embryo_init_count != 0)
+     return _embryo_init_count;
 
    return _embryo_init_count;
 }

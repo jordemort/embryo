@@ -18,7 +18,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.
- *  Version: $Id: embryo_cc_sc1.c 51964 2010-09-08 03:33:11Z lucas $
+ *  Version: $Id: embryo_cc_sc1.c 56354 2011-01-29 03:19:51Z raster $
  */
 
 

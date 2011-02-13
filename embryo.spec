@@ -4,7 +4,7 @@
 
 Summary: A small virtual machine engine (in a library) and bytecode compiler
 Name: embryo
-Version: 1.0.0.beta
+Version: 1.0.0
 Release: %{_rel}
 License: BSD
 Group: System Environment/Libraries
@@ -72,6 +72,6 @@ test "x$RPM_BUILD_ROOT" != "x/" && rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.la
 %{_libdir}/*.a
 %{_libdir}/pkgconfig/*
-%{_includedir}/*.h
+%{_includedir}/embryo-1/*.h
 
 %changelog

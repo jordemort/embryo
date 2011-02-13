@@ -20,7 +20,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_scvars.c 50816 2010-08-04 16:57:32Z lucas $
+ *  Version: $Id: embryo_cc_scvars.c 56354 2011-01-29 03:19:51Z raster $
  */
 
 

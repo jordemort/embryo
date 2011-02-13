@@ -1,5 +1,10 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
+
+#ifndef EFL_CONFIG_H__
+#define EFL_CONFIG_H__
+
+
 /* Define if building universal (internal helper macro) */
 #undef AC_APPLE_UNIVERSAL_BUILD
 
@@ -137,3 +142,7 @@
 #ifndef __cplusplus
 #undef inline
 #endif
+
+
+#endif /* EFL_CONFIG_H__ */
+

@@ -19,7 +19,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc5.c 56354 2011-01-29 03:19:51Z raster $
+ *  Version: $Id: embryo_cc_sc5.c 61433 2011-07-16 23:19:02Z caro $
  */
 
 
@@ -32,7 +32,7 @@
 #include <stdarg.h>
 #include <string.h>
 
-#ifndef _MSC_VER
+#ifdef HAVE_UNISTD_H
 # include <unistd.h>
 #endif
 

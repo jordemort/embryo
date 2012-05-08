@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc2.c 56354 2011-01-29 03:19:51Z raster $
+ *  Version: $Id: embryo_cc_sc2.c 62382 2011-08-12 12:39:29Z billiob $
  */
 
 
@@ -755,29 +755,29 @@ preproc_expr(cell * val, int *tag)
  * character that caused the input to be ended.
  */
 static char        *
-getstring(char *dest, int max, char *line)
+getstring(char *dest, int max)
 {
-   assert(dest != NULL && line != NULL);
+   assert(dest != NULL);
    *dest = '\0';
-   while (*line <= ' ' && *line != '\0')
-      line++;			/* skip whitespace */
-   if (*line != '"')
+   while (*lptr <= ' ' && *lptr != '\0')
+      lptr++;			/* skip whitespace */
+   if (*lptr != '"')
      {
 	error(37);		/* invalid string */
      }
-   else if (*line == '\0')
+   else
      {
 	int                 len = 0;
 
-	line++;			/* skip " */
-	while (*line != '"' && *line != '\0')
+	lptr++;			/* skip " */
+	while (*lptr != '"' && *lptr != '\0')
 	  {
 	     if (len < max - 1)
-		dest[len++] = *line;
-	     line++;
+		dest[len++] = *lptr;
+	     lptr++;
 	  }			/* if */
 	dest[len] = '\0';
-	if (*line == '"')
+	if (*lptr == '"')
 	   lptr++;		/* skip closing " */
 	else
 	   error(37);		/* invalid string */
@@ -925,7 +925,7 @@ command(void)
 	  {
 	     char                pathname[PATH_MAX];
 
-	     lptr = getstring(pathname, sizeof pathname, lptr);
+	     lptr = getstring(pathname, sizeof pathname);
 	     if (pathname[0] != '\0')
 	       {
 		  free(inpfname);
@@ -942,6 +942,22 @@ command(void)
 	     if (lex(&val, &str) != tNUMBER)
 		error(8);	/* invalid/non-constant expression */
 	     fline = (int)val;
+
+	     while (*lptr == ' ' && *lptr != '\0')
+	        lptr++;			/* skip whitespace */
+	     if (*lptr == '"')
+               {
+		  char pathname[PATH_MAX];
+
+		  lptr = getstring(pathname, sizeof pathname);
+		  if (pathname[0] != '\0')
+		    {
+		       free(inpfname);
+		       inpfname = strdup(pathname);
+		       if (!inpfname)
+		          error(103);	/* insufficient memory */
+		    }		/* if */
+	       }
 	  }			/* if */
 	check_empty(lptr);
 	break;
@@ -984,7 +1000,7 @@ command(void)
 			  lptr++;
 		       if (*lptr == '"')
 			 {
-			    lptr = getstring(name, sizeof name, lptr);
+			    lptr = getstring(name, sizeof name);
 			 }
 		       else
 			 {

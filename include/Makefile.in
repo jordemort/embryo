@@ -40,6 +40,7 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ac_attribute.m4 \
 	$(top_srcdir)/m4/efl_binary.m4 $(top_srcdir)/m4/efl_doxygen.m4 \
 	$(top_srcdir)/m4/efl_fnmatch.m4 \
+	$(top_srcdir)/m4/efl_gettimeofday.m4 \
 	$(top_srcdir)/m4/efl_path_max.m4 $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
@@ -109,12 +110,16 @@ ECHO_T = @ECHO_T@
 EFL_EMBRYO_BUILD = @EFL_EMBRYO_BUILD@
 EFL_FNMATCH_LIBS = @EFL_FNMATCH_LIBS@
 EGREP = @EGREP@
+EINA_CFLAGS = @EINA_CFLAGS@
+EINA_LIBS = @EINA_LIBS@
 EMBRYO_CC_PRG = @EMBRYO_CC_PRG@
 EMBRYO_CFLAGS = @EMBRYO_CFLAGS@
 EMBRYO_CPPFLAGS = @EMBRYO_CPPFLAGS@
 EVIL_CFLAGS = @EVIL_CFLAGS@
 EVIL_LIBS = @EVIL_LIBS@
 EXEEXT = @EXEEXT@
+EXOTIC_CFLAGS = @EXOTIC_CFLAGS@
+EXOTIC_LIBS = @EXOTIC_LIBS@
 FGREP = @FGREP@
 GREP = @GREP@
 INSTALL = @INSTALL@
@@ -147,6 +152,8 @@ PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
+PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
+PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@

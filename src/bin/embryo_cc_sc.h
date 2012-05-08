@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h 56354 2011-01-29 03:19:51Z raster $
+ *  Version: $Id: embryo_cc_sc.h 59489 2011-05-18 08:37:38Z raster $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -54,7 +54,7 @@
 
 #define sDIMEN_MAX     2	/* maximum number of array dimensions */
 #define sDEF_LITMAX  500	/* initial size of the literal pool, in "cells" */
-#define sLINEMAX     65535	/* input line length (in characters) */
+#define sLINEMAX (640 * 1024)	/* input line length (in characters) */
 #define sDEF_AMXSTACK 4096	/* default stack size for AMX files */
 #define sSTKMAX       80	/* stack for nested #includes and other uses */
 #define PREPROC_TERM  '\x7f'	/* termination character for preprocessor expressions (the "DEL" code) */

@@ -1,4 +1,34 @@
 2011-01-29  Carsten Haitzler (The Rasterman)
 
         1.0.0 release
-        
+
+2011-05-12  Carsten Haitzler (The Rasterman)
+
+	* Make embryo_cc use eina and eina_prefix to determine include location
+
+2011-07-16  Vincent Torri
+
+	* delete temporary files on Windows
+
+2011-10-05  Vincent Torri
+
+	* use fseek() instead of rewind() as the latter does not exist on
+	Windows CE and fix compilation with Evil.
+
+2011-12-02 Carsten Haitzler (The Rasterman)
+
+        1.1.0 release
+
+2012-02-24  Cedric Bail
+
+        * Add exotic support
+
+2012-03-07  Vincent Torri
+
+	* Fix windows compilation issues
+
+2012-04-16 Carsten Haitzler (The Rasterman)
+
+        * Add asin(), acos(), atan(), atan2(), log1p(), cbrt(), exp(),
+        exp2(), hypot(), EMBRYO_12 define
+

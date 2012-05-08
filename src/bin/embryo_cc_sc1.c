@@ -18,7 +18,7 @@
  *  must not be misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source
  *  distribution.
- *  Version: $Id: embryo_cc_sc1.c 56354 2011-01-29 03:19:51Z raster $
+ *  Version: $Id: embryo_cc_sc1.c 61433 2011-07-16 23:19:02Z caro $
  */
 
 
@@ -34,7 +34,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifndef _MSC_VER
+#ifdef HAVE_UNISTD_H
 # include <unistd.h>
 #endif
 
@@ -119,31 +119,7 @@ static char         binfname[PATH_MAX];	/* binary file name */
 int
 main(int argc, char *argv[], char *env[] __UNUSED__)
 {
-   char                argv0[PATH_MAX];
-   int                 i;
-
-   snprintf(argv0, sizeof(argv0), "%s", argv[0]);
-   /* Linux stores the name of the program in argv[0], but not the path.
-    * To adjust this, I store a string with the path in argv[0]. To do
-    * so, I try to get the current path with getcwd(), and if that fails
-    * I search for the PWD= setting in the environment.
-    */
-   if (getcwd(argv0, PATH_MAX))
-     {
-	i = strlen(argv0);
-	snprintf(argv0 + i, sizeof(argv0) - i, "/%s", argv[0]);
-     }
-   else
-     {
-	char               *pwd = getenv("PWD");
-
-	if (pwd)
-	   snprintf(argv0, sizeof(argv0), "%s/%s", pwd, argv[0]);
-     }				/* if */
-   argv[0] = argv0;		/* set location to new first parameter */
-
-   e_prefix_determine(argv0);
-
+   e_prefix_determine(argv[0]);
    return sc_compile(argc, argv);
 }
 
@@ -328,8 +304,6 @@ sc_compile(int argc, char *argv[])
    if (fd_out < 0)
      error(101, outfname);
 
-   unlink (outfname); /* kill this file as soon as it's (f)close'd */
-
    setconfig(argv[0]);		/* the path to the include files */
    lcl_ctrlchar = sc_ctrlchar;
    lcl_packstr = sc_packstr;
@@ -433,6 +407,7 @@ sc_compile(int argc, char *argv[])
      }				/* if */
    if (outf)
       sc_closeasm(outf);
+   unlink (outfname);
    if (binf)
       sc_closebin(binf, errnum != 0);
 

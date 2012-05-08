@@ -16,6 +16,9 @@
 /* Define to 1 if using `alloca.c'. */
 #undef C_ALLOCA
 
+/* Defined if gettimeofday is available. */
+#undef EFL_HAVE_GETTIMEOFDAY
+
 /* Define to 1 if you have `alloca', as a function or macro. */
 #undef HAVE_ALLOCA
 
@@ -29,8 +32,8 @@
 /* Set to 1 if Evil library is installed */
 #undef HAVE_EVIL
 
-/* Define to 1 if you have the `gettimeofday' function. */
-#undef HAVE_GETTIMEOFDAY
+/* Define to 1 if you have Exotic. */
+#undef HAVE_EXOTIC
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H

@@ -1,8 +1,10 @@
-embryo (1.2.0-1) UNRELEASED; urgency=low
+embryo (1.2.0-1) unstable; urgency=low
 
   * New upstream release
+  * debian/control: add Build-Depends on pkg-config and libeina-dev
+  * debian/libembryo1.symbols: update with symbols from the new release
 
- -- Albin Tonnerre <lutin@debian.org>  Tue, 08 May 2012 18:00:57 +0200
+ -- Albin Tonnerre <lutin@debian.org>  Sun, 13 May 2012 16:46:51 +0200
 
 embryo (1.0.0-1) unstable; urgency=low
 

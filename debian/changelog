@@ -1,8 +1,12 @@
-embryo (1.7.4-1) UNRELEASED; urgency=low
+embryo (1.7.4-1) experimental; urgency=low
 
   * New upstream release
+  * Add Multi-Arch support and switch to dh compat 9
+  * Update build-deps to use the latest version of eina
+  * Bump Standards-Version, no change required
+  * libembryo1.symbols: remove private symbols erroneously exported in the past
 
- -- Albin Tonnerre <lutin@debian.org>  Sun, 23 Dec 2012 15:35:21 +0100
+ -- Albin Tonnerre <lutin@debian.org>  Sun, 23 Dec 2012 15:56:18 +0100
 
 embryo (1.2.0-1) unstable; urgency=low
 

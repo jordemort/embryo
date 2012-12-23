@@ -7,7 +7,7 @@ These routines are used for Embryo.
 
 @image html  e_big.png
 
-@version 1.0.0
+@version 1.7.0
 @author Carsten Haitzler <raster\@rasterman.com>
 @author Compuphase http://www.compuphase.com
 @date 2004-2012
@@ -341,7 +341,7 @@ extern "C" {
 #endif
 
 #define EMBRYO_VERSION_MAJOR 1
-#define EMBRYO_VERSION_MINOR 2
+#define EMBRYO_VERSION_MINOR 7
    
    typedef struct _Embryo_Version
      {

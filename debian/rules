@@ -2,16 +2,15 @@
 
 CFLAGS += -fvisibility=hidden
 
-binary: binary-indep binary-arch
-binary-indep: build-doc
-build-doc: build
-	$(MAKE) doc
-
 %:
 	dh $@
 
 override_dh_auto_configure:
-	dh_auto_configure --enable-doc --disable-rpath
+	dh_auto_configure -- \
+	--enable-doc --disable-rpath
+
+override_dh_auto_build-indep:
+	$(MAKE) doc
 
 override_dh_strip:
 	dh_strip --dbg-package=libembryo-dbg

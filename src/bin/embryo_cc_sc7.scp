@@ -19,7 +19,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc7.scp 35497 2008-08-17 07:44:18Z raster $
+ *  Version: $Id: embryo_cc_sc7.scp 14177 2005-04-13 19:37:01Z tsauerbeck $
  */
 
 int         strexpand(char *dest, unsigned char *source, int maxlen,

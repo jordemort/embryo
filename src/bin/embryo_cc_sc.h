@@ -9,7 +9,7 @@
  *  Copyright J.E. Hendrix, 1982, 1983
  *  Copyright T. Riemersma, 1997-2003
  *
- *  Version: $Id: embryo_cc_sc.h 59489 2011-05-18 08:37:38Z raster $
+ *  Version: $Id: embryo_cc_sc.h 76492 2012-09-12 07:04:49Z raster $
  *
  *  This software is provided "as-is", without any express or implied warranty.
  *  In no event will the authors be held liable for any damages arising from
@@ -663,5 +663,11 @@ extern FILE      *inpf_org;	/* main source file */
 extern FILE      *outf;	/* file written to */
 
 extern jmp_buf    errbuf;	/* target of longjmp() on a fatal error */
+
+#define sc_isspace(x)  isspace ((int)((unsigned char)x))
+#define sc_isalpha(x)  isalpha ((int)((unsigned char)x))
+#define sc_isdigit(x)  isdigit ((int)((unsigned char)x))
+#define sc_isupper(x)  isupper ((int)((unsigned char)x))
+#define sc_isxdigit(x) isxdigit((int)((unsigned char)x))
 
 #endif

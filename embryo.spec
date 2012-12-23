@@ -4,7 +4,7 @@
 
 Summary: A small virtual machine engine (in a library) and bytecode compiler
 Name: embryo
-Version: 1.2.0
+Version: 1.7.4
 Release: %{_rel}
 License: BSD
 Group: System Environment/Libraries

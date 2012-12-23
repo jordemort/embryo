@@ -35,10 +35,14 @@ embryo.spec
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = embryo.pc
 
-.PHONY: doc
+.PHONY: doc install-doc
 
 # Documentation
 
 doc:
 	@echo "entering doc/"
 	make -C doc doc
+
+install-doc:
+	@echo "entering doc/"
+	make -C doc install-doc

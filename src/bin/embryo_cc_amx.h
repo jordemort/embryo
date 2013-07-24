@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_amx.h 51650 2010-08-26 01:34:13Z lucas $
+ *  Version: $Id$
  */
 
 #ifndef EMBRYO_CC_AMX_H

@@ -18,7 +18,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc5.scp 14177 2005-04-13 19:37:01Z tsauerbeck $
+ *  Version: $Id$
  */
 
 int         strexpand(char *dest, unsigned char *source, int maxlen,

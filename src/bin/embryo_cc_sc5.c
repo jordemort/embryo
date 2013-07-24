@@ -19,7 +19,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sc5.c 61433 2011-07-16 23:19:02Z caro $
+ *  Version: $Id$
  */
 
 

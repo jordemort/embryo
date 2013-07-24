@@ -1,4 +1,53 @@
-Embryo 1.2.0
+Embryo 1.7.7
+
+Changes since Embryo 1.7.6:
+---------------------------
+
+No changes, just updating to keep in sync with last release.
+
+
+Changes since Embryo 1.7.5:
+---------------------------
+
+No changes, just updating to keep in sync with last release.
+
+
+Changes since Embryo 1.7.4:
+---------------------------
+
+No changes, just updating to keep in sync with last release.
+
+
+Changes since Embryo 1.7.3:
+---------------------------
+
+Fixes:
+   * Add XML output to doc
+   * Add installation rule for doc
+
+Changes since Embryo 1.7.2:
+---------------------------
+
+No changes, just updating to keep in sync with last release.
+
+Changes since Embryo 1.7.1:
+---------------------------
+
+No changes, just updating to keep in sync with last release.
+
+Changes since Embryo 1.7.0:
+---------------------------
+
+Fixes:
+
+    * Fix windows utf8 shitepsace parse issue.
+
+Changes since Embryo 1.2.0:
+---------------------------
+
+Fixes:
+
+    * Fix divide by 0 n FP support to avoid FPE.
 
 Changes since Embryo 1.1.0:
 ---------------------------

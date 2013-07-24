@@ -21,7 +21,7 @@
  *      misrepresented as being the original software.
  *  3.  This notice may not be removed or altered from any source distribution.
  *
- *  Version: $Id: embryo_cc_sclist.c 52451 2010-09-19 03:00:12Z raster $
+ *  Version: $Id$
  */
 
 
